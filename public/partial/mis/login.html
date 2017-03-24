@@ -1,0 +1,64 @@
+<div id="loginContainer" class="container">
+    <toaster-container
+            toaster-options="{'time-out': 2000, 'animation-class': 'toast-top-center','position-class': 'toast-top-full-width'}">
+    </toaster-container>
+    <div class="row" style="margin-top:80px;margin-bottom:100px;">
+        <div class="col-md-offset-8 col-md-4">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h1>&nbsp;&nbsp;<span class="glyphicon glyphicon-leaf"></span>&nbsp;SXY MIS</h1>
+                </div>
+                <div class="panel-body">
+                    <br/>
+                    <form>
+                        <!-- 用户名 -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="username" class="control-label">用户名:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="username" type="text" class="form-control"
+                                       placeholder="请输入11位数字" ng-model="username"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <!-- 密码 -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="password" class="control-label">密码:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="password" type="text" class="form-control"
+                                       placeholder="请输入4-20位字符" ng-model="password"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <!-- 验证码 -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="checkCode" class="control-label">验证码:</label>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <input id="checkCode" type="text" class="form-control" ng-model="checkCode"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-offset-8 col-md-4">
+                                <button class="btn btn-info pull-right" ng-click="loginIn();"> 登录 </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-md-offset-7 col-md-5">
+                        <small>@version 1.0.0</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

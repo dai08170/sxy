@@ -1,0 +1,200 @@
+<div class="margin-top-10">
+    <div class="row col-md-12">
+        <div class="col-md-9 padding-5 height-auto">
+            <div class="row bg-white">
+                <div class="col-md-2">
+                    <br/><br/>
+                    <div class="row">
+                        <img style="width:94px;height:132px;" src="images/mis/head_photo.jpg"/>
+                    </div>
+                    <br/>
+                    <div class="row text-center">
+                        <a ng-click="">上传头像</a>
+                    </div>
+                </div>
+                <div class="panel col-md-10 border-none">
+                    <div class="panel-heading">
+                        <h3 ng-bind="greetings"></h3>
+                    </div>
+                    <hr class="margin-none"/>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="control-label">
+                                    姓名:
+                                </label>
+                                <p ng-bind="client.name"></p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">
+                                    性别:
+                                </label>
+                                <p ng-bind="client.sex"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="control-label">
+                                    班级:
+                                </label>
+                                <p ng-bind="client.class"></p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">
+                                    出生日期:
+                                </label>
+                                <p ng-bind="client.birth"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="control-label">
+                                    企业链接:
+                                </label>
+                                <p ng-bind="client.link"></p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">
+                                    简介:
+                                </label>
+                                <p ng-bind="client.profile"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <button class="btn btn-info pull-right"
+                            ng-click="">修改个人信息</button>
+                </div>
+            </div>
+            <div class="divider-bar"></div>
+            <div class="row">
+                <div class="col-md-6 bg-white padding-5">
+                    <div class="panel border-none">
+                        <div class="panel-heading padding-5">
+                            <label class="control-label margin-left-10">
+                                你的课程
+                            </label>
+                            <a class="pull-right" style="padding: 7px;" href="">>>详情</a>
+                        </div>
+                        <hr class="margin-none"/>
+                        <div class="panel-body padding-5">
+                            <table class="table table-bordered table-striped table-fixed">
+                                <thead>
+                                <tr>
+                                    <td class="one-line" ng-repeat="item in courses.fields" ng-bind="item">
+                                        
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in courses.value">
+                                    <td class="one-line" title="{{item.title}}" ng-bind="item.title"></td>
+                                    <td class="one-line" title="{{item.type}}" ng-bind="item.type"></td>
+                                    <td class="one-line" title="{{item.teacher}}" ng-bind="item.teacher"></td>
+                                    <td class="one-line" title="{{item.begin_date}}" ng-bind="item.begin_date"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 bg-white padding-5">
+                    <div class="panel border-none">
+                        <div class="panel-heading padding-5">
+                            <label class="control-label margin-left-10">
+                                你的作业
+                            </label>
+                            <a class="pull-right" style="padding: 7px;" href="">>>详情</a>
+                        </div>
+                        <hr class="margin-none"/>
+                        <div class="panel-body padding-5">
+                            <table class="table table-bordered table-striped table-fixed">
+                                <thead>
+                                <tr>
+                                    <td class="one-line" ng-repeat="item in homework.fields" ng-bind="item">
+    
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in homework.value">
+                                    <td class="one-line" title="{{item.title}}" ng-bind="item.title"></td>
+                                    <td class="one-line" title="{{item.course}}" ng-bind="item.course"></td>
+                                    <td class="one-line" title="{{item.create_time}}" ng-bind="item.create_time"></td>
+                                    <td class="one-line" title="{{item.expire_time}}" ng-bind="item.expire_time"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="padding-5 height-auto fixed-propagate">
+            <div class="row">
+                <div id="myCarousel" class="carousel slide">
+                    <!-- 轮播（Carousel）指标 -->
+                    <ol class="carousel-indicators" style="bottom: 0;">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+                    <!-- 轮播（Carousel）项目 -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <a href="http://www.baidu.com">
+                                <img src="images/mis/slide1.jpg" alt="First slide">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="http://www.baidu.com">
+                                <img src="images/mis/slide2.jpg" alt="Second slide">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="http://www.baidu.com">
+                                <img src="images/mis/slide3.jpg" alt="Third slide">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="divider-bar"></div>
+            <div class="row bg-white">
+                <div class="panel border-none">
+                    <div class="panel-heading padding-5">
+                        <label class="control-label margin-left-10">
+                            企业宣传
+                        </label>
+                    </div>
+                    <hr class="margin-none"/>
+                    <div class="panel-body padding-5">
+                        <div class="row padding-5" ng-repeat="item in  cPropagate">
+                            <a class="one-line block-display" href="">
+                                <span class="badge" ng-bind="item.type"></span>
+                                <small ng-bind="item.title"></small>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <hr class="margin-none"/>
+                <div class="panel border-none">
+                    <div class="panel-heading padding-5">
+                        <label class="control-label margin-left-10">
+                            活动宣传
+                        </label>
+                    </div>
+                    <hr class="margin-none"/>
+                    <div class="panel-body padding-5">
+                        <div class="row padding-5" ng-repeat="item in  aPropagate">
+                            <a class="one-line block-display" href="">
+                                <span class="badge" ng-bind="item.type"></span>
+                                <small ng-bind="item.title"></small>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
