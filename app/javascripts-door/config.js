@@ -27,7 +27,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
     $httpProvider.defaults.headers.common["Cache-Control"] = "no-cache";
     $httpProvider.defaults.headers.common.Pragma = "no-cache";
 
-    $urlRouterProvider.otherwise('/index');
+    $urlRouterProvider.otherwise('/index/homepage');
     $stateProvider
         .state('index', {
             url: '/index',
@@ -56,21 +56,21 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 }
             }
         })
-        .state('index.page2',{
-            url: '/page2',
+        // .state('index.page2',{
+        //     url: '/page2',
+        //     views: {
+        //         'content': {
+        //             templateUrl: '/partial/door/page2.html',
+        //             controller: 'page2Ctrl'
+        //         }
+        //     }
+        // })
+        .state('index.appDownload',{
+            url: '/appDownload',
             views: {
                 'content': {
-                    templateUrl: '/partial/door/page2.html',
-                    controller: 'page2Ctrl'
-                }
-            }
-        })
-        .state('index.page3',{
-            url: '/page3',
-            views: {
-                'content': {
-                    templateUrl: '/partial/door/page3.html',
-                    controller: 'page3Ctrl'
+                    templateUrl: '/partial/door/appDownload.html',
+                    controller: 'appDownloadCtrl'
                 }
             }
         })

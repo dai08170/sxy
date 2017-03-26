@@ -87,6 +87,20 @@
     margin-right: auto;
 }
 
+.bg-img{
+    max-width: 100%;
+    height: auto;
+}
+
+.bigger-hover:hover{
+    width: 100%;
+    transition: ease 1000ms;
+}
+
+.relative{
+    position: relative;
+}
+
 /* 定制样式 */
 #rootCtrl{
     height:100%;
@@ -143,5 +157,10 @@
         background:url("/images/mis/bg.jpg");
         background-repeat: no-repeat;
         background-size: cover;
+    }
+
+    .phone-pic{
+        position: absolute;
+        top:20%;
     }
 }
