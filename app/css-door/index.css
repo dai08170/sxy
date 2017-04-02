@@ -13,14 +13,31 @@
 
 /* 通用样式 */
 .bg-white{
-    background: #fff;
+    background-color: #fff !important;
+}
+
+.bg-default{
+    background-color: #ecf0f5 !important;
 }
 
 .color-gray{
     color: #8c8c8c !important;
 }
+
+.color-deep-gray{
+    color: #7a7a7a !important;
+}
+
+.color-deep-gray:hover{
+    color: #5a5a5a !important;
+}
+
 .color-white{
     color: #fff !important;
+}
+
+.div-circle{
+    border-radius: 50% !important;
 }
 
 .one-line{
@@ -97,8 +114,26 @@
     transition: ease 1000ms;
 }
 
+.bigger-font-hover:hover{
+    font-size: 16px;
+    transition: ease 1000ms;
+}
+
 .relative{
     position: relative;
+}
+
+.bg-none{
+    background: transparent;
+}
+
+.text-index{
+    color:#7a7a7a;
+    font-size: 1.3em;
+    font-weight: 200;
+    line-height: 1.8;
+    text-align: left;
+    text-indent: 20px;
 }
 
 /* 定制样式 */

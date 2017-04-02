@@ -47,24 +47,42 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 }
             }
         })
-        .state('index.page1',{
-            url: '/page1',
+        .state('index.teaching',{
+            url: '/teaching',
             views: {
                 'content': {
-                    templateUrl: '/partial/door/page1.html',
-                    controller: 'page1Ctrl'
+                    templateUrl: '/partial/door/teaching.html',
+                    controller: 'teachingCtrl'
                 }
             }
         })
-        // .state('index.page2',{
-        //     url: '/page2',
-        //     views: {
-        //         'content': {
-        //             templateUrl: '/partial/door/page2.html',
-        //             controller: 'page2Ctrl'
-        //         }
-        //     }
-        // })
+        .state('index.course',{
+            url: '/course',
+            views: {
+                'content': {
+                    templateUrl: '/partial/door/course.html',
+                    controller: 'courseCtrl'
+                }
+            }
+        })
+        .state('index.jiangsu',{
+            url: '/jiangsu',
+            views: {
+                'content': {
+                    templateUrl: '/partial/door/jiangsu.html',
+                    controller: 'jiangsuCtrl'
+                }
+            }
+        })
+        .state('index.xuzhou',{
+            url: '/xuzhou',
+            views: {
+                'content': {
+                    templateUrl: '/partial/door/xuzhou.html',
+                    controller: 'xuzhouCtrl'
+                }
+            }
+        })
         .state('index.appDownload',{
             url: '/appDownload',
             views: {
@@ -74,12 +92,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 }
             }
         })
-        .state('index.page4',{
-            url: '/page4',
+        .state('index.contact',{
+            url: '/contact',
             views: {
                 'content': {
-                    templateUrl: '/partial/door/page4.html',
-                    controller: 'page4Ctrl'
+                    templateUrl: '/partial/door/contact.html',
+                    controller: 'contactCtrl'
                 }
             }
         });
