@@ -1,12 +1,12 @@
 <div class="row margin-none">
     <div class="row relative">
-        <img class="bg-img" src="images/door/download_bg.jpg"/>
+        <img class="bg-img" src="{{bg}}"/>
         <hr/>
         <div id="QRCode" class="col-md-12 row phone-pic">
             <div class="col-md-offset-5 col-md-3 col-sm-offset-4 col-sm-4 col-xs-offset-1 col-xs-10">
                 <div class="row">
                     <div class="col-md-11 margin-center bigger-hover">
-                        <img class="bg-img" ng-click="phoneModalShow();" src="images/door/QRCode.jpg"/>
+                        <img class="bg-img" src="{{qrCode}}" ng-click="phoneModalShow();"/>
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
             </div>
             <div class="modal-body">
                 <div class="row text-center">
-                    <img class="bg-img" src="images/door/QRCode.jpg" alt="Android & IOS 版本下载二维码"/>
+                    <img class="bg-img" src="{{qrCode}}" alt="Android & IOS 版本下载二维码"/>
                 </div>
             </div>
         </div><!-- /.modal-content -->

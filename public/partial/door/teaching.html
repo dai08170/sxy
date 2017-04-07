@@ -4,94 +4,25 @@
         <div class="row">
             <h1>格局教学实景拍摄</h1>
             <hr/>
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <img class="bg-img" src="images/door/teach_way1.jpg" alt="哈佛教授在美国远程进入格局系统全国直播授课"/>
-                    <p class="text-center text-feature">哈佛教授在美国远程进入格局系统全国直播授课</p>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <img class="bg-img" src="images/door/teach_way2.jpg" alt="罗杰斯在格局商学北京千人大会与全国百个教师教学互动"/>
-                    <p class="text-center text-feature">罗杰斯在格局商学北京千人大会与全国百个教师教学互动</p>
+            <div class="row margin-top-10" ng-repeat="row in views">
+                <div class="col-md-6 col-sm-12" ng-repeat="item in row">
+                    <img class="bg-img" src="{{item.picture_path}}" alt="{{item.label}}"/>
+                    <p class="text-center text-feature" ng-bind="item.label"></p>
                 </div>
             </div>
-            <br/>
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <img class="bg-img" src="images/door/teach_way3.jpg" alt="孙中一老师在北京格局总部直播室（全国百家分院转播）"/>
-                    <p class="text-center text-feature">孙中一老师在北京格局总部直播室（全国百家分院转播）</p>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <img class="bg-img" src="images/door/teach_way4.jpg" alt="毛大庆老师在北京格局总部直播室（全国百家分院转播）"/>
-                    <p class="text-center text-feature">毛大庆老师在北京格局总部直播室（全国百家分院转播）</p>
-                </div>
-            </div>
-            <br/>
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <img class="bg-img" src="images/door/teach_way5.jpg" alt="学员在格局全国分院教室上课"/>
-                    <p class="text-center text-feature">学员在格局全国分院教室上课</p>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <img class="bg-img" src="images/door/teach_way6.jpg" alt="冯鑫老师在北京直播室与各分院学员互动提问"/>
-                    <p class="text-center text-feature">冯鑫老师在北京直播室与各分院学员互动提问</p>
-                </div>
-            </div>
-            <br/>
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <img class="bg-img" src="images/door/teach_way7.jpg" alt="分院学员之间在大屏上互动交流"/>
-                    <p class="text-center text-feature">分院学员之间在大屏上互动交流</p>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <img class="bg-img" src="images/door/teach_way8.jpg" alt="周鸿祎老师在武汉分院给全国分院上课"/>
-                    <p class="text-center text-feature">周鸿祎老师在武汉分院给全国分院上课</p>
-                </div>
-            </div>
-            <br/>
         </div>
+        <br/>
         <!-- 格局教学特色 -->
         <div class="row">
             <h1>格局教学五大特色</h1>
             <hr/>
             <div class="row">
-                <div class="teach-feature">
-                    <img class="bg-img" src="images/door/teach_feature1.jpg" alt="权威师资鲜活观点"/>
+                <div class="teach-feature" ng-repeat="item in feature">
+                    <img class="bg-img" src="{{item.picture_path}}" alt="{{item.label}}"/>
                     <div class="teach-feature-bg"></div>
                     <div class="teach-feature-text color-white text-center">
-                        <h1><span class="glyphicon glyphicon-user"></span></h1>
-                        <p class="text-feature">权威师资鲜活观点</p>
-                    </div>
-                </div>
-                <div class="teach-feature">
-                    <img class="bg-img" src="images/door/teach_feature2.jpg" alt="权威师资鲜活观点"/>
-                    <div class="teach-feature-bg"></div>
-                    <div class="teach-feature-text color-white text-center">
-                        <h1><span class="glyphicon glyphicon-home"></span></h1>
-                        <p class="text-feature">世界顶级商学院教室</p>
-                    </div>
-                </div>
-                <div class="teach-feature">
-                    <img class="bg-img" src="images/door/teach_feature3.jpg" alt="权威师资鲜活观点"/>
-                    <div class="teach-feature-bg"></div>
-                    <div class="teach-feature-text color-white text-center">
-                        <h1><span class="glyphicon glyphicon-facetime-video"></span></h1>
-                        <p class="text-feature">巨幕全息还原真是教学场景</p>
-                    </div>
-                </div>
-                <div class="teach-feature">
-                    <img class="bg-img" src="images/door/teach_feature4.jpg" alt="权威师资鲜活观点"/>
-                    <div class="teach-feature-bg"></div>
-                    <div class="teach-feature-text color-white text-center">
-                        <h1><span class="glyphicon glyphicon-globe"></span></h1>
-                        <p class="text-feature">多地实时互动学习</p>
-                    </div>
-                </div>
-                <div class="teach-feature">
-                    <img class="bg-img" src="images/door/teach_feature5.jpg" alt="权威师资鲜活观点"/>
-                    <div class="teach-feature-bg"></div>
-                    <div class="teach-feature-text color-white text-center">
-                        <h1><span class="glyphicon glyphicon-folder-open"></span></h1>
-                        <p class="text-feature">全国资源当地平台社区链接</p>
+                        <h1><span class="{{item.class}}"></span></h1>
+                        <p class="text-feature" ng-bind="item.label"></p>
                     </div>
                 </div>
             </div>

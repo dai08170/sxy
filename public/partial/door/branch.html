@@ -4,7 +4,7 @@
         <hr/>
         <div class="row">
             <div class="col-md-4 text-center">
-                <img class="bg-img" src="images/door/character_gaoning.jpg" alt="格局商学徐州分院院长"/>
+                <img class="bg-img" src="{{xuzhou.president.picture_path}}" alt="格局商学徐州分院院长"/>
             </div>
             <div class="col-md-8">
     
@@ -56,7 +56,7 @@
             <!-- 江苏分院院长 -->
             <div class="row">
                 <div class="col-md-4 text-center">
-                    <img class="bg-img" src="images/door/character_wangfang.jpg" alt="格局商学江苏分院院长"/>
+                    <img class="bg-img" src="{{jiangsu.president.picture_path}}" alt="格局商学江苏分院院长"/>
                 </div>
                 <div class="col-md-8">
                     <div class="panel panel-default border-none">
@@ -65,7 +65,7 @@
                         </div>
                         <div class="panel-body bg-default">
                             <div class="row">
-                                <p class="text-index">格局商学不是互联网公司，是一家商学院，我们只是用互联网提高教学效率，保留传统教育氛围，我们是在做教育+互联网，未来格局商学会把高端教育做到极致，把学员服务做到极致。</p>
+                                <p class="text-index" ng-bind="jiangsu.president.speech"></p>
                             </div>
                         </div>
                         <div class="panel-footer bg-default">
@@ -83,7 +83,7 @@
                     </div>
                     <div class="panel-body bg-default">
                         <div class="row">
-                            <p class="text-index">格局商学江苏分院计划在未来的3年里，成立40家以上地市分院，计划年服务培养长期班企业家3万人次。并充分利用格局商学线上线下的互联网教学平台，增加各地平台相互的联动性，不断为江苏企业家提供各类增值服务，致力成为江苏地区最大的企业家校友圈，为校友提供在管理教育以为的商业信息、科技信息、金融信息、管理咨询等服务内容，以广泛的活跃度、多样性的活动内容，以不断沉淀的企业家校友资源大数据，搭建各类服务平台，助力江苏地区民营经济企业腾飞。塑造厚德、崇文、实业、创新的苏商精神。</p>
+                            <p class="text-index" ng-bind="jiangsu.prospect"></p>
                         </div>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                     </div>
                     <div class="panel-body bg-default">
                         <div class="row">
-                            <img class="bg-img" src="images/door/increment.jpg" alt="格局商学江苏五大增值体系"/>
+                            <img class="bg-img" src="{{jiangsu.increment.picture_path}}" alt="格局商学江苏五大增值体系"/>
                         </div>
                     </div>
                 </div>
@@ -105,58 +105,14 @@
         <h1>格局商学江苏其他分院</h1>
         <hr/>
         <div class="row">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <img class="bg-img" src="images/door/college_wuxixishan.jpg" alt="格局商学无锡锡山分院"/>
-                    <p class="text-center text-feature">格局商学无锡锡山分院</p>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <img class="bg-img" src="images/door/college_wuxihuishan.jpg" alt="格局商学无锡惠山分院"/>
-                    <p class="text-center text-feature">格局商学无锡惠山分院</p>
+            <div class="row margin-top-10" ng-repeat="row in other_college">
+                <div class="col-md-6 col-sm-12" ng-repeat="item in row">
+                    <img class="bg-img" src="{{item.picture_path}}" alt="{{item.label}}"/>
+                    <p class="text-center text-feature" ng-bind="item.label"></p>
                 </div>
             </div>
-            <br/>
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <img class="bg-img" src="images/door/college_jiangyin.jpg" alt="格局商学江阴分院"/>
-                    <p class="text-center text-feature">格局商学江阴分院</p>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <img class="bg-img" src="images/door/college_yixing.jpg" alt="格局商学宜兴分院"/>
-                    <p class="text-center text-feature">格局商学宜兴分院</p>
-                </div>
-            </div>
-            <br/>
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <img class="bg-img" src="images/door/college_changzhou.jpg" alt="格局商学常州分院"/>
-                    <p class="text-center text-feature">格局商学常州分院</p>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <img class="bg-img" src="images/door/college_suzhou.jpg" alt="格局商学苏州分院"/>
-                    <p class="text-center text-feature">格局商学苏州分院</p>
-                </div>
-            </div>
-            <br/>
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <img class="bg-img" src="images/door/college_kunshan.jpg" alt="格局商学昆山分院"/>
-                    <p class="text-center text-feature">格局商学昆山分院</p>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <img class="bg-img" src="images/door/college_nanjing.jpg" alt="格局商学南京分院"/>
-                    <p class="text-center text-feature">格局商学南京分院</p>
-                </div>
-            </div>
-            <br/>
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <img class="bg-img" src="images/door/college_zhangjiagang.jpg" alt="格局商学张家港分院"/>
-                    <p class="text-center text-feature">格局商学张家港分院</p>
-                </div>
-            </div>
-            <br/>
         </div>
+        <br/>
         <br/>
     </div>
 </div>

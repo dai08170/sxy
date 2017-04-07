@@ -4,36 +4,20 @@
             <br/>
             <h1>格局商学院</h1>
             <hr/>
-            <div class="row">
+            <div class="row" ng-repeat="item in college.txts">
                 <div class="col-md-3 col-sm-3">
-                    <p class="text-feature">地址:</p>
+                    <p class="text-feature" ng-bind="item.label"></p>
                 </div>
                 <div class="col-md-9 col-sm-9">
-                    <p class="text-feature">徐州市格局商学院（泉山区大学路7号矿大南湖校区东门北600米晴朗谷)</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3 col-sm-3">
-                    <p class="text-feature">临近地点:</p>
-                </div>
-                <div class="col-md-9 col-sm-9">
-                    <p class="text-feature">云龙湖、矿大南湖校区、泉山森林公园、晴朗谷游泳馆、张伯英艺术馆等</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3 col-sm-3">
-                    <p class="text-feature">联系电话:</p>
-                </div>
-                <div class="col-md-9 col-sm-9">
-                    <p class="text-feature">83897966 83897968</p>
+                    <p class="text-feature" ng-bind="item.content"></p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-3">
-                    <p class="text-feature">微信公众号:</p>
+                    <p class="text-feature" ng-bind="college.QRCode.label">微信公众号:</p>
                 </div>
                 <div class="col-md-3 col-sm-12 text-center" ng-click="QRModalShow();">
-                    <img class="bg-img" src="images/door/QRCode_weixin.jpg" alt="徐州格局商学院微信公众号二维码"/>
+                    <img class="bg-img" src="{{college.QRCode.content}}" alt="徐州格局商学院微信公众号二维码"/>
                 </div>
             </div>
         </div>
@@ -42,12 +26,12 @@
         <div class="row">
             <h1>系统开发者</h1>
             <hr/>
-            <div class="row">
+            <div class="row" ng-repeat="item in developer.txts">
                 <div class="col-md-3 col-sm-3">
-                    <p class="text-feature">电子邮箱:</p>
+                    <p class="text-feature" ng-bind="item.label"></p>
                 </div>
                 <div class="col-md-9 col-sm-9">
-                    <p class="text-feature">lonelydawn@sina.com</p>
+                    <p class="text-feature" ng-bind="item.content"></p>
                     <label>(如有bug, 请及时反馈!)</label>
                 </div>
             </div>
@@ -68,7 +52,7 @@
             </div>
             <div class="modal-body">
                 <div class="row text-center">
-                    <img class="bg-img" src="images/door/QRCode_weixin.jpg" alt="徐州格局商学院微信公众号二维码"/>
+                    <img class="bg-img" src="{{college.QRCode.content}}" alt="徐州格局商学院微信公众号二维码"/>
                 </div>
                 <br/>
             </div>

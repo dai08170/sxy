@@ -14,40 +14,9 @@
             </ol>
             <!-- 轮播（Carousel）项目 -->
             <div class="carousel-inner">
-                <div class="item active">
-                    <a>
-                        <img src="images/door/slide1.jpg" alt="First slide">
-                    </a>
-                </div>
-                <div class="item">
-                    <a>
-                        <img src="images/door/slide2.jpg" alt="Second slide">
-                    </a>
-                </div>
-                <div class="item">
-                    <a>
-                        <img src="images/door/slide3.jpg" alt="Third slide">
-                    </a>
-                </div>
-                <div class="item">
-                    <a>
-                        <img src="images/door/slide4.jpg" alt="Fourth slide">
-                    </a>
-                </div>
-                <div class="item">
-                    <a>
-                        <img src="images/door/slide5.jpg" alt="Fifth slide">
-                    </a>
-                </div>
-                <div class="item">
-                    <a>
-                        <img src="images/door/slide6.jpg" alt="Sixth slide">
-                    </a>
-                </div>
-                <div class="item">
-                    <a>
-                        <img src="images/door/slide7.jpg" alt="Seventh slide">
-                    </a>
+                <div class="item" ng-class="{'true':'active','false':''}[item.active]"
+                     ng-repeat="item in slide">
+                        <img src="{{item.path}}" alt="{{item.alt}}">
                 </div>
             </div>
         </div>
@@ -62,8 +31,7 @@
                         <h1>格局商学</h1>
                     </div>
                     <div class="panel-body bg-default">
-                        <p class="text-index">格局商学是中国第一家在线互动直播的管理教育平台，利用互联网技术搭建一个符合企业家学习习惯的全新在线直播互动学习系统，打造世界一流学习环境，提供世界级品质的教学内容和学习解决方案，帮助企业家企业轻松实现全员学习，助推企业持续成长。同时，格局商学关注企业家的家庭成长 ，提供家庭教育、隔代教育、青少年梦想教育等公益课程。</p>
-                        <p class="text-index">  格局商学已在全国85个城市建立分院，成功招募10000多位企业家成为梦想发起人。格局商学计划未来5年在全国建立1000个分院，格局商学将成为国内规模最大的管理教育机构，不仅为企业家聚集本地校友资源，更为企业家构建中国最大校友资源共享网络。</p>
+                        <p class="text-index" ng-repeat="item in intro" ng-bind="item"></p>
                     </div>
                 </div>
             </div>
@@ -75,29 +43,9 @@
                         <h1>格局商学五大竞争优势</h1>
                     </div>
                     <div class="panel-body bg-default">
-                        <div class="alert alert-info">
-                            <div class="col-md-2"><label>学习最高效</label></div>
-                            <div class="col-md-10">全国百家分院就读，可利用各种碎片时间，就近选择学院学习</div>
-                            <br/>
-                        </div>
-                        <div class="alert alert-info">
-                            <div class="col-md-2"><label>费用最低廉</label></div>
-                            <div class="col-md-10">平均每次课程学费不到150元，拒绝天价总裁班。</div>
-                            <br/>
-                        </div>
-                        <div class="alert alert-info">
-                            <div class="col-md-2"><label>师资最顶级</label></div>
-                            <div class="col-md-10">国内外知名前沿专家教授、商界大咖、企业新锐参与教学。</div>
-                            <br/>
-                        </div>
-                        <div class="alert alert-info">
-                            <div class="col-md-2"><label>知识最前瞻</label></div>
-                            <div class="col-md-10">直播不录播，有效保证教学内容最新鲜、最具前瞻性。</div>
-                            <br/>
-                        </div>
-                        <div class="alert alert-info">
-                            <div class="col-md-2"><label>气氛最浓郁</label></div>
-                            <div class="col-md-10">百人同班，万人同课，小组竞赛，分院互访，教学方式丰富多彩。</div>
+                        <div class="alert alert-info" ng-repeat="item in advantage">
+                            <div class="col-md-2"><label ng-bind="item.label"></label></div>
+                            <div class="col-md-10" ng-bind="item.content"></div>
                             <br/>
                         </div>
                     </div>
@@ -112,47 +60,11 @@
                     </div>
                     <div class="panel-body bg-default">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3" ng-repeat="item in feature">
                                 <div class="row div-circle bg-white">
                                     <div class="col-md-offset-2 col-md-8 color-deep-gray">
-                                        <h3 class="text-center">直播</h3>
-                                        <p class="text-center">权威师资，鲜活观点</p>
-                                        <p class="text-center">世界顶尖商学院教室</p>
-                                        <p class="text-center">巨幕全息，还原场景</p>
-                                        <p class="text-center">全国资源，当地平台</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="row div-circle bg-white">
-                                    <div class="col-md-offset-2 col-md-8 color-deep-gray">
-                                        <h3 class="text-center">互动</h3>
-                                        <p class="text-center">互联网技术</p>
-                                        <p class="text-center">符合企业家学习习惯</p>
-                                        <p class="text-center">全新互动学习系统</p>
-                                        <p class="text-center">世界级品质</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="row div-circle bg-white">
-                                    <div class="col-md-offset-2 col-md-8 color-deep-gray">
-                                        <h3 class="text-center">夜读</h3>
-                                        <p class="text-center">学习成本低</p>
-                                        <p class="text-center">时间成本低</p>
-                                        <p class="text-center">差旅成本低</p>
-                                        <p class="text-center">&nbsp;</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="row div-circle bg-white">
-                                    <div class="col-md-offset-2 col-md-8 color-deep-gray">
-                                        <h3 class="text-center">氛围</h3>
-                                        <p class="text-center">互联网思维</p>
-                                        <p class="text-center">创新教学场景</p>
-                                        <p class="text-center">企业家集体学习</p>
-                                        <p class="text-center">&nbsp;</p>
+                                        <h3 class="text-center" ng-bind="item.title"></h3>
+                                        <p class="text-center" ng-repeat="content in item.contents" ng-bind="content"></p>
                                     </div>
                                 </div>
                             </div>
@@ -167,7 +79,7 @@
                     <h1>格局商学创始人</h1>
                 </div>
                 <div class="col-md-4 text-center">
-                    <img class="bg-img" src="images/door/character_xingzhiqing.jpg" alt="邢志清"/>
+                    <img class="bg-img" src="{{creater.picture_path}}" alt="邢志清"/>
                 </div>
                 <div class="col-md-8">
                     <div class="col-md-offset-1 col-md-10">
@@ -177,9 +89,7 @@
                                 <br/>
                             </div>
                             <div class="panel-body bg-default">
-                                <p class="text-index">
-                                    格局商学将建立一个更大的健康和谐的知识文化平台，聚集一批又一批积极向上，有着朗朗人格的商业精英、社会贤达和精神上流，孕育出一桩又一桩对社会有益，推动社会前进的行为和行动，凡参与其中者都会有意想不到的收获！
-                                </p>
+                                <p class="text-index" ng-bind="creater.speech"></p>
                                 <br/>
                             </div>
                             <div class="panel-footer bg-default">
@@ -199,7 +109,7 @@
             <h1>格局商学创始人团队</h1>
         </div>
         <div class="row">
-            <img class="bg-img" src="images/door/creater_team.jpg" alt="创始人团队"/>
+            <img class="bg-img" src="{{createrTeam.picture_path}}" alt="创始人团队"/>
         </div>
     </div>
     <br/>
@@ -208,7 +118,7 @@
     <!-- 格局商学服务项目 -->
     <div class="row">
         <div class="row">
-            <img class="bg-img" src="images/door/activity_banner.jpg" alt="服务项目"/>
+            <img class="bg-img" src="{{service.picture_path}}" alt="服务项目"/>
         </div>
     </div>
     <br/>
