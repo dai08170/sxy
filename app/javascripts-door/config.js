@@ -83,6 +83,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 }
             }
         })
+        .state('index.branch',{
+            url: '/branch',
+            views: {
+                'content': {
+                    templateUrl: '/partial/door/branch.html',
+                    controller: 'branchCtrl'
+                }
+            }
+        })
         .state('index.appDownload',{
             url: '/appDownload',
             views: {

@@ -1,3 +1,78 @@
-<div>
-    <h1>Course</h1>
+<div class="row">
+    <div class="col-md-offset-1 col-md-10">
+        <!-- 格局商学直播课程体系 -->
+        <h1>格局商学直播课程体系</h1>
+        <hr/>
+        <div class="row">
+            <div class="row">
+                <div class="col-md-4">
+                    <select class="form-control" ng-model="selectedName"
+                            ng-options="item for item in weekCourses.weekday"
+                            ng-change="changeWeekCourse();">
+                        
+                    </select>
+                </div>
+            </div>
+            <br/>
+            <table class="table table-bordered table-stripped table-fixed">
+                <thead>
+                    <tr>
+                        <td class="one-line col-xs-4"><label>上午</label></td>
+                        <td class="one-line col-xs-4"><label>下午</label></td>
+                        <td class="one-line col-xs-4"><label>晚上</label></td>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="one-line" ng-repeat="item in course track by $index" ng-bind="item"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <br/>
+        <br/>
+        
+        <!-- 格局商学公益课程体系 -->
+        <h1>格局商学公益课程体系</h1>
+        <hr/>
+        <div class="row" ng-repeat="item in publicCourses">
+            <small class="mobile-show"><i>( 点击课程所在单元格查看完整课程名称 )</i></small>
+            <table class="table table-bordered table-stripped table-fixed">
+                <thead>
+                <tr>
+                    <td class="one-line" colspan="2"><h4 ng-bind="item.title"></h4></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="one-line" ng-repeat="label in item.label"><label ng-bind="label"></label></td>
+                </tr>
+                <tr ng-repeat="cols in item.cols">
+                    <td class="one-line" ng-bind="cols.col1"></td>
+                    <td class="one-line" ng-bind="cols.col2" ng-click="courseModalShow(cols.col2);"></td>
+                </tr>
+                </tbody>
+            </table>
+            <br/>
+        </div>
+    </div>
+</div>
+<br/>
+
+<div id="CourseModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="courseModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="CourseModalLabel">课程名称</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <p class="text-index">{{courseName}}</p>
+                </div>
+                <br/>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
 </div>

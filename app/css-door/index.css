@@ -46,6 +46,7 @@
     overflow:hidden;
     white-space:nowrap;
 }
+
 .block-display{
     display: block;
 }
@@ -236,6 +237,10 @@
     .phone-pic{
         position: absolute;
         top:20%;
+    }
+
+    .mobile-show{
+        display: none;
     }
 }
 
