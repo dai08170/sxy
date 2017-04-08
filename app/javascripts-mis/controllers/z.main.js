@@ -9,6 +9,9 @@ app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', 'toaster', 
             case "100860601":
                 $state.go("main.documentManage");
                 break;
+            case "100860609":
+                $state.go("main.configManage");
+                break;
             default:
                 $state.go("main.homepage");
                 break;
@@ -48,7 +51,7 @@ app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', 'toaster', 
     };
 
     $scope.toggleDoor = function () {
-        window.location.href = "http://localhost:3000/index"
+        window.location.href = "http://localhost:3000/index/homepage"
     };
 
     // 退出系统

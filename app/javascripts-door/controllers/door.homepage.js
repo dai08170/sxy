@@ -6,6 +6,7 @@ app.controller('homepageCtrl',['$scope','$state',function($scope){
     var data = global_config.homepage ;
 
     $scope.slide = data.slide;
+    $scope.xuzhou = data.xuzhou;
     $scope.intro = data.intro;
     $scope.advantage = data.advantage;
     $scope.feature = data.feature;

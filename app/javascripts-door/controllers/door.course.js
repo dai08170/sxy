@@ -5,6 +5,7 @@
 app.controller('courseCtrl',['$scope','$state',function($scope){
     var data = global_config.course;
 
+    $scope.courseShow = data.courseShow;
     $scope.weekCourses = data.weekCourse;
     $scope.publicCourses = data.publicCourse;
 

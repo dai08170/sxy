@@ -19,6 +19,9 @@ var global_config = {
             text: "宣传管理",
             moduleId: "1008602",
             selectable: false,
+            state: {
+                expanded: false
+            },
             nodes: [{
                 text: "企业宣传",
                 icon: "glyphicon glyphicon-tags",
@@ -48,6 +51,9 @@ var global_config = {
             text: "学院制度",
             selectable: false,
             moduleId: "1008604",
+            state: {
+                expanded: false
+            },
             nodes: [{
                 text: "日常制度",
                 icon: "glyphicon glyphicon-tags",
@@ -63,6 +69,9 @@ var global_config = {
             text: "信息建设",
             selectable: false,
             moduleId: "1008605",
+            state: {
+                expanded: false
+            },
             nodes: [{
                 text: "留言板",
                 icon: "glyphicon glyphicon-tags",
@@ -78,6 +87,9 @@ var global_config = {
             text: "基础管理",
             selectable: false,
             moduleId: "1008606",
+            state: {
+                expanded: false
+            },
             nodes: [{
                 text: "档案管理",
                 icon: "glyphicon glyphicon-tags",
@@ -126,6 +138,12 @@ var global_config = {
             }]
         }
     ]
+};
+// 全局数据
+var global_data = {
+    "configManage": {
+        "config_items": ["角色", "班级", "行业", "物资", "收支", "课程", "活动"]
+    }
 };
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'JSONFormatterConfigProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, JSONFormatterConfigProvider) {

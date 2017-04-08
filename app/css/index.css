@@ -229,7 +229,7 @@
 
 @media (min-width: 1024px){
     #loginContainer{
-        background:url("/images/mis/bg.jpg");
+        background:url("../images/mis/bg.jpg");
         background-repeat: no-repeat;
         background-size: cover;
     }

@@ -14,9 +14,8 @@ var watch = require('gulp-watch');
 
 var path={
     doorJs:     ['./app/javascripts-door/**/*.js'],
-    doorCss:    ['./app/css-door/*.css'],
     misJs:     ['./app/javascripts-mis/**/*.js'],
-    misCss:    ['./app/css-mis/*.css'],
+    css:    ['./app/css/*.css'],
     test:   ['./test/*.js']
 };
 
@@ -48,23 +47,6 @@ gulp.task('doorJs:minify',function(){
         .pipe(gulp.dest('./public/javascripts'));
 });
 
-// 合并门户网 css
-gulp.task('doorCss:merge',function(){
-    return gulp.src(path.doorCss)
-        .pipe(plumber())
-        .pipe(concat('style-door.css'))
-        .pipe(gulp.dest('./public/stylesheets'));
-});
-
-// 压缩门户网 css
-gulp.task('doorCss:minify',function(){
-    return gulp.src(path.doorCss)
-        .pipe(plumber())
-        .pipe(concat('style-door.min.css'))
-        .pipe(cleanCss())
-        .pipe(gulp.dest('./public/stylesheets'));
-});
-
 // 合并管理系统 js
 gulp.task('misJs:merge',function(){
     return gulp.src(path.misJs)
@@ -86,19 +68,19 @@ gulp.task('misJs:minify',function(){
         .pipe(gulp.dest('./public/javascripts'));
 });
 
-// 合并管理系统 css
-gulp.task('misCss:merge',function(){
-    return gulp.src(path.misCss)
+// 合并css
+gulp.task('css:merge',function(){
+    return gulp.src(path.css)
         .pipe(plumber())
-        .pipe(concat('style-mis.css'))
+        .pipe(concat('style.css'))
         .pipe(gulp.dest('./public/stylesheets'));
 });
 
 // 压缩管理系统 css
-gulp.task('misCss:minify',function(){
-    return gulp.src(path.misCss)
+gulp.task('css:minify',function(){
+    return gulp.src(path.css)
         .pipe(plumber())
-        .pipe(concat('style-mis.min.css'))
+        .pipe(concat('style.min.css'))
         .pipe(cleanCss())
         .pipe(gulp.dest('./public/stylesheets'));
 });
@@ -118,19 +100,19 @@ gulp.task('tdd', function (done) {
 
 // 监测文件变化, 执行响应动作
 gulp.task('watch',function(){
-    // 检测门户网css js
+    // 检测门户网js
     gulp.watch(path.doorJs,['doorJs:merge','doorJs:minify']);
-    gulp.watch(path.doorCss,['doorCss:merge','doorCss:minify']);
-    // 检测管理系统css js
+    // 检测管理系统js
     gulp.watch(path.misJs,['misJs:merge','misJs:minify']);
-    gulp.watch(path.misCss,['misCss:merge','misCss:minify']);
+    // 检测css
+    gulp.watch(path.css,['css:merge','css:minify']);
 
     gulp.watch(path.test,['test']);
 });
 
 // 默认执行任务
 gulp.task('default',function(){
-   gulp.start(['doorJs:merge','doorJs:minify','doorCss:merge','doorCss:minify',
-       'misJs:merge','misJs:minify','misCss:merge','misCss:minify']);
+   gulp.start(['doorJs:merge','doorJs:minify','misJs:merge','misJs:minify',
+       'css:merge','css:minify']);
    // gulp.start(['watch']);
 });

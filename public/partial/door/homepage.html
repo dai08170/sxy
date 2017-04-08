@@ -24,6 +24,27 @@
     <hr/>
     <div class="row">
         <div class="col-md-offset-1 col-md-10">
+            <!-- 徐州格局商学介绍 -->
+            <div class="row">
+                <h1>徐州格局商学院</h1>
+                <hr/>
+                <div class="row">
+                    <div class="col-md-4 margin-top-10">
+                        <img class="bg-img" src="{{xuzhou.picture_path}}" alt="徐州格局商学院"/>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="panel panel-default border-none">
+                            <div class="panel-heading bg-default">
+                                <h2>介绍</h2>
+                            </div>
+                            <div class="panel-body bg-default">
+                                <p class="text-index" ng-repeat="item in xuzhou.intro" ng-bind="item"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr/>
             <!-- 格局商学介绍 -->
             <div class="row">
                 <div class="panel panel-default border-none">

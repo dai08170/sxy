@@ -1,5 +1,27 @@
 <div class="row">
     <div class="col-md-offset-1 col-md-10">
+        <!-- 格局商学课程展示 -->
+        <h1>格局商学课程展示</h1>
+        <hr/>
+        <div class="row">
+            <div class="col-md-6 col-sm-12" ng-repeat="item in courseShow">
+                <div class="row">
+                    <img class="bg-img" src="{{item.picture_path}}" alt="思想的格局"/>
+                </div>
+                <div class="panel panel-default border-none">
+                    <div class="panel-heading">
+                        <h4 ng-bind="item.title"></h4>
+                    </div>
+                    <div class="panel-body bg-default">
+                        <p ng-bind="item.intro"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        
         <!-- 格局商学直播课程体系 -->
         <h1>格局商学直播课程体系</h1>
         <hr/>
