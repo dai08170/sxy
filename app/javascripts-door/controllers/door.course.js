@@ -21,8 +21,10 @@ app.controller('courseCtrl',['$scope','$state',function($scope){
     };
 
     $scope.courseModalShow = function(item){
-        $scope.courseName = item;
-        $("#CourseModal").modal("show");
+        if(item!=undefined && item.trim()!=""){
+            $scope.courseName = item;
+            $("#CourseModal").modal("show");
+        }
     };
 
     //格局课程公益课程体系

@@ -48,7 +48,7 @@
                     <td class="one-line" ng-repeat="label in item.label"><label ng-bind="label"></label></td>
                 </tr>
                 <tr ng-repeat="cols in item.cols">
-                    <td class="one-line" ng-bind="cols.col1"></td>
+                    <td class="one-line" ng-bind="cols.col1" ng-click="courseModalShow(cols.col1);"></td>
                     <td class="one-line" ng-bind="cols.col2" ng-click="courseModalShow(cols.col2);"></td>
                 </tr>
                 </tbody>
