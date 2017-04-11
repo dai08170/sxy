@@ -37,7 +37,7 @@
 }
 
 .div-circle{
-    border-radius: 50% !important;
+    /*border-radius: 50% !important;*/
 }
 
 .one-line{
@@ -147,6 +147,10 @@
     line-height: 1.8;
 }
 
+.map-size{
+    height: 200px;
+}
+
 /* 定制样式 */
 #rootCtrl{
     height:100%;
@@ -206,6 +210,48 @@
     opacity: 0.6;
 }
 
+.feature-icon{
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    top: 0;
+    left: 0;
+    z-index: 80;
+}
+
+.feature-icon p{
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    background: #E50012;
+    color: #ffffff;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 60px;
+    font-size: 26px;
+}
+
+.feature-bg{
+    position: absolute;
+    height: 60px;
+    left: 32%;
+    top: 0;
+    right: 32%;
+    background: #ecf0f5;
+    z-index: 70;
+}
+
+.feature-content{
+    height: 210px;
+    width: 100%;
+    border: 2px solid #ccc;
+    margin-top: 30px;
+    padding: 30px 5px;
+    border-radius: 6px;
+    z-index: 10;
+    text-align: center;
+}
+
 @media (max-width: 2120px){
     .height-auto{
         height: 100%;
@@ -247,5 +293,9 @@
 @media (min-width: 768px){
     .teach-feature{
         width: 20% !important;
+    }
+
+    .map-size{
+        height: 400px;
     }
 }
