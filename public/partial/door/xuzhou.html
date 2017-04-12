@@ -48,7 +48,48 @@
         </div>
         <br/>
         <br/>
+        <h1>徐州分院学院荣誉</h1>
+        <hr/>
+        <div class="row">
+            <div class="col-md-6" ng-repeat="item in honor">
+                <img class="bg-img" src="{{item.picture_path}}" alt="{{item.label}}"/>
+                <p class="text-center text-feature" ng-bind="item.label"></p>
+            </div>
+        </div>
         <br/>
-        
+        <br/>
+        <h1>徐州分院学习掠影</h1>
+        <hr/>
+        <div class="row">
+            <div class="col-md-6" ng-repeat="item in study">
+                <img class="bg-img" src="{{item.picture_path}}" alt="{{item.label}}"/>
+                <p class="text-center text-feature" ng-bind="item.label"></p>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <h1>徐州分院学员风采</h1>
+        <hr/>
+        <div class="row">
+            <div class="col-md-6" ng-repeat="item in student">
+                <img class="bg-img" src="{{item.picture_path}}" alt="{{item.label}}"/>
+                <p class="text-center text-feature" ng-bind="item.label"></p>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <h1>徐州分院学院活动</h1>
+        <hr/>
+        <div class="row">
+            <div class="row" ng-repeat="act in activity">
+                <h3 ng-bind="act.title"></h3>
+                <div class="col-md-6 margin-top-10" ng-repeat="item in act.picture_path">
+                    <img class="bg-img" src="{{item}}" alt="{{act.title}}"/>
+                </div>
+            </div>
+            <hr/>
+        </div>
+        <br/>
+        <br/>
     </div>
 </div>

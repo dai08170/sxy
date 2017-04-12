@@ -375,8 +375,60 @@ var global_config = {
     "xuzhou": {
         "president":{
             "picture_path": "images/door/character_gaoning.jpg",
-            "speech": ""
-        }
+            "speech": "格局，追梦，从这里照耀未来！"
+        },
+        "honor":[{
+            "picture_path": "images/door/college_honor1.jpg",
+            "label": "格局商学徐州分院荣获2016格局商学年度功勋一等奖"
+        },{
+            "picture_path": "images/door/college_honor2.jpg",
+            "label": "格局商学徐州分院挂牌仪式"
+        }],
+        "study":[{
+            "picture_path": "images/door/college_study1.jpg",
+            "label": "徐州黄埔一期班委会成立"
+        },{
+            "picture_path": "images/door/college_study2.jpg",
+            "label": "同学们认真听讲课程"
+        },{
+            "picture_path": "images/door/college_study3.jpg",
+            "label": "黄埔一期企业行宣讲"
+        },{
+            "picture_path": "images/door/college_study4.jpg",
+            "label": "格局业余舞蹈班课程"
+        }],
+        "student":[{
+            "picture_path": "images/door/college_student1.jpg",
+            "label": "思想的格局一班班长、新盛公司董事长林斌作开学演讲"
+        },{
+            "picture_path": "images/door/college_student2.jpg",
+            "label": "格局商学学员、《张慧帮你问》主持人张慧作开学演讲"
+        },{
+            "picture_path": "images/door/college_student3.jpg",
+            "label": "新年晚会，格局学员表演三句半"
+        },{
+            "picture_path": "images/door/college_student4.jpg",
+            "label": "新年晚会，格局学员诗歌朗诵"
+        },{
+            "picture_path": "images/door/college_student5.jpg",
+            "label": "格局商学企业型精英女性"
+        },{
+            "picture_path": "images/door/college_student6.jpg",
+            "label": "学员对话美国投资大师吉姆▪罗杰斯"
+        }],
+        "activity":[{
+            "title": "学习讨论会",
+            "picture_path": ["images/door/college_activity_discuss1.jpg", "images/door/college_activity_discuss2.jpg"]
+        },{
+            "title": "新春晚会",
+            "picture_path": ["images/door/college_activity_party1.jpg", "images/door/college_activity_party2.jpg"]
+        },{
+            "title": "女神节活动",
+            "picture_path": ["images/door/college_activity_lady1.jpg", "images/door/college_activity_lady2.jpg"]
+        },{
+            "title": "掼蛋大赛",
+            "picture_path": ["images/door/college_activity_card1.jpg", "images/door/college_activity_card2.jpg"]
+        }]
     },
     "appDownload": {
         "background_path": "images/door/download_bg.jpg",
