@@ -91,10 +91,15 @@ var global_config = {
                 expanded: false
             },
             nodes: [{
-                text: "档案管理",
+                text: "用户管理",
                 icon: "glyphicon glyphicon-tags",
                 moduleId: "100860601",
-                href: "main.documentManage"
+                href: "main.userManage"
+            }, {
+                text: "班级管理",
+                icon: "glyphicon glyphicon-tags",
+                moduleId: "100860610",
+                href: "main.classManage"
             }, {
                 text: "课程管理",
                 icon: "glyphicon glyphicon-tags",
@@ -137,7 +142,8 @@ var global_config = {
                 href: "main.configManage"
             }]
         }
-    ]
+    ],
+    userType: ["学生", "教师"]
 };
 // 全局数据
 var global_data = {
@@ -311,12 +317,21 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 }
             }
         })
-        .state('main.documentManage',{
-            url: '/documentManage',
+        .state('main.userManage',{
+            url: '/userManage',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/documentManage.html',
-                    controller: 'documentManageCtrl'
+                    templateUrl: '/partial/mis/userManage.html',
+                    controller: 'userManageCtrl'
+                }
+            }
+        })
+        .state('main.classManage',{
+            url: '/classManage',
+            views: {
+                'content': {
+                    templateUrl: '/partial/mis/classManage.html',
+                    controller: 'classManageCtrl'
                 }
             }
         })

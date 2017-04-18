@@ -17,6 +17,7 @@ const path = require("path");
 // 自定义路由转发模块
 const common = require("./routes/common");
 const login = require("./routes/main/login");
+const userManage = require("./routes/main/userManage");
 
 
 const app = new Koa();
@@ -39,6 +40,11 @@ app.use(common.config);
 
 app.use(route.post('/api/login',login.login));
 
+// 用户管理
+app.use(route.get('/api/userManage/search',userManage.search));
+app.use(route.post('/api/userManage/create',userManage.create));
+app.use(route.post('/api/userManage/update',userManage.update));
+app.use(route.post('/api/userManage/delete',userManage.delete));
 
 
 // nodejs 转发请求

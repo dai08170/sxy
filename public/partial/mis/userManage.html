@@ -1,0 +1,150 @@
+<div class="margin-top-10 height-auto bg-white">
+	<div class="row margin-10">
+		<div class="panel panel-default border-none">
+			<div class="panel-heading bg-white">
+				<h2><span class="glyphicon glyphicon-user"></span> &nbsp;用户管理</h2>
+			</div>
+			<div class="panel-body">
+				<h3>查询用户</h3>
+				<hr/>
+				<form name="searchUserForm">
+					<div class="row">
+						<div class="col-md-3">
+							<input class="form-control" type="text" ng-model="searchAccount"
+								   placeholder="请输入待查询账号" required/>
+						</div>
+						<div class="col-md-2">
+							<button class="btn btn-info" ng-disabled="searchUserForm.$invalid"
+									ng-click="searchUserByAccount();">查询</button>
+							<button class="btn btn-default" ng-click="resetSearch();">重置</button>
+						</div>
+					</div>
+				</form>
+				<hr/>
+				<h3>新建用户</h3>
+				<hr/>
+				<form name="newUserForm">
+					<div class="row">
+						<div class="col-md-offset-1 col-md-2">
+							<label class="control-label">请输入姓名:</label>
+						</div>
+						<div class="col-md-3">
+							<input class="form-control" ng-model="newUserName"
+								   placeholder="请输入姓名" required/>
+						</div>
+					</div>
+					<br/>
+					<div class="row">
+						<div class="col-md-offset-1 col-md-2">
+							<label class="control-label">请输入账号:</label>
+						</div>
+						<div class="col-md-3">
+							<input class="form-control" ng-model="newUserAccount"
+								   placeholder="请输入账号" required/>
+						</div>
+					</div>
+					<br/>
+					<div class="row">
+						<div class="col-md-offset-1 col-md-2">
+							<label class="control-label">请输入密码:</label>
+						</div>
+						<div class="col-md-3">
+							<input class="form-control" ng-model="newUserPassword"
+								   placeholder="请输入密码" required/>
+						</div>
+					</div>
+					<br/>
+					<div class="row">
+						<div class="col-md-offset-1 col-md-2">
+							<label class="control-label">请选择账号类型:</label>
+						</div>
+						<div class="col-md-3">
+							<select class="form-control" ng-model="newUserType"
+									ng-options="item for item in userTypes"
+									ng-change="toggleUserType();"></select>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="panel-footer bg-white">
+				<button class="btn btn-default pull-right margin-right-10"
+					ng-click="resetNewUser();">重置</button>
+				<button class="btn btn-success pull-right margin-right-10"
+					ng-disabled="newUserForm.$invalid" ng-click="createUser();">新建</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 用户账号查询结果模态框 -->
+<div id="userModal" class="modal fade" tabindex="-1" role="dialog"
+	 aria-labelledby="userModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="userModalLabel">查询账号内容</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-offset-1 col-md-2">
+						<label class="control-label">姓名:</label>
+					</div>
+					<div class="col-md-5">
+						<input class="form-control" ng-model="searchedUserName"
+							   placeholder="请输入姓名" required/>
+					</div>
+				</div>
+				<br/>
+				<div class="row">
+					<div class="col-md-offset-1 col-md-2">
+						<label class="control-label">账号:</label>
+					</div>
+					<div class="col-md-5">
+						<input class="form-control" ng-model="searchedUserAccount"
+							   placeholder="请输入账号" required/>
+					</div>
+				</div>
+				<br/>
+				<div class="row">
+					<div class="col-md-offset-1 col-md-2">
+						<label class="control-label">密码:</label>
+					</div>
+					<div class="col-md-5">
+						<input class="form-control" ng-model="searchedUserPassword"
+							   placeholder="请输入密码" required/>
+					</div>
+				</div>
+				<br/>
+				<div class="row">
+					<div class="col-md-offset-1 col-md-2">
+						<label class="control-label">类型:</label>
+					</div>
+					<div class="col-md-5">
+						<label class="control-label" ng-bind="searchedUserType"></label>
+					</div>
+				</div>
+                <br/>
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-2">
+                        <label class="control-label">是否可用:</label>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-default"
+                                 ng-click="reverseUserDisabled();" ng-class="{true:'btn-default',false:'btn-info'}[searchedUserDisabled]">禁用</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-default"
+                                ng-click="reverseUserDisabled();" ng-class="{true:'btn-info',false:'btn-default'}[searchedUserDisabled]">启用</button>
+                    </div>
+                </div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-success" data-dismiss="modal" ng-click="updateUser();">修改</button>
+				<button class="btn btn-info" ng-click="deleteUser();">
+					删除</button>
+                <button class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>

@@ -2,12 +2,12 @@
  * Created by lonelydawn on 2017-03-09.
  */
 
-app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', 'toaster', function ($scope, $http, $state, $cookies, toaster) {
+app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', function ($scope, $http, $state, $cookies) {
     // 根据点击树节点编号 转发视图
     var routeViews = function(moduleId){
         switch(moduleId){
             case "100860601":
-                $state.go("main.documentManage");
+                $state.go("main.userManage");
                 break;
             case "100860609":
                 $state.go("main.configManage");
