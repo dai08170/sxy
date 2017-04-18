@@ -142,14 +142,12 @@ var global_config = {
                 href: "main.configManage"
             }]
         }
-    ],
-    userType: ["学生", "教师"]
+    ]
 };
 // 全局数据
 var global_data = {
-    "configManage": {
-        "config_items": ["角色", "班级", "行业", "物资", "收支", "课程", "活动"]
-    }
+    "config_options": ["行业", "班级", "课程", "职称", "角色", "公告", "活动", "物资", "收支"],
+    "user_types": ["学生", "教师"]
 };
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'JSONFormatterConfigProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, JSONFormatterConfigProvider) {

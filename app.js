@@ -18,6 +18,7 @@ const path = require("path");
 const common = require("./routes/common");
 const login = require("./routes/main/login");
 const userManage = require("./routes/main/userManage");
+const configManage = require("./routes/main/configManage");
 
 
 const app = new Koa();
@@ -45,6 +46,10 @@ app.use(route.get('/api/userManage/search',userManage.search));
 app.use(route.post('/api/userManage/create',userManage.create));
 app.use(route.post('/api/userManage/update',userManage.update));
 app.use(route.post('/api/userManage/delete',userManage.delete));
+
+// 配置管理
+app.use(route.get('/api/configManage/getCurrent',configManage.getCurrent));
+app.use(route.post('/api/configManage/create',configManage.create));
 
 
 // nodejs 转发请求

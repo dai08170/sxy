@@ -3,7 +3,7 @@
  */
 
 app.controller('userManageCtrl',['$scope', '$state','$http', '$cookies','toaster', function($scope, $state,$http, $cookies, toaster){
-	$scope.userTypes = global_config.userType;
+	$scope.userTypes = global_data.user_types;
 
 	$scope.newUserType = $scope.userTypes[0];
     $scope.newUserName = undefined;
@@ -58,7 +58,7 @@ app.controller('userManageCtrl',['$scope', '$state','$http', '$cookies','toaster
 
     // 查询用户
 	$scope.searchUserByAccount = function(){
-        if($scope.searchAccount == undefined || $scope.searchAccount =='')
+        if($scope.searchAccount == undefined || $.trim($scope.searchAccount) =='')
             toaster.pop("warning", "请输入待查询账号!", null, 2000, "toast-top-full-width");
         else {
         	$http.get("/api/userManage/search?username="+$scope.searchAccount).then(function(res){
