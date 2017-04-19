@@ -9,6 +9,9 @@ app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', function ($
             case "100860601":
                 $state.go("main.userManage");
                 break;
+            case "100860610":
+                $state.go("main.classManage");
+                break;
             case "100860609":
                 $state.go("main.configManage");
                 break;

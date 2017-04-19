@@ -147,7 +147,8 @@ var global_config = {
 // 全局数据
 var global_data = {
     "config_options": ["行业", "班级", "课程", "职称", "角色", "公告", "活动", "物资", "收支"],
-    "user_types": ["学生", "教师"]
+    "user_types": ["学生", "教师"],
+    "config_state": ["在读", "毕业", "不明"]
 };
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'JSONFormatterConfigProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, JSONFormatterConfigProvider) {

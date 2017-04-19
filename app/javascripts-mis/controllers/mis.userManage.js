@@ -10,17 +10,15 @@ app.controller('userManageCtrl',['$scope', '$state','$http', '$cookies','toaster
     $scope.newUserAccount = undefined;
     $scope.newUserPassword = undefined;
 
-
-	$scope.users = [];
 	$scope.accountExist = true;
 
 	// 创建用户
 	$scope.createUser = function(){
-		if($scope.newUserName.length > 10)
+		if($scope.newUserName.length >= 20)
 			toaster.pop("warning", "新建用户名称长度不可超过20!", null, 2000, "toast-top-full-width");
-        else if($scope.newUserAccount.length > 20)
+        else if($scope.newUserAccount.length >= 20)
             toaster.pop("warning", "新建用户账号长度不可超过20!", null, 2000, "toast-top-full-width");
-        else if($scope.newUserPassword.length > 20)
+        else if($scope.newUserPassword.length >= 20)
             toaster.pop("warning", "新建用户密码长度不可超过20!", null, 2000, "toast-top-full-width");
         else{
         	var newUser = {
