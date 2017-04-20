@@ -99,24 +99,32 @@ app.controller('userManageCtrl',['$scope', '$state','$http', '$cookies','toaster
 
 	// 修改用户
 	$scope.updateUser = function(){
-        var data = {
-            "username": $scope.searchedUserAccount,
-            "name": $scope.searchedUserName,
-            "password": $scope.searchedUserPassword,
-            "type": $scope.searchedUserType,
-            "state": $scope.searchedUserDisabled
-        };
-        $http.post("/api/userManage/update", data).then(function(res){
-            if(res.data.flg == 1){
-                toaster.pop("success", "修改成功!" + (res.data.msg || ""), null,
-                    2000, "toast-top-full-width");
-                $("#userModal").modal("hide");
-            } else
+        if($scope.newUserName.length >= 20)
+            toaster.pop("warning", "新建用户名称长度不可超过20!", null, 2000, "toast-top-full-width");
+        else if($scope.newUserAccount.length >= 20)
+            toaster.pop("warning", "新建用户账号长度不可超过20!", null, 2000, "toast-top-full-width");
+        else if($scope.newUserPassword.length >= 20)
+            toaster.pop("warning", "新建用户密码长度不可超过20!", null, 2000, "toast-top-full-width");
+        else {
+            var data = {
+                "username": $scope.searchedUserAccount,
+                "name": $scope.searchedUserName,
+                "password": $scope.searchedUserPassword,
+                "type": $scope.searchedUserType,
+                "state": $scope.searchedUserDisabled
+            };
+            $http.post("/api/userManage/update", data).then(function(res){
+                if(res.data.flg == 1){
+                    toaster.pop("success", "修改成功!" + (res.data.msg || ""), null,
+                        2000, "toast-top-full-width");
+                    $("#userModal").modal("hide");
+                } else
+                    toaster.pop("error", "修改失败!" + (res.data.msg || ""), null,
+                        2000, "toast-top-full-width");
+            }, function(res){
                 toaster.pop("error", "修改失败!" + (res.data.msg || ""), null,
                     2000, "toast-top-full-width");
-        }, function(res){
-            toaster.pop("error", "修改失败!" + (res.data.msg || ""), null,
-                2000, "toast-top-full-width");
-        });
+            });
+        }
     };
 }]);

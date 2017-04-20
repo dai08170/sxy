@@ -183,6 +183,12 @@
     min-height: 80px;
 }
 
+.textarea-size2{
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+}
+
 .map-size{
     height: 200px;
 }

@@ -148,7 +148,8 @@ var global_config = {
 var global_data = {
     "config_options": ["行业", "班级", "课程", "职称", "角色", "公告", "活动", "物资", "收支"],
     "user_types": ["学生", "教师"],
-    "config_state": ["在读", "毕业", "不明"]
+    "config_state": ["在读", "毕业", "不明"],
+    "regulation_types": ["日常制度", "领导职责"]
 };
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'JSONFormatterConfigProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, JSONFormatterConfigProvider) {
@@ -212,7 +213,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/sSelfInfo',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/sSelfInfo.html',
+                    templateUrl: '/partial/mis/selfInfo/sSelfInfo.html',
                     controller: 'sSelfInfoCtrl'
                 }
             }
@@ -221,7 +222,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/tSelfInfo',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/tSelfInfo.html',
+                    templateUrl: '/partial/mis/selfInfo/tSelfInfo.html',
                     controller: 'tSelfInfoCtrl'
                 }
             }
@@ -230,7 +231,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/companyPropagate',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/companyPropagate.html',
+                    templateUrl: '/partial/mis/collegePropagate/companyPropagate.html',
                     controller: 'companyPropagateCtrl'
                 }
             }
@@ -239,7 +240,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/activityPropagate',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/activityPropagate.html',
+                    templateUrl: '/partial/mis/collegePropagate/activityPropagate.html',
                     controller: 'activityPropagateCtrl'
                 }
             }
@@ -248,7 +249,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/coursePropagate',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/coursePropagate.html',
+                    templateUrl: '/partial/mis/collegePropagate/coursePropagate.html',
                     controller: 'coursePropagateCtrl'
                 }
             }
@@ -257,7 +258,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/perfectStudent',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/perfectStudent.html',
+                    templateUrl: '/partial/mis/collegePropagate/perfectStudent.html',
                     controller: 'perfectStudentCtrl'
                 }
             }
@@ -266,7 +267,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/sCourseBuild',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/sCourseBuild.html',
+                    templateUrl: '/partial/mis/courseConstruct/sCourseBuild.html',
                     controller: 'sCourseBuildCtrl'
                 }
             }
@@ -275,7 +276,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/tCourseBuild',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/tCourseBuild.html',
+                    templateUrl: '/partial/mis/courseConstruct/tCourseBuild.html',
                     controller: 'tCourseBuildCtrl'
                 }
             }
@@ -284,7 +285,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/dailySystem',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/dailySystem.html',
+                    templateUrl: '/partial/mis/collegeRegulation/dailySystem.html',
                     controller: 'dailySystemCtrl'
                 }
             }
@@ -293,7 +294,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/leaderDuty',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/leaderDuty.html',
+                    templateUrl: '/partial/mis/collegeRegulation/leaderDuty.html',
                     controller: 'leaderDutyCtrl'
                 }
             }
@@ -302,7 +303,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/messageBoard',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/messageBoard.html',
+                    templateUrl: '/partial/mis/infoConstruct/messageBoard.html',
                     controller: 'messageBoardCtrl'
                 }
             }
@@ -311,7 +312,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/systemNotice',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/systemNotice.html',
+                    templateUrl: '/partial/mis/infoConstruct/systemNotice.html',
                     controller: 'systemNoticeCtrl'
                 }
             }
@@ -320,7 +321,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/userManage',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/userManage.html',
+                    templateUrl: '/partial/mis/baseManage/userManage.html',
                     controller: 'userManageCtrl'
                 }
             }
@@ -329,7 +330,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/classManage',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/classManage.html',
+                    templateUrl: '/partial/mis/baseManage/classManage.html',
                     controller: 'classManageCtrl'
                 }
             }
@@ -338,7 +339,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/courseManage',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/courseManage.html',
+                    templateUrl: '/partial/mis/baseManage/courseManage.html',
                     controller: 'courseManageCtrl'
                 }
             }
@@ -347,7 +348,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/attendenceManage',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/attendenceManage.html',
+                    templateUrl: '/partial/mis/baseManage/attendenceManage.html',
                     controller: 'attendenceManageCtrl'
                 }
             }
@@ -356,7 +357,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/propagateManage',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/propagateManage.html',
+                    templateUrl: '/partial/mis/baseManage/propagateManage.html',
                     controller: 'propagateManageCtrl'
                 }
             }
@@ -365,7 +366,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/systemManage',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/systemManage.html',
+                    templateUrl: '/partial/mis/baseManage/systemManage.html',
                     controller: 'systemManageCtrl'
                 }
             }
@@ -374,7 +375,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/accountManage',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/accountManage.html',
+                    templateUrl: '/partial/mis/baseManage/accountManage.html',
                     controller: 'accountManageCtrl'
                 }
             }
@@ -383,7 +384,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/authorityManage',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/authorityManage.html',
+                    templateUrl: '/partial/mis/baseManage/authorityManage.html',
                     controller: 'authorityManageCtrl'
                 }
             }
@@ -392,7 +393,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/infoManage',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/infoManage.html',
+                    templateUrl: '/partial/mis/baseManage/infoManage.html',
                     controller: 'infoManageCtrl'
                 }
             }
@@ -401,7 +402,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: '/configManage',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/configManage.html',
+                    templateUrl: '/partial/mis/baseManage/configManage.html',
                     controller: 'configManageCtrl'
                 }
             }

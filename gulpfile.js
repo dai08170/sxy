@@ -14,7 +14,7 @@ var watch = require('gulp-watch');
 
 var path={
     doorJs:     ['./app/javascripts-door/**/*.js'],
-    misJs:     ['./app/javascripts-mis/**/*.js'],
+    misJs:     ['./app/javascripts-mis/**/**/*.js'],
     css:    ['./app/css/*.css'],
     test:   ['./test/*.js']
 };

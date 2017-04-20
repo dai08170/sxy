@@ -26,9 +26,9 @@ app.controller('classManageCtrl',['$scope', '$state','$http', '$cookies','toaste
 
     // 创建班级
     $scope.createClass = function(){
-        if($scope.newClassNumberlength >= 20)
+        if($scope.newClassNumber.length >= 20)
             toaster.pop("warning", "新建班级编号长度不可超过20!", null, 2000, "toast-top-full-width");
-        if($scope.newClassNamelength >= 20)
+        else if($scope.newClassName.length >= 20)
             toaster.pop("warning", "新建班级名称长度不可超过20!", null, 2000, "toast-top-full-width");
         else {
             var newClass = {
@@ -38,7 +38,6 @@ app.controller('classManageCtrl',['$scope', '$state','$http', '$cookies','toaste
                 "profile": $scope.newClassProfile,
                 "state": $scope.newClassState
             };
-            console.log(newClass);
             $http.post("/api/classManage/create", newClass).then(function(res){
                 if(res.data.flg == 1){
                     toaster.pop("success", "创建成功!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
@@ -66,14 +65,14 @@ app.controller('classManageCtrl',['$scope', '$state','$http', '$cookies','toaste
     };
 
     // 查询班级
-    $scope.searchClassByName = function(){
+    $scope.searchByNumber = function(){
         if($scope.searchClassNumber == undefined || $.trim($scope.searchClassNumber) =='')
-            toaster.pop("warning", "请输入待查询班级名称!", null, 2000, "toast-top-full-width");
+            toaster.pop("warning", "请输入待查询班级编号!", null, 2000, "toast-top-full-width");
         else {
             $http.get("/api/classManage/search?number="+$scope.searchClassNumber).then(function(res){
                 $scope.classExist = res.data.exists;
                 if(!$scope.classExist)
-                    toaster.pop("warning", "查询失败!"+ (res.data.msg || ''), null, 2000, "toast-top-full-width");
+                    toaster.pop("danger", "查询失败!"+ (res.data.msg || ''), null, 2000, "toast-top-full-width");
                 else {
                     console.log(res.data);
                     $scope.searchedClassNumber = res.data.class.number;
@@ -84,7 +83,7 @@ app.controller('classManageCtrl',['$scope', '$state','$http', '$cookies','toaste
                     $("#classModal").modal("show");
                 }
             },function(res){
-                toaster.pop("warning", "查询失败!"+ (res.data.msg || ''), null, 2000, "toast-top-full-width");
+                toaster.pop("danger", "查询失败!"+ (res.data.msg || ''), null, 2000, "toast-top-full-width");
             });
         }
     };
@@ -109,26 +108,32 @@ app.controller('classManageCtrl',['$scope', '$state','$http', '$cookies','toaste
     };
 
     // 修改班级
-    $scope.updateClass = function(){
-        var data = {
-            "number": $scope.searchedClassNumber,
-            "name": $scope.searchedClassName,
-            "type": $scope.searchedClassType,
-            "profile": $scope.searchedClassProfile,
-            "state": $scope.searchedClassState
-        };
-        $http.post("/api/classManage/update", data).then(function(res){
-            if(res.data.flg == 1){
-                toaster.pop("success", "修改成功!" + (res.data.msg || ""), null,
-                    2000, "toast-top-full-width");
-                $("#classModal").modal("hide");
-            } else
+    $scope.updateClass = function() {
+        if ($scope.searchedClassNumber.length >= 20)
+            toaster.pop("warning", "新建班级编号长度不可超过20!", null, 2000, "toast-top-full-width");
+        else if ($scope.searchedClassName.length >= 20)
+            toaster.pop("warning", "新建班级名称长度不可超过20!", null, 2000, "toast-top-full-width");
+        else {
+            var data = {
+                "number": $scope.searchedClassNumber,
+                "name": $scope.searchedClassName,
+                "type": $scope.searchedClassType,
+                "profile": $scope.searchedClassProfile,
+                "state": $scope.searchedClassState
+            };
+            $http.post("/api/classManage/update", data).then(function (res) {
+                if (res.data.flg == 1) {
+                    toaster.pop("success", "修改成功!" + (res.data.msg || ""), null,
+                        2000, "toast-top-full-width");
+                    $("#classModal").modal("hide");
+                } else
+                    toaster.pop("error", "修改失败!" + (res.data.msg || ""), null,
+                        2000, "toast-top-full-width");
+            }, function (res) {
                 toaster.pop("error", "修改失败!" + (res.data.msg || ""), null,
                     2000, "toast-top-full-width");
-        }, function(res){
-            toaster.pop("error", "修改失败!" + (res.data.msg || ""), null,
-                2000, "toast-top-full-width");
-        });
+            });
+        }
     };
 
 }]);

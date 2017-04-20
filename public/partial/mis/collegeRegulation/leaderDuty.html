@@ -1,0 +1,43 @@
+<div class="margin-top-10 height-auto bg-white">
+    <div class="row margin-10">
+        <div class="panel panel-default border-none">
+            <div class="panel-heading bg-white">
+                <h2><span class="glyphicon glyphicon-flag"></span> &nbsp;领导职责</h2>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-2">
+                        <label class="control-label">请选择条目:</label>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-control" ng-options="item for item in nameItems"
+                                ng-model="itemName" ng-change="getItemData();">
+                        
+                        </select>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class="row text-center">
+                        <h1 ng-bind="itemTitle"></h1>
+                    </div>
+                    <div class="row text-center">
+                        <label>
+                            发布者:
+                            <i ng-bind="itemEditor"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+                            发布时间:
+                            <i ng-bind="itemCreateTime"></i>
+                        </label>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-10">
+                            <p class="text-index" ng-bind="itemContent"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+        </div>
+    </div>
+</div>

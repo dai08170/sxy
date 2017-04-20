@@ -1,27 +1,17 @@
 /**
- * Created by lonelydawn on 2017-04-19.
+ * Created by lonelydawn on 2017-04-17.
  */
 
-var config = require("../config");
+var config = require("../../config");
 
 module.exports = {
-    getClassType : function *(){
-        var options = {
-            method : 'GET',
-            url : config.url2 +"/classManage/getClassType",
-            json: true
-        };
-        var res = yield this.routeConfig(options);
-        this.status = res.statusCode;
-        this.body = res.body;
-    },
     search : function *(){
         var options = {
             method : 'GET',
-            url : config.url2 +"/classManage/search",
+            url : config.url2 +"/userManage/search",
             json: true,
             headers: {
-                number : this.request.query.number
+                username : this.request.query.username
             }
         };
         var res = yield this.routeConfig(options);
@@ -31,13 +21,12 @@ module.exports = {
     create : function *(){
         var options = {
             method : 'POST',
-            url : config.url2 +"/classManage/create",
+            url : config.url2 +"/userManage/create",
             json: {
-                number : this.request.body.number,
                 name : this.request.body.name,
-                type : this.request.body.type,
-                profile : this.request.body.profile,
-                state : this.request.body.state
+                username : this.request.body.username,
+                password : this.request.body.password,
+                type : this.request.body.type
             }
         };
         var res = yield this.routeConfig(options);
@@ -47,12 +36,12 @@ module.exports = {
     update : function *(){
         var options = {
             method : 'POST',
-            url : config.url2 +"/classManage/update",
+            url : config.url2 +"/userManage/update",
             json: {
-                number : this.request.body.number,
-                name : this.request.body.name,
+                name: this.request.body.name,
+                username : this.request.body.username,
+                password : this.request.body.password,
                 type : this.request.body.type,
-                profile : this.request.body.profile,
                 state : this.request.body.state
             }
         };
@@ -63,9 +52,9 @@ module.exports = {
     delete : function *(){
         var options = {
             method : 'POST',
-            url : config.url2 +"/classManage/delete",
+            url : config.url2 +"/userManage/delete",
             json: {
-                number : this.request.body.number
+                username : this.request.body.username
             }
         };
         var res = yield this.routeConfig(options);

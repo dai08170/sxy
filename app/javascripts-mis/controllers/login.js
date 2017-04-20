@@ -3,8 +3,10 @@
  */
 
 app.controller('loginCtrl', ['$scope', '$http', '$state', '$cookies', 'toaster', function ($scope, $http, $state, $cookies, toaster) {
-    if($cookies.get('pass')!=undefined)
+    if($cookies.get('pass')!=undefined){
+        global_role = JSON.parse($cookies.get('pass')).role;
         $state.go('main.homepage');
+    }
 
     $scope.loginIn = function () {
         if ($scope.username == undefined || $scope.password == undefined) toaster.pop("warning", "请输入用户名或密码", null, 2000, "toast-top-full-width");else {
@@ -14,11 +16,10 @@ app.controller('loginCtrl', ['$scope', '$http', '$state', '$cookies', 'toaster',
             };
             $http.post('/api/login', json).then(function (res) {
                 if (!res.data.in) toaster.pop("error", "用户名或密码错误!", null, 2000, "toast-top-full-width");else {
-                    console.log(res.data);
                     var pass ={
                         "username": json.username,
-                        "password": json.password
-                        // "role": res.data.role,
+                        "password": json.password,
+                        "role": res.data.role
                         // "modules": res.data.modules
                     };
                     // 设置 cookie 过期时间
@@ -30,6 +31,8 @@ app.controller('loginCtrl', ['$scope', '$http', '$state', '$cookies', 'toaster',
                     $cookies.putObject('pass',pass,{
                         "expires": expires
                     });
+                    // 初始化全局角色
+                    global_role = res.data.role;
                     $state.go('main.homepage');
                 }
             }, function (res) {

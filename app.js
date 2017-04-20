@@ -16,10 +16,17 @@ const path = require("path");
 
 // 自定义路由转发模块
 const common = require("./routes/common");
-const login = require("./routes/main/login");
-const userManage = require("./routes/main/userManage");
-const classManage = require("./routes/main/classManage");
-const configManage = require("./routes/main/configManage");
+const login = require("./routes/mis/login");
+
+// 学院制度
+const dailySystem = require("./routes/mis/collegeRegulation/dailySystem");
+const leaderDuty = require("./routes/mis/collegeRegulation/leaderDuty");
+
+// 基础管理
+const userManage = require("./routes/mis/baseManage/userManage");
+const classManage = require("./routes/mis/baseManage/classManage");
+const systemManage = require("./routes/mis/baseManage/systemManage");
+const configManage = require("./routes/mis/baseManage/configManage");
 
 
 const app = new Koa();
@@ -55,6 +62,15 @@ app.use(route.post('/api/classManage/create',classManage.create));
 app.use(route.post('/api/classManage/update',classManage.update));
 app.use(route.post('/api/classManage/delete',classManage.delete));
 
+// 日常制度
+app.use(route.get('/api/dailySystem/getAll', dailySystem.getAll));
+
+// 领导职责
+app.use(route.get('/api/leaderDuty/getAll', leaderDuty.getAll));
+
+// 制度管理
+app.use(route.post('/api/systemManage/create',systemManage.create));
+app.use(route.post('/api/systemManage/delete',systemManage.delete));
 
 // 配置管理
 app.use(route.get('/api/configManage/getCurrent',configManage.getCurrent));

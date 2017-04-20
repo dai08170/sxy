@@ -3,17 +3,49 @@
  */
 
 app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', function ($scope, $http, $state, $cookies) {
+    // 如果用户cookies存在, 则将角色赋值于全局角色 ;否则, 返回登录界面
+    if($cookies.get('pass')!=undefined)
+        global_role = JSON.parse($cookies.get('pass')).role;
+    else $state.go("login");
+
     // 根据点击树节点编号 转发视图
     var routeViews = function(moduleId){
         switch(moduleId){
+            case "100860401":
+                $state.go("main.dailySystem");
+                break;
+            case "100860402":
+                $state.go("main.leaderDuty");
+                break;
             case "100860601":
                 $state.go("main.userManage");
                 break;
-            case "100860610":
-                $state.go("main.classManage");
+            case "100860602":
+                $state.go("main.courseManage");
+                break;
+            case "100860603":
+                $state.go("main.attendenceManage");
+                break;
+            case "100860604":
+                $state.go("main.propagateManage");
+                break;
+            case "100860605":
+                $state.go("main.systemManage");
+                break;
+            case "100860606":
+                $state.go("main.accountManage");
+                break;
+            case "100860607":
+                $state.go("main.authorityManage");
+                break;
+            case "100860608":
+                $state.go("main.infoManage");
                 break;
             case "100860609":
                 $state.go("main.configManage");
+                break;
+            case "100860610":
+                $state.go("main.classManage");
                 break;
             default:
                 $state.go("main.homepage");
