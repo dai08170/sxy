@@ -5,82 +5,341 @@
                 <h2><span class="glyphicon glyphicon-camera"></span> &nbsp;宣传管理</h2>
             </div>
             <div class="panel-body">
-            
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-2">
+                        <label class="control-label">请选择宣传类型:</label>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-control" ng-model="propagateType"
+                                ng-options="item for item in propagateTypes"></select>
+                    </div>
+                    <div class="col-md-3 pull-right">
+                        <button class="btn btn-success" ng-click="createModalShow();">新建{{propagateType}}</button>
+                    </div>
+                </div>
+                <hr/>
+                <h3>{{propagateType}}</h3>
+                <hr/>
+                <div class="row" ng-show="propagateType == propagateTypes[0]">
+                    <div class="row" ng-repeat="item in propagateArr">
+                    
+                    </div>
+                </div>
+                <div class="row" ng-show="propagateType == propagateTypes[1]">
+                    <div class="row" ng-repeat="item in propagateArr">
+        
+                    </div>
+                </div>
+                <div class="row" ng-show="propagateType == propagateTypes[2]">
+                    <div class="row" ng-repeat="item in propagateArr">
+        
+                    </div>
+                </div>
+                <div class="row" ng-show="propagateType == propagateTypes[3]">
+                    <div class="row" ng-repeat="item in propagateArr">
+        
+                    </div>
+                </div>
             </div>
             <div class="panel-footer bg-white">
-            
+                <div class="row text-center">
+                    <ul class="pagination pagination-md">
+                        <li ng-repeat="btn in pageBtns">
+                            <a href="#" ng-bind="btn" ng-click="pageClick(btn)"></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- 班级查询结果模态框 -->
-<div id="classModal" class="modal fade" tabindex="-1" role="dialog"
-     aria-labelledby="classModalLabel" aria-hidden="true">
+<!-- 企业宣传模态框 -->
+<div id="companyPropagateModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="companyPropagateModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content top-red">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="classModalLabel">查询班级信息</h4>
+                <h4 class="modal-title" id="companyPropagateModalLabel">企业宣传</h4>
+            </div>
+            <div class="modal-body">
+                <form name="companyPropagateForm">
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">宣传标题:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" type="text" ng-model="companyTitle"
+                                placeholder="请输入标题" required/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">宣传内容:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" tabindex="-1" type="text" placeholder="点击输入..."
+                                   ng-click="contentModalShow();" ng-model="propagateContent" required/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">宣传图片:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" tabindex="-1" type="text" placeholder="点击选择本地文件..."
+                                   ng-click=""/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">企业名称:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" type="text" ng-model="companyName"
+                                   placeholder="请输入企业名称" required/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">企业类型:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" type="text" tabindex="-1" ng-model="companyType"
+                                   ng-click="companyTypeModalShow();" placeholder="点击选择..."/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">企业地址:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" type="text" ng-model="companyAddress"
+                                   placeholder="请输入企业地址" required/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">联系方式:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" type="text" ng-model="companyPhone"
+                                   placeholder="请输入联系方式" required/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-info" ng-click="createCompanyPropagate()"
+                    ng-disabled="companyPropagateForm.$invalid">确定</button>
+                <button class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 活动宣传模态框 -->
+<div id="activityPropagateModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="activityPropagateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content top-red">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="activityPropagateModalLabel">活动宣传</h4>
+            </div>
+            <div class="modal-body">
+                <form name="activityPropagateForm">
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">宣传标题:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" type="text" ng-model="activityTitle"
+                                   placeholder="请输入标题" required/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">宣传内容:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" tabindex="-1" type="text" placeholder="点击输入..."
+                                   ng-click="contentModalShow();" ng-model="propagateContent" required/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">活动类型:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <select class="form-control" ng-options="item for item in activityTypes"
+                                    ng-model="activityType"></select>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">宣传图片:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" tabindex="-1" type="text" placeholder="点击选择本地文件..."
+                                   ng-click=""/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">负责组织:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" type="text" ng-model="activityMan"
+                                   placeholder="请输入负责人" required/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">联系方式:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" type="text" ng-model="activityPhone"
+                                   placeholder="请输入联系方式" required/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-info" ng-click="createActivityPropagate()"
+                        ng-disabled="activityPropagateForm.$invalid">确定</button>
+                <button class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 课程宣传模态框 -->
+<div id="coursePropagateModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="coursePropagateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content top-red">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="coursePropagateModalLabel">课程宣传</h4>
+            </div>
+            <div class="modal-body">
+                <form name="coursePropagateForm">
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">课程编号:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <select class="form-control" ng-options="item for item in courseNums"
+                                    ng-model="courseType"></select>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">宣传标题:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" type="text" ng-model="courseTitle"
+                                   placeholder="请输入标题" required/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">宣传内容:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" tabindex="-1" type="text" placeholder="点击输入..."
+                                   ng-click="contentModalShow();" ng-model="propagateContent" required/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">宣传图片:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" tabindex="-1" type="text" placeholder="点击选择本地文件..."
+                                   ng-click=""/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 优秀学子模态框 -->
+<div id="excellentStudentModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="excellentStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content top-red">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="excellentStudentModalLabel">优秀学子</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 企业类型模态框 -->
+<div id="companyTypeModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="companyTypeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content top-red">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="companyTypeModalLabel">企业类型</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-offset-1 col-md-2">
-                        <label class="control-label">账号:</label>
-                    </div>
-                    <div class="col-md-5">
-                        <input class="form-control" ng-model="searchedClassNumber"
-                               placeholder="请输入账号" required/>
-                    </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-2">
-                        <label class="control-label">名称:</label>
-                    </div>
-                    <div class="col-md-5">
-                        <input class="form-control" ng-model="searchedClassName"
-                               placeholder="请输入名称" required/>
-                    </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-2">
-                        <label class="control-label">类型:</label>
-                    </div>
-                    <div class="col-md-3">
-                        <select class="form-control" ng-model="searchedClassType"
-                                ng-options="item for item in classTypes">
-                        
-                        </select>
-                    </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-2">
-                        <label class="control-label">简介:</label>
-                    </div>
-                    <div class="col-md-8">
-                        <textarea class="form-control textarea-size" placeholder="简介..."
-                                  ng-model="searchedClassProfile"></textarea>
-                    </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-2">
-                        <label class="control-label">状态:</label>
-                    </div>
-                    <div class="col-md-3">
-                        <select class="form-control" ng-model="searchedClassState"
-                                ng-options="item for item in classState"></select>
-                    </div>
+                    <button class="btn btn-default margin-5 company-type" ng-repeat="item in companyTypes track by $index"
+                            ng-bind="item" ng-click="toggleSelect(item);"></button>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" data-dismiss="modal" ng-click="updateClass();">修改</button>
-                <button class="btn btn-info" ng-click="deleteClass();">
-                    删除</button>
                 <button class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 宣传内容模态框 -->
+<div id="contentModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="contentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content top-red">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="contentModalLabel">宣传内容</h4>
+            </div>
+            <div class="modal-body">
+                <textarea class="form-control textarea-size2" ng-model="propagateContent"
+                    placeholder="内容..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" ng-click="resetContent();">清空</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->

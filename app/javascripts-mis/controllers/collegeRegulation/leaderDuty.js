@@ -25,6 +25,8 @@ app.controller('leaderDutyCtrl',['$scope', '$state','$http', '$cookies','toaster
         var index = $scope.nameItems.indexOf($scope.itemName);
         var item = $scope.objItems[index];
         $scope.itemTitle = $scope.itemName +" (编号 : " + item.num +")";
+        // itemContent改变时刷新scrollbar
+        $("#itemContent").find("p").html(item.content.replace(/ /g,"&nbsp;"));
         $scope.itemContent = item.content;
         $scope.itemEditor = item.editor;
         $scope.itemCreateTime = item.create_time;

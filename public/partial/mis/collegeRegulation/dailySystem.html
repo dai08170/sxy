@@ -32,7 +32,12 @@
                     <br/>
                     <div class="row">
                         <div class="col-md-offset-1 col-md-10">
-                            <p class="text-index" ng-bind="itemContent"></p>
+                            <perfect-scrollbar id="itemContent" class="scroller"
+                                               wheel-propagation="true" wheel-speed="10"
+                                               min-scrollbar-length="20" refresh-on-change="itemContent">
+                                <!-- itemContent改变时刷新scrollbar-->
+                                <p class="text-feature"></p>
+                            </perfect-scrollbar>
                         </div>
                     </div>
                 </div>

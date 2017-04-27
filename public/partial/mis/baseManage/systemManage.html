@@ -23,6 +23,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <input class="form-control" type="text" ng-model="deleteNumber"
+                                   onkeypress="numberOnly();" onpaste="return false;"
                                    placeholder="请输入编号" required/>
                         </div>
                         <div class="col-md-2">
@@ -41,6 +42,7 @@
                         </div>
                         <div class="col-md-3">
                             <input class="form-control" ng-model="newNumber"
+                                   onkeypress="numberOnly();" onpaste="return false;"
                                    placeholder="请输入编号" required/>
                         </div>
                     </div>

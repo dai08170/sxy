@@ -11,6 +11,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <input class="form-control" type="text" ng-model="searchClassNumber"
+                                   onkeypress="numberOnly();" onpaste="return false;"
                                    placeholder="请输入班级编号" required/>
                         </div>
                         <div class="col-md-2">
@@ -30,6 +31,7 @@
                         </div>
                         <div class="col-md-3">
                             <input class="form-control" ng-model="newClassNumber"
+                                   onkeypress="numberOnly();" onpaste="return false;"
                                    placeholder="请输入班级编号" required/>
                         </div>
                     </div>

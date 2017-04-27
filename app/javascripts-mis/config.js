@@ -4,7 +4,7 @@
 
 
 
-var app = angular.module('app', ['ui.router', 'jsonFormatter', 'toaster', 'ngAnimate', 'ngSanitize', 'ngCookies']);
+var app = angular.module('app', ['ui.router', 'jsonFormatter', 'toaster', 'ngAnimate', 'ngSanitize', 'ngCookies', 'angular-loading-bar', 'perfect_scrollbar']);
 // 标识登录角色
 var global_role = undefined;
 // 全局配置
@@ -149,10 +149,11 @@ var global_data = {
     "config_options": ["行业", "班级", "课程", "职称", "角色", "公告", "活动", "物资", "收支"],
     "user_types": ["学生", "教师"],
     "config_state": ["在读", "毕业", "不明"],
-    "regulation_types": ["日常制度", "领导职责"]
+    "regulation_types": ["日常制度", "领导职责"],
+    "propagate_types": ["企业宣传", "活动宣传", "课程宣传", "优秀学子"]
 };
 
-app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'JSONFormatterConfigProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, JSONFormatterConfigProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'JSONFormatterConfigProvider', 'cfpLoadingBarProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, JSONFormatterConfigProvider, cfpLoadingBarProvider) {
     // 在请求中设置 X-Requested-With 向服务器声明这是一个XHR请求
     $httpProvider.defaults.headers.common = {
         'X-Requested-With': 'XMLHttpRequest'
@@ -165,6 +166,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
     });
 
     JSONFormatterConfigProvider.hoverPreviewEnabled = true;
+    cfpLoadingBarProvider.includeSpinner = true;
+
     window.httpProvider = $httpProvider;
     $httpProvider.defaults.headers.common.pageSize = 1000;
     $httpProvider.defaults.headers.common.pageNum = 1;

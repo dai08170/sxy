@@ -40,8 +40,10 @@ app.controller('systemManageCtrl',['$scope', '$state','$http', '$cookies','toast
                 "number": $scope.newNumber,
                 "people_id": global_role.id,
                 "name": $scope.newName,
-                "content": $scope.newContent
+                "content": $scope.newContent.replace(/[\n\r]/g,"<br/>").replace(/ /g,"&nbsp;")
             };
+            console.log($scope.newContent);
+            console.log($scope.newContent.replace("\n",";"));
             $http.post("/api/systemManage/create", data).then(function(res){
                 if(res.data.flg == 1){
                     toaster.pop("success", "创建成功!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");

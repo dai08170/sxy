@@ -21,15 +21,18 @@
     "jquery": "^3.1.1",
     "bootstrap": "^3.3.6",
     "echarts": "^2.2.7",
-    "angular": "^1.5.0",
-    "angular-ui-router": "^0.2.18",
+    "angular": "^1.6.4",
     "angularjs-toaster": "^2.0.0",
     "angular-sanitize": "^1.4.1",
     "json-formatter": "^0.5.0",
     "bootstrap-treeview": "^1.2.0",
-    "angular-cookies": "^1.5.3"
+    "angular-cookies": "^1.5.3",
+    "angular-loading-bar": "^0.9.0",
+    "angular-ui-router": "^0.4.2",
+    "angular-perfect-scrollbar": "^0.0.4",
+    "bootstrap-datepicker": "^1.6.4"
   },
   "resolutions": {
-    "angular": "1.5.8"
+    "angular": "^1.6.4"
   }
 }

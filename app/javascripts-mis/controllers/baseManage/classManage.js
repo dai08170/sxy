@@ -13,8 +13,11 @@ app.controller('classManageCtrl',['$scope', '$state','$http', '$cookies','toaste
     // 获取班级类型
     var getClassType = function(){
         $http.get("/api/classManage/getClassType").then(function (res) {
-            $scope.classTypes = res.data;
-            $scope.newClassType = $scope.classTypes[0];
+            if(res.data.length>0){
+                $scope.classTypes = res.data;
+                $scope.newClassType = $scope.classTypes[0];
+            } else
+                toaster.pop("danger", "班级类型无数据!不可创建!", null, 2000, "toast-top-full-width");
         }, function (res) {
 
         });

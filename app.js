@@ -25,6 +25,8 @@ const leaderDuty = require("./routes/mis/collegeRegulation/leaderDuty");
 // 基础管理
 const userManage = require("./routes/mis/baseManage/userManage");
 const classManage = require("./routes/mis/baseManage/classManage");
+const courseManage = require("./routes/mis/baseManage/courseManage");
+const propagateManage = require("./routes/mis/baseManage/propagateManage");
 const systemManage = require("./routes/mis/baseManage/systemManage");
 const configManage = require("./routes/mis/baseManage/configManage");
 
@@ -55,12 +57,23 @@ app.use(route.post('/api/userManage/create',userManage.create));
 app.use(route.post('/api/userManage/update',userManage.update));
 app.use(route.post('/api/userManage/delete',userManage.delete));
 
-//班级管理
+// 班级管理
 app.use(route.get('/api/classManage/getClassType', classManage.getClassType));
 app.use(route.get('/api/classManage/search',classManage.search));
 app.use(route.post('/api/classManage/create',classManage.create));
 app.use(route.post('/api/classManage/update',classManage.update));
 app.use(route.post('/api/classManage/delete',classManage.delete));
+
+// 课程管理
+app.use(route.get('/api/courseManage/getCourseType', courseManage.getCourseType));
+app.use(route.get('/api/courseManage/getTeachers',courseManage.getTeachers));
+app.use(route.get('/api/courseManage/search',courseManage.search));
+app.use(route.post('/api/courseManage/create',courseManage.create));
+app.use(route.post('/api/courseManage/update',courseManage.update));
+app.use(route.post('/api/courseManage/delete',courseManage.delete));
+
+// 宣传管理
+app.use(route.get('/api/propagateManage/getPage', propagateManage.getPage));
 
 // 日常制度
 app.use(route.get('/api/dailySystem/getAll', dailySystem.getAll));
