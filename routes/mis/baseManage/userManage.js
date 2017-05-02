@@ -2,9 +2,29 @@
  * Created by lonelydawn on 2017-04-17.
  */
 
-var config = require("../../config");
+const config = require("../../config");
 
 module.exports = {
+    getAllTeachers : function *(){
+        var options = {
+            method : 'GET',
+            url : config.url2 +"/userManage/getAllTeachers",
+            json: true
+        };
+        var res = yield this.routeConfig(options);
+        this.status = res.statusCode;
+        this.body = res.body;
+    },
+    getAllStudents : function *(){
+        var options = {
+            method : 'GET',
+            url : config.url2 +"/userManage/getAllStudents",
+            json: true
+        };
+        var res = yield this.routeConfig(options);
+        this.status = res.statusCode;
+        this.body = res.body;
+    },
     search : function *(){
         var options = {
             method : 'GET',

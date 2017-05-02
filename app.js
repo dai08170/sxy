@@ -13,6 +13,18 @@ const logger = require('koa-logger');
 const session = require("koa-generic-session");
 const FileStore = require("koa-generic-session-file");
 const path = require("path");
+const multer = require("koa-router-multer");
+
+// 配置图片上传插件参数
+var Storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, "public/uploads");
+    },
+    filename: function (req, file, callback) {
+        callback(null, file.originalname);
+    }
+});
+var upload = multer({ storage: Storage });
 
 // 自定义路由转发模块
 const common = require("./routes/common");
@@ -52,6 +64,8 @@ app.use(common.config);
 app.use(route.post('/api/login',login.login));
 
 // 用户管理
+app.use(route.get('/api/userManage/getAllTeachers',userManage.getAllTeachers));
+app.use(route.get('/api/userManage/getAllStudents',userManage.getAllStudents));
 app.use(route.get('/api/userManage/search',userManage.search));
 app.use(route.post('/api/userManage/create',userManage.create));
 app.use(route.post('/api/userManage/update',userManage.update));
@@ -66,7 +80,7 @@ app.use(route.post('/api/classManage/delete',classManage.delete));
 
 // 课程管理
 app.use(route.get('/api/courseManage/getCourseType', courseManage.getCourseType));
-app.use(route.get('/api/courseManage/getTeachers',courseManage.getTeachers));
+app.use(route.get('/api/courseManage/getAllCourses',courseManage.getAllCourses));
 app.use(route.get('/api/courseManage/search',courseManage.search));
 app.use(route.post('/api/courseManage/create',courseManage.create));
 app.use(route.post('/api/courseManage/update',courseManage.update));
@@ -74,6 +88,19 @@ app.use(route.post('/api/courseManage/delete',courseManage.delete));
 
 // 宣传管理
 app.use(route.get('/api/propagateManage/getPage', propagateManage.getPage));
+app.use(route.get('/api/propagateManage/getTotalItem', propagateManage.getTotalItem));
+app.use(route.get('/api/propagateManage/getCurrent', propagateManage.getCurrent));
+app.use(route.post('/api/propagateManage/createCompany', propagateManage.createCompany));
+app.use(route.post('/api/propagateManage/createActivity', propagateManage.createActivity));
+app.use(route.post('/api/propagateManage/createCourse', propagateManage.createCourse));
+app.use(route.post('/api/propagateManage/createStudent', propagateManage.createStudent));
+app.use(route.post('/api/propagateManage/updateCompany', propagateManage.updateCompany));
+app.use(route.post('/api/propagateManage/updateActivity', propagateManage.updateActivity));
+app.use(route.post('/api/propagateManage/updateCourse', propagateManage.updateCourse));
+app.use(route.post('/api/propagateManage/updateStudent', propagateManage.updateStudent));
+app.use(route.post('/api/propagateManage/delete', propagateManage.delete));
+// 上传图片保存到node服务器端
+app.use(route.post('/api/propagateManage/upload', upload.single('file')));
 
 // 日常制度
 app.use(route.get('/api/dailySystem/getAll', dailySystem.getAll));

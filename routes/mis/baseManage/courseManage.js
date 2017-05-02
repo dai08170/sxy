@@ -2,7 +2,7 @@
  * Created by lonelydawn on 2017-04-25.
  */
 
-var config = require("../../config");
+const config = require("../../config");
 
 module.exports = {
     getCourseType  : function *(){
@@ -15,10 +15,10 @@ module.exports = {
         this.status = res.statusCode;
         this.body = res.body;
     },
-    getTeachers : function *(){
+    getAllCourses : function *(){
         var options = {
             method : 'GET',
-            url : config.url2 +"/courseManage/getTeachers",
+            url : config.url2 +"/courseManage/getAllCourses",
             json: true
         };
         var res = yield this.routeConfig(options);

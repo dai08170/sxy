@@ -4,9 +4,11 @@
 
 
 
-var app = angular.module('app', ['ui.router', 'jsonFormatter', 'toaster', 'ngAnimate', 'ngSanitize', 'ngCookies', 'angular-loading-bar', 'perfect_scrollbar']);
+var app = angular.module('app', ['ui.router', 'jsonFormatter', 'toaster', 'ngAnimate', 'ngSanitize', 'ngCookies', 'angular-loading-bar', 'perfect_scrollbar', 'angularFileUpload']);
 // 标识登录角色
 var global_role = undefined;
+// 标识全局资源基路径
+var global_baseurl = "uploads/";
 // 全局配置
 var global_config = {
     modules: [

@@ -2,7 +2,7 @@
  * Created by lonelydawn on 2017-04-20.
  */
 
-var config = require("../../config");
+const config = require("../../config");
 
 module.exports = {
     getAll : function *(){

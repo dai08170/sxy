@@ -47,8 +47,8 @@ app.controller('courseManageCtrl',['$scope', '$state','$http', '$cookies','toast
     };
 
     // 获取教师数组
-    var getTeachers = function(){
-        $http.get("/api/courseManage/getTeachers").then(function (res) {
+    var getAllTeachers = function(){
+        $http.get("/api/userManage/getAllTeachers").then(function (res) {
             if(res.data.length>0){
                 $scope.teacherArr = res.data;
                 $scope.newCourseTeacher = $scope.teacherArr[0];
@@ -60,7 +60,7 @@ app.controller('courseManageCtrl',['$scope', '$state','$http', '$cookies','toast
     };
 
     getCourseType();
-    getTeachers();
+    getAllTeachers();
 
     // 创建课程
     $scope.createCourse = function(){

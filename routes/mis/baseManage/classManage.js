@@ -2,7 +2,7 @@
  * Created by lonelydawn on 2017-04-19.
  */
 
-var config = require("../../config");
+const config = require("../../config");
 
 module.exports = {
     getClassType : function *(){

@@ -30,7 +30,8 @@
     "angular-loading-bar": "^0.9.0",
     "angular-ui-router": "^0.4.2",
     "angular-perfect-scrollbar": "^0.0.4",
-    "bootstrap-datepicker": "^1.6.4"
+    "bootstrap-datepicker": "^1.6.4",
+    "angular-file-upload": "^2.5.0"
   },
   "resolutions": {
     "angular": "^1.6.4"

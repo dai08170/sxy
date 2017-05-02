@@ -38,7 +38,7 @@ app.controller('systemManageCtrl',['$scope', '$state','$http', '$cookies','toast
             var data = {
                 "tableIndex": $scope.systemNames.indexOf($scope.systemName),
                 "number": $scope.newNumber,
-                "people_id": global_role.id,
+                "creator_id": global_role.id,
                 "name": $scope.newName,
                 "content": $scope.newContent.replace(/[\n\r]/g,"<br/>").replace(/ /g,"&nbsp;")
             };

@@ -68,26 +68,30 @@ app.controller('configManageCtrl', ['$scope', '$http', 'toaster', function($scop
 
     // 创建新配置项数据
     $scope.createNewConfigItem = function(){
-        var data = {
-            "tableIndex": $scope.configOptions.indexOf($scope.configOption),
-            "configItemData": $scope.newConfigName
-        };
-        $http.post('/api/configManage/create', data).then(function (res) {
-            if(res.data.flg == 1) {
-                toaster.pop("success", "创建成功!" + (res.data.msg || ""), null,
-                    2000, "toast-top-full-width");
-                $scope.configData.push($scope.newConfigName);
-                // 数组数据划分为表格
-                $scope.tableData = getLevelArray($scope.configData);
-                initCreateConfig();
-            } else
+        if($scope.newConfigName.length >= 20)
+            toaster.pop("warning", "新建配置名称长度不可超过20!", null, 2000, "toast-top-full-width");
+        else {
+            var data = {
+                "tableIndex": $scope.configOptions.indexOf($scope.configOption),
+                "configItemData": $scope.newConfigName
+            };
+            $http.post('/api/configManage/create', data).then(function (res) {
+                if (res.data.flg == 1) {
+                    toaster.pop("success", "创建成功!" + (res.data.msg || ""), null,
+                        2000, "toast-top-full-width");
+                    $scope.configData.push($scope.newConfigName);
+                    // 数组数据划分为表格
+                    $scope.tableData = getLevelArray($scope.configData);
+                    initCreateConfig();
+                } else
+                    toaster.pop("error", "创建失败!" + (res.data.msg || ""), null,
+                        2000, "toast-top-full-width");
+                $("#confirmModal").modal("hide");
+            }, function (res) {
                 toaster.pop("error", "创建失败!" + (res.data.msg || ""), null,
                     2000, "toast-top-full-width");
-            $("#confirmModal").modal("hide");
-        }, function(res){
-            toaster.pop("error", "创建失败!" + (res.data.msg || ""), null,
-                2000, "toast-top-full-width");
-        });
+            });
+        }
     };
 
     // 初始化 当前配置项数据表

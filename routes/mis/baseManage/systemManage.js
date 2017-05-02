@@ -2,7 +2,7 @@
  * Created by lonelydawn on 2017-04-20.
  */
 
-var config = require("../../config");
+const config = require("../../config");
 
 module.exports = {
     create : function *(){
@@ -11,7 +11,7 @@ module.exports = {
             url : config.url2 +"/systemManage/create",
             json: {
                 tableIndex: this.request.body.tableIndex,
-                people_id : this.request.body.people_id,
+                creator_id : this.request.body.creator_id,
                 number : this.request.body.number,
                 name : this.request.body.name,
                 content : this.request.body.content
