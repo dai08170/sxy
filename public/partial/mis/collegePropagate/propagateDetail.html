@@ -1,0 +1,73 @@
+<div class="margin-top-10 height-auto bg-white">
+    <div class="row margin-10">
+        <div class="panel panel-default border-none" ng-show="item!=undefined">
+            <div class="panel-heading bg-white">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h2><span class="glyphicon glyphicon-file"></span> &nbsp;{{item.title}}</h2>
+                    </div>
+                    <div class="col-md-2">
+                        <h3><a class="color-gray" ng-click="backward();">后退</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <p>创建时间:&nbsp;<i ng-bind="item.create_time"></i></p>
+                </div>
+                <div class="row">
+                    <perfect-scrollbar class="scroller"
+                                       wheel-propagation="true" wheel-speed="10"
+                                       min-scrollbar-length="20" refresh-on-change="item">
+                        <!-- item改变时刷新scrollbar-->
+                        <!-- 企业宣传 -->
+                        <div class="row scrollbar-margin-top" ng-show="typeIndex==0">
+                            <div class="col-md-6 text-center">
+                                <img class="bg-img poster-detail-img-height"
+                                     src="{{item.picture_path}}">
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-index" ng-bind="item.content"></p>
+                            </div>
+                        </div>
+                        <!-- 活动宣传 -->
+                        <div class="row scrollbar-margin-top" ng-show="typeIndex==1">
+                            <div class="col-md-6 text-center">
+                                <img class="bg-img poster-detail-img-height"
+                                     src="{{item.picture_path}}">
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-index" ng-bind="item.content"></p>
+                            </div>
+                        </div>
+                        <!-- 课程宣传 -->
+                        <div class="row scrollbar-margin-top" ng-show="typeIndex==2">
+                            <div class="col-md-6 text-center">
+                                <img class="bg-img poster-detail-img-height"
+                                     src="{{item.picture_path}}">
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-index" ng-bind="item.content"></p>
+                            </div>
+                        </div>
+                        <!-- 优秀学子 -->
+                        <div class="row scrollbar-margin-top" ng-show="typeIndex==3">
+                            <div class="col-md-6 text-center">
+                                <img class="bg-img poster-detail-img-height"
+                                     src="{{item.photo_path}}">
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-feature">个人简介:</p>
+                                <p class="text-index" ng-bind="item.profile"></p>
+                                <p class="text-feature">所的荣誉:</p>
+                                <p class="text-index" ng-bind="item.honor"></p>
+                                <p class="text-feature">个人宣言:</p>
+                                <p class="text-index" ng-bind="item.declaration"></p>
+                            </div>
+                        </div>
+                    </perfect-scrollbar>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="margin-top-10 height-auto bg-white">
+    <div class="row margin-10">
+        <div class="panel panel-default border-none">
+            <div class="panel-heading bg-white">
+                <h2><span class="glyphicon glyphicon-book"></span> &nbsp;{{propagateType}}</h2>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-offset-7 col-md-3">
+                        <input class="form-control" type="text" ng-model="searchText"
+                               placeholder="请输入关键字 (标题)"/>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-info" ng-click="search();">
+                            <span class="glyphicon"></span>&nbsp;搜索
+                        </button>
+                    </div>
+                </div>
+                <div class="row margin-top-10 border-gray" ng-repeat="item in propagateArr">
+                    <!-- 路由到宣传详细页面 -->
+                    <a class="color-deep-gray" ng-click="forward(item);">
+                        <div class="col-md-3 text-center">
+                            <img class="bg-img poster-img-height" src="{{item.picture_path}}" alt="企业宣传">
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="row">
+                                    <!-- 标题 -->
+                                    <div class="col-md-8">
+                                        <h6 class="one-line">
+                                            <span class="badge" ng-bind="item.company_type"></span>
+                                            {{item.title}}
+                                        </h6>
+                                    </div>
+                                    <!-- 创建时间 -->
+                                    <div class="col-md-4">
+                                        <i class="one-line pull-right" ng-bind="item.create_time"></i>
+                                    </div>
+                                </div>
+                                <div class="row top-gray">
+                                    <div class="col-md-6">
+                                        <p class="one-line">
+                                            {{"课程名称: "+item.course_name}}</p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p class="one-line">
+                                            {{"宣传内容: "+item.content}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+    
+                <!-- 分页 -->
+                <div class="row text-center" ng-show="propagateArr.length>0">
+                    <ul class="pagination pagination-md">
+                        <li ng-repeat="btn in pageBtns">
+                            <a href="#" ng-bind="btn" ng-click="pageClick(btn)"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <br/>
+        </div>
+    </div>
+</div>

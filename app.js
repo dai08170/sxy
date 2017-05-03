@@ -30,6 +30,8 @@ var upload = multer({ storage: Storage });
 const common = require("./routes/common");
 const login = require("./routes/mis/login");
 
+// 学院宣传
+const collegePropagate =require("./routes/mis/collegePropagate/collegePropagate");
 // 学院制度
 const dailySystem = require("./routes/mis/collegeRegulation/dailySystem");
 const leaderDuty = require("./routes/mis/collegeRegulation/leaderDuty");
@@ -85,6 +87,9 @@ app.use(route.get('/api/courseManage/search',courseManage.search));
 app.use(route.post('/api/courseManage/create',courseManage.create));
 app.use(route.post('/api/courseManage/update',courseManage.update));
 app.use(route.post('/api/courseManage/delete',courseManage.delete));
+
+// 学院宣传
+app.use(route.get('/api/collegePropagate/search', collegePropagate.search));
 
 // 宣传管理
 app.use(route.get('/api/propagateManage/getPage', propagateManage.getPage));

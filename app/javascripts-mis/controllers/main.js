@@ -11,6 +11,18 @@ app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', function ($
     // 根据点击树节点编号 转发视图
     var routeViews = function(moduleId){
         switch(moduleId){
+            case "100860201":
+                $state.go("main.companyPropagate");
+                break;
+            case "100860202":
+                $state.go("main.activityPropagate");
+                break;
+            case "100860203":
+                $state.go("main.coursePropagate");
+                break;
+            case "100860204":
+                $state.go("main.excellentStudent");
+                break;
             case "100860401":
                 $state.go("main.dailySystem");
                 break;

@@ -32,7 +32,8 @@ var global_config = {
             }, {
                 text: "活动宣传",
                 icon: "glyphicon glyphicon-tags",
-                moduleId: "main.activityPropagate"
+                moduleId: "100860202",
+                href: "main.activityPropagate"
             }, {
                 text: "课程宣传",
                 icon: "glyphicon glyphicon-tags",
@@ -234,37 +235,72 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
         })
         .state('main.companyPropagate',{
             url: '/companyPropagate',
+            params: {
+                "typeIndex": 0,
+                "pageNum": 0,
+                "searchText": ''
+            },
             views: {
                 'content': {
                     templateUrl: '/partial/mis/collegePropagate/companyPropagate.html',
-                    controller: 'companyPropagateCtrl'
+                    controller: 'propagateCtrl'
                 }
             }
         })
         .state('main.activityPropagate',{
             url: '/activityPropagate',
+            params: {
+                "typeIndex": 1,
+                "pageNum": 0,
+                "searchText": ''
+            },
             views: {
                 'content': {
                     templateUrl: '/partial/mis/collegePropagate/activityPropagate.html',
-                    controller: 'activityPropagateCtrl'
+                    controller: 'propagateCtrl'
                 }
             }
         })
         .state('main.coursePropagate',{
             url: '/coursePropagate',
+            params: {
+                "typeIndex": 2,
+                "pageNum": 0,
+                "searchText": ''
+            },
             views: {
                 'content': {
                     templateUrl: '/partial/mis/collegePropagate/coursePropagate.html',
-                    controller: 'coursePropagateCtrl'
+                    controller: 'propagateCtrl'
                 }
             }
         })
-        .state('main.perfectStudent',{
-            url: '/perfectStudent',
+        .state('main.excellentStudent',{
+            url: '/excellentStudent',
+            params: {
+                "typeIndex": 3,
+                "pageNum": 0,
+                "searchText": ''
+            },
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/collegePropagate/perfectStudent.html',
-                    controller: 'perfectStudentCtrl'
+                    templateUrl: '/partial/mis/collegePropagate/excellentStudent.html',
+                    controller: 'propagateCtrl'
+                }
+            }
+        })
+        .state('main.propagateDetail',{
+            url: '/propagateDetail',
+            params: {
+                "item": undefined,
+                "typeIndex": 0,
+                "pageNum": 0,
+                "searchText": ''
+            },
+            views: {
+                'content': {
+                    templateUrl: '/partial/mis/collegePropagate/propagateDetail.html',
+                    controller: 'propagateDetailCtrl'
                 }
             }
         })

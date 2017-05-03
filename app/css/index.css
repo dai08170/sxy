@@ -15,6 +15,11 @@
     min-width: 60px;
 }
 
+hr{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 /* 通用样式 */
 .bg-white{
     background-color: #fff !important;
@@ -25,11 +30,23 @@
 }
 
 .bg-red{
-    background-color: #f00 !important;
+    background-color: #c9302c !important;
 }
 
 .bg-blue{
-    background-color: #00f !important;
+    background-color: #337ab7 !important;
+}
+
+.bg-light-blue{
+    background-color: #269abc !important;
+}
+
+.bg-green{
+    background-color: #5cb85c !important;
+}
+
+.bg-yellow{
+    background-color: #f0ad4e !important;
 }
 
 .color-gray{
@@ -54,6 +71,11 @@
 
 .top-red{
     border-top: 3px solid #d43f3a !important;
+    border-radius: 3px !important;
+}
+
+.top-gray{
+    border-top: 1px solid #ddd !important;
     border-radius: 3px !important;
 }
 
@@ -132,6 +154,9 @@
 }
 .margin-bottom-10{
     margin-bottom: 10px;
+}
+.margin-top-5{
+    margin-top: 5px;
 }
 
 .margin-center{
@@ -220,7 +245,7 @@
 .fixed-propagate{
     position: fixed;
     width:20%;
-    margin-left:61%;
+    margin-left:62%;
 }
 
 .teach-feature{
@@ -296,6 +321,14 @@
 
 .poster-img-height{
     height: 136px !important;
+}
+
+.poster-detail-img-height{
+    height:300px !important;
+}
+
+.scrollbar-margin-top{
+    margin-top: -100px;
 }
 
 #document-tree .list-group .list-group-item{
@@ -385,7 +418,7 @@
 
     .scroller {
         white-space: pre-line;
-        height: 400px;
+        height: 500px;
         overflow-y: hidden;
         position: relative;
     }
@@ -402,7 +435,7 @@
 
     .scroller {
         white-space: pre-line;
-        height: 340px;
+        height: 420px;
         overflow-y: hidden;
         position: relative;
     }

@@ -2,7 +2,7 @@
  * Created by lonelydawn on 2017-04-20.
  */
 
-app.controller('dailySystemCtrl',['$scope', '$state','$http', '$cookies','toaster', function($scope, $state,$http, $cookies, toaster){
+app.controller('dailySystemCtrl',['$scope', '$state', '$http', function($scope, $state, $http){
     $scope.objItems = [];
     $scope.nameItems = [];
     $scope.itemName = undefined;
@@ -35,10 +35,12 @@ app.controller('dailySystemCtrl',['$scope', '$state','$http', '$cookies','toaste
     // 初始化所有数据项
     var initDataItems = function(){
         $http.get("/api/dailySystem/getAll").then(function (res) {
-            $scope.objItems = res.data;
-            $scope.nameItems = getItemsName(res.data);
-            $scope.itemName = $scope.nameItems[0];
-            $scope.getItemData();
+            if(res.data != undefined && res.data != null && res.data.length != 0) {
+                $scope.objItems = res.data;
+                $scope.nameItems = getItemsName(res.data);
+                $scope.itemName = $scope.nameItems[0];
+                $scope.getItemData();
+            }
         }, function (res) {
 
         });
