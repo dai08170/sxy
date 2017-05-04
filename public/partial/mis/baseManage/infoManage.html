@@ -5,81 +5,176 @@
                 <h2><span class="glyphicon glyphicon-comment"></span> &nbsp;信息管理</h2>
             </div>
             <div class="panel-body">
-            
-            </div>
-            <div class="panel-footer bg-white">
-            
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-2">
+                        <label class="control-label">请选择信息模块:</label>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-default" ng-click="toggleAnnounce();"
+                                ng-class="{true:'btn-info', false:'btn-default'}[isAnnounce]">公告栏</button>
+    
+                        <button class="btn btn-default" ng-click="toggleMessageBoard();"
+                                ng-class="{true:'btn-info', false:'btn-default'}[isMessageBoard]">留言板</button>
+                       </div>
+                    <div class="col-md-3" ng-show="isAnnounce">
+                        <button class="btn btn-success" ng-click="createAnnounceModalShow();">
+                            新建公告信息
+                        </button>
+                    </div>
+                </div>
+                <hr/>
+    
+                <!-- 系统公告模块 -->
+                <div class="row" ng-show="isAnnounce">
+                    <table class="table table-bordered table-fixed table-striped">
+                        <thead>
+                        <tr>
+                            <td class="col-md-7">内容</td>
+                            <td class="col-md-2">发布时间</td>
+                            <td class="col-md-1">创建者</td>
+                            <td class="col-md-2">操作</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in dataArr">
+                            <td class="one-line col-md-7">
+                                <span class="badge bg-light-blue" ng-bind="item.type"></span>
+                                <a ng-bind="item.content"
+                                   ng-click="contentDetailModalShow(item.content);"></a>
+                            </td>
+                            <td class="one-line col-md-2" ng-bind="item.create_time"></td>
+                            <td class="one-line col-md-1" ng-bind="item.creator_name"></td>
+                            <td class="col-md-2">
+                                <a class="color-blue" ng-click="updateAnnounceModalShow(item);">
+                                    <span class="glyphicon glyphicon-pencil"></span>修改</a>&nbsp;&nbsp;
+                                <a class="color-red" ng-click="delete(item.id);">
+                                    <span class="glyphicon glyphicon-trash"></span>删除</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- 留言板模块 -->
+                <div class="row" ng-show="isMessageBoard">
+                    <table class="table table-bordered table-fixed table-striped">
+                        <thead>
+                        <tr>
+                            <td class="col-md-7">留言内容</td>
+                            <td class="col-md-2">留言时间</td>
+                            <td class="col-md-1">创建者</td>
+                            <td class="col-md-2">操作</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in dataArr">
+                            <td class="one-line col-md-7">
+                                <span class="badge bg-light-blue" ng-bind="item.type"></span>
+                                <a ng-bind="item.content"
+                                   ng-click="contentDetailModalShow(item.content);"></a>
+                            </td>
+                            <td class="one-line col-md-2" ng-bind="item.create_time"></td>
+                            <td class="one-line col-md-1" ng-bind="item.creator_name"></td>
+                            <td class="col-md-2">
+                                <a class="color-red" ng-click="delete(item.id);">
+                                    <span class="glyphicon glyphicon-trash"></span>删除</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- 分页 -->
+                <div class="row text-center" ng-show="dataArr.length>0">
+                    <ul class="pagination pagination-md">
+                        <li ng-repeat="btn in pageBtns">
+                            <a href="#" ng-bind="btn" ng-click="pageClick(btn)"></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- 班级查询结果模态框 -->
-<div id="classModal" class="modal fade" tabindex="-1" role="dialog"
-     aria-labelledby="classModalLabel" aria-hidden="true">
+<!-- 公告模态框 -->
+<div id="announceModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="announceModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content top-red">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="classModalLabel">查询班级信息</h4>
+                <h4 class="modal-title" id="announceModalLabel">系统公告</h4>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-2">
-                        <label class="control-label">账号:</label>
+                <form name="announceForm">
+                    <!-- 内容 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">内容:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" ng-model="content" tabindex="-1"
+                                   placeholder="请输入内容" ng-click="contentModalShow();" required/>
+                        </div>
                     </div>
-                    <div class="col-md-5">
-                        <input class="form-control" ng-model="searchedClassNumber"
-                               placeholder="请输入账号" required/>
+                    <br/>
+                    <!-- 类型 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">类型:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <select class="form-control" ng-model="announceType"
+                                    ng-options="item for item in announceTypes">
+            
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-2">
-                        <label class="control-label">名称:</label>
-                    </div>
-                    <div class="col-md-5">
-                        <input class="form-control" ng-model="searchedClassName"
-                               placeholder="请输入名称" required/>
-                    </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-2">
-                        <label class="control-label">类型:</label>
-                    </div>
-                    <div class="col-md-3">
-                        <select class="form-control" ng-model="searchedClassType"
-                                ng-options="item for item in classTypes">
-                        
-                        </select>
-                    </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-2">
-                        <label class="control-label">简介:</label>
-                    </div>
-                    <div class="col-md-8">
-                        <textarea class="form-control textarea-size" placeholder="简介..."
-                                  ng-model="searchedClassProfile"></textarea>
-                    </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-2">
-                        <label class="control-label">状态:</label>
-                    </div>
-                    <div class="col-md-3">
-                        <select class="form-control" ng-model="searchedClassState"
-                                ng-options="item for item in classState"></select>
-                    </div>
-                </div>
+                </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" data-dismiss="modal" ng-click="updateClass();">修改</button>
-                <button class="btn btn-info" ng-click="deleteClass();">
-                    删除</button>
+                <button class="btn btn-success" data-dismiss="modal"
+                        ng-click="createAnnounce();" ng-disabled="announceForm.$invalid">确定</button>
+                <button class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 公告内容修改创建模态框 -->
+<div id="contentModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="contentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content top-red">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="contentModalLabel">公告内容</h4>
+            </div>
+            <div class="modal-body">
+                <textarea class="form-control textarea-size2" ng-model="content"
+                          placeholder="内容..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" ng-click="resetContent();">清空</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 公告显示模态框 -->
+<div id="contentDetailModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="contentDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content top-red">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="contentDetailModalLabel">公告内容</h4>
+            </div>
+            <div class="modal-body">
+                <p class="text-feature" id="con"></p>
+            </div>
+            <div class="modal-footer">
                 <button class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
         </div><!-- /.modal-content -->

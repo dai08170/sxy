@@ -21,7 +21,7 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
     $scope.totalPages = 0;
     $scope.pageBtns = [];
 
-    $scope.propagateTypes = global_data.propagate_types;
+    $scope.propagateTypes = global_config.propagate_types;
     $scope.propagateType = $scope.propagateTypes[0];
     $scope.propagateArr = [];
 
@@ -86,7 +86,7 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
             } else
                 toaster.pop("danger", "无学生存在!请先创建学生!", null, 2000, "toast-top-full-width");
         }, function (res) {
-            toaster.pop("danger", "服务器错误!", null, 2000, "toast-top-full-width");
+            toaster.pop("error", "服务器错误!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
         });
     };
     init();
@@ -202,7 +202,7 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
             } else
                 toaster.pop("danger", "创建失败!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
         }, function(res){
-            toaster.pop("danger", "创建失败!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
+            toaster.pop("error", "服务器错误!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
         });
     };
 
@@ -297,9 +297,9 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
                     $scope.companyAddress = res.data.company_address;
                     $scope.companyPhone = res.data.phone_number;
                 }else
-                    toaster.pop("error", "数据获取失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
+                    toaster.pop("danger", "数据获取失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
             }, function (res) {
-                toaster.pop("error", "数据获取失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
+                toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
             });
         };
         // 初始化活动宣传模态框
@@ -322,9 +322,9 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
                                 $scope.activityType = $scope.activityTypes[i];
                         }
                     } else
-                        toaster.pop("error", "数据获取失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
+                        toaster.pop("danger", "数据获取失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
                 }, function (res) {
-                    toaster.pop("error", "数据获取失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
+                    toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
                 });
         };
         // 初始化课程宣传模态框
@@ -345,9 +345,9 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
                                 $scope.course = $scope.courses[i];
                         }
                     }else
-                        toaster.pop("error", "数据获取失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
+                        toaster.pop("danger", "数据获取失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
                 }, function (res) {
-                    toaster.pop("error", "数据获取失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
+                    toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
                 });
         };
         // 初始化优秀学子模态框
@@ -369,9 +369,9 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
                                 $scope.excellentStudent = $scope.excellentStudents[i];
                         }
                     }else
-                        toaster.pop("error", "数据获取失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
+                        toaster.pop("danger", "数据获取失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
                 }, function (res) {
-                    toaster.pop("error", "数据获取失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
+                    toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
                 });
         };
 
@@ -412,7 +412,7 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
             } else
                 toaster.pop("danger", "修改失败!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
         }, function(res){
-            toaster.pop("danger", "修改失败!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
+            toaster.pop("error", "服务器错误!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
         });
     };
 
@@ -478,7 +478,7 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
             } else
                 toaster.pop("danger", "修改失败!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
         }, function(res){
-            toaster.pop("danger", "修改失败!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
+            toaster.pop("error", "服务器错误!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
         });
     };
 
@@ -521,7 +521,7 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
             }else
                 toaster.pop("danger", "删除失败!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
         }, function(res){
-            toaster.pop("danger", "删除失败!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
+            toaster.pop("error", "服务器错误!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
         });
     };
 

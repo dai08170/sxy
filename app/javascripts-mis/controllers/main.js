@@ -29,6 +29,12 @@ app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', function ($
             case "100860402":
                 $state.go("main.leaderDuty");
                 break;
+            case "100860501":
+                $state.go("main.messageBoard");
+                break;
+            case "100860502":
+                $state.go("main.systemNotice");
+                break;
             case "100860601":
                 $state.go("main.userManage");
                 break;
@@ -72,7 +78,7 @@ app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', function ($
             expandIcon: 'glyphicon glyphicon-chevron-right',
             collapseIcon: 'glyphicon glyphicon-chevron-down',
             checkedIcon: 'glyphicon glyphicon-chevron-down',
-            data: global_config.modules,
+            data: global_modules,
             color: '#fff',
             backColor: '#222',
             onhoverColor: '#333',

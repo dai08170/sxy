@@ -6,7 +6,7 @@ app.controller('systemManageCtrl',['$scope', '$state','$http', '$cookies','toast
     // 初始化新建项类型
     $scope.isRegulation = true;
     $scope.isDuty = false;
-    $scope.systemNames = global_data.regulation_types;
+    $scope.systemNames = global_config.regulation_types;
     $scope.systemName = $scope.systemNames[0];
 
     // 选择日常制度
@@ -51,7 +51,7 @@ app.controller('systemManageCtrl',['$scope', '$state','$http', '$cookies','toast
                 } else
                     toaster.pop("danger", "创建失败!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
             }, function(res){
-                toaster.pop("danger", "创建失败!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
+                toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
             });
         }
     };
@@ -83,7 +83,7 @@ app.controller('systemManageCtrl',['$scope', '$state','$http', '$cookies','toast
                     toaster.pop("success", "删除成功!"+ (res.data.msg || ''), null, 2000, "toast-top-full-width");
                 }
             },function(res){
-                toaster.pop("danger", "删除失败!"+ (res.data.msg || ''), null, 2000, "toast-top-full-width");
+                toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
             });
         }
     };

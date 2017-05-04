@@ -10,8 +10,7 @@ var global_role = undefined;
 // 标识全局资源基路径
 var global_baseurl = "uploads/";
 // 全局配置
-var global_config = {
-    modules: [
+var global_modules = [
         {
             text: "个人信息",
             icon: "glyphicon glyphicon-tags",
@@ -145,10 +144,9 @@ var global_config = {
                 href: "main.configManage"
             }]
         }
-    ]
-};
+    ];
 // 全局数据
-var global_data = {
+var global_config = {
     "config_options": ["行业", "班级", "课程", "职称", "角色", "公告", "活动", "物资", "收支"],
     "user_types": ["学生", "教师"],
     "config_state": ["在读", "毕业", "不明"],

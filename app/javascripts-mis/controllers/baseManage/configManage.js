@@ -3,7 +3,7 @@
  */
 
 app.controller('configManageCtrl', ['$scope', '$http', 'toaster', function($scope, $http, toaster){
-    $scope.configOptions = global_data.config_options;
+    $scope.configOptions = global_config.config_options;
     $scope.configOption = $scope.configOptions[0];
 
     $scope.configData = undefined;
@@ -84,11 +84,11 @@ app.controller('configManageCtrl', ['$scope', '$http', 'toaster', function($scop
                     $scope.tableData = getLevelArray($scope.configData);
                     initCreateConfig();
                 } else
-                    toaster.pop("error", "创建失败!" + (res.data.msg || ""), null,
+                    toaster.pop("danger", "创建失败!" + (res.data.msg || ""), null,
                         2000, "toast-top-full-width");
                 $("#confirmModal").modal("hide");
             }, function (res) {
-                toaster.pop("error", "创建失败!" + (res.data.msg || ""), null,
+                toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null,
                     2000, "toast-top-full-width");
             });
         }

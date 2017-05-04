@@ -42,6 +42,7 @@ const classManage = require("./routes/mis/baseManage/classManage");
 const courseManage = require("./routes/mis/baseManage/courseManage");
 const propagateManage = require("./routes/mis/baseManage/propagateManage");
 const systemManage = require("./routes/mis/baseManage/systemManage");
+const infoManage = require("./routes/mis/baseManage/infoManage");
 const configManage = require("./routes/mis/baseManage/configManage");
 
 
@@ -116,6 +117,14 @@ app.use(route.get('/api/leaderDuty/getAll', leaderDuty.getAll));
 // 制度管理
 app.use(route.post('/api/systemManage/create',systemManage.create));
 app.use(route.post('/api/systemManage/delete',systemManage.delete));
+
+// 信息管理
+app.use(route.get('/api/infoManage/getAnnounceTypes',infoManage.getAnnounceTypes));
+app.use(route.get('/api/infoManage/getPage',infoManage.getPage));
+app.use(route.post('/api/infoManage/createAnnounce',infoManage.createAnnounce));
+app.use(route.post('/api/infoManage/createMessage',infoManage.createMessage));
+app.use(route.post('/api/infoManage/updateAnnounce',infoManage.updateAnnounce));
+app.use(route.post('/api/infoManage/delete',infoManage.delete));
 
 // 配置管理
 app.use(route.get('/api/configManage/getCurrent',configManage.getCurrent));

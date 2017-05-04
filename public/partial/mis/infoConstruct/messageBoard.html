@@ -1,0 +1,60 @@
+<div class="margin-top-10 height-auto bg-white">
+    <div class="row margin-10">
+        <div class="panel panel-default border-none">
+            <div class="panel-heading bg-white">
+                <h2><span class="glyphicon glyphicon-comment"></span> &nbsp;留言板</h2>
+            </div>
+            <div class="panel-body">
+                <!-- 留言板模块 -->
+                <div class="row">
+                    <div class="row border-gray margin-top-5" ng-repeat="item in dataArr">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <label class="control-label">
+                                        <span class="glyphicon glyphicon-user">&nbsp;{{item.creator_name}}
+                                        </span>
+                                </label>
+                            </div>
+                            <div class="col-md-4">
+                                <i class="color-gray pull-right" ng-bind="item.create_time"></i>
+                            </div>
+                        </div>
+                        <div class="row top-deep-gray message-height">
+                            <p class="text-index" ng-bind="item.content"></p>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- 分页 -->
+                <div class="row text-center" ng-show="dataArr.length>0">
+                    <ul class="pagination pagination-md">
+                        <li ng-repeat="btn in pageBtns">
+                            <a href="#" ng-bind="btn" ng-click="pageClick(btn)"></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="row">
+                        <form name="messageForm">
+                            <div class="row">
+                                <textarea class="form-control textarea-size" ng-model="message"
+                                          placeholder="请输入留言内容..." required></textarea>
+                            </div>
+                        </form>
+                        <div class="row margin-top-10">
+                            <div class="col-md-1 pull-right">
+                                <button class="btn btn-success" ng-disabled="messageForm.$invalid"
+                                        ng-click="createMessage();">发表</button>
+                            </div>
+                            <div class="col-md-1 pull-right">
+                                <label class="control-label">
+                                    <input type="checkbox" ng-model="isAnonymous"/>&nbsp;匿名
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

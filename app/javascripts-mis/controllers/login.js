@@ -15,7 +15,7 @@ app.controller('loginCtrl', ['$scope', '$http', '$state', '$cookies', 'toaster',
                 password: $scope.password
             };
             $http.post('/api/login', json).then(function (res) {
-                if (!res.data.in) toaster.pop("error", "用户名或密码错误!", null, 2000, "toast-top-full-width");else {
+                if (!res.data.in) toaster.pop("danger", "用户名或密码错误!", null, 2000, "toast-top-full-width");else {
                     var pass ={
                         "username": json.username,
                         "password": json.password,
@@ -36,7 +36,7 @@ app.controller('loginCtrl', ['$scope', '$http', '$state', '$cookies', 'toaster',
                     $state.go('main.homepage');
                 }
             }, function (res) {
-                toaster.pop("error", "用户名或密码错误", null, 2000, "toast-top-full-width");
+                toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
             });
         }
     };

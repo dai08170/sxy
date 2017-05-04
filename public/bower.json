@@ -31,7 +31,8 @@
     "angular-ui-router": "^0.4.2",
     "angular-perfect-scrollbar": "^0.0.4",
     "bootstrap-datepicker": "^1.6.4",
-    "angular-file-upload": "^2.5.0"
+    "angular-file-upload": "^2.5.0",
+    "ngQuill": "ng-quill#^3.1.1"
   },
   "resolutions": {
     "angular": "^1.6.4"

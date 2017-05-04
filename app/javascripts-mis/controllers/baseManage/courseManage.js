@@ -42,7 +42,7 @@ app.controller('courseManageCtrl',['$scope', '$state','$http', '$cookies','toast
             } else
                 toaster.pop("danger", "课程类型无数据!不可创建!", null, 2000, "toast-top-full-width");
         }, function (res) {
-            toaster.pop("danger", "服务器错误!", null, 2000, "toast-top-full-width");
+            toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
         });
     };
 
@@ -55,7 +55,7 @@ app.controller('courseManageCtrl',['$scope', '$state','$http', '$cookies','toast
             } else
                 toaster.pop("danger", "无教师存在!请先创建教师!", null, 2000, "toast-top-full-width");
         }, function (res) {
-            toaster.pop("danger", "服务器错误!", null, 2000, "toast-top-full-width");
+            toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
         });
     };
 
@@ -85,7 +85,7 @@ app.controller('courseManageCtrl',['$scope', '$state','$http', '$cookies','toast
                 } else
                     toaster.pop("danger", "创建失败!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
             }, function(res){
-                toaster.pop("danger", "创建失败!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
+                toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
             });
         }
     };
@@ -129,7 +129,7 @@ app.controller('courseManageCtrl',['$scope', '$state','$http', '$cookies','toast
                     $("#courseModal").modal("show");
                 }
             },function(res){
-                toaster.pop("danger", "查询失败!"+ (res.data.msg || ''), null, 2000, "toast-top-full-width");
+                toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
             });
         }
     };
@@ -145,10 +145,10 @@ app.controller('courseManageCtrl',['$scope', '$state','$http', '$cookies','toast
                     2000, "toast-top-full-width");
                 $("#courseModal").modal("hide");
             } else
-                toaster.pop("error", "删除失败!" + (res.data.msg || ""), null,
+                toaster.pop("danger", "删除失败!" + (res.data.msg || ""), null,
                     2000, "toast-top-full-width");
         }, function(res){
-            toaster.pop("error", "删除失败!" + (res.data.msg || ""), null,
+            toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null,
                 2000, "toast-top-full-width");
         });
     };
@@ -175,10 +175,10 @@ app.controller('courseManageCtrl',['$scope', '$state','$http', '$cookies','toast
                         2000, "toast-top-full-width");
                     $("#courseModal").modal("hide");
                 } else
-                    toaster.pop("error", "修改失败!" + (res.data.msg || ""), null,
+                    toaster.pop("danger", "修改失败!" + (res.data.msg || ""), null,
                         2000, "toast-top-full-width");
             }, function (res) {
-                toaster.pop("error", "修改失败!" + (res.data.msg || ""), null,
+                toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null,
                     2000, "toast-top-full-width");
             });
         }

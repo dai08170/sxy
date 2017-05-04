@@ -15,7 +15,7 @@ app.controller('propagateCtrl',['$scope', '$state', '$stateParams', '$http', '$c
 
     $scope.propagateArr = [];
 
-    $scope.propagateTypes = global_data.propagate_types;
+    $scope.propagateTypes = global_config.propagate_types;
     $scope.propagateType = $scope.propagateTypes[typeIndex];
 
 

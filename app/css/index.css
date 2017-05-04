@@ -69,6 +69,10 @@ hr{
     color: #f00 !important;
 }
 
+.color-blue{
+    color: #269abc !important;
+}
+
 .top-red{
     border-top: 3px solid #d43f3a !important;
     border-radius: 3px !important;
@@ -76,6 +80,11 @@ hr{
 
 .top-gray{
     border-top: 1px solid #ddd !important;
+    border-radius: 3px !important;
+}
+
+.top-deep-gray{
+    border-top: 1px solid #bbb !important;
     border-radius: 3px !important;
 }
 
@@ -214,8 +223,20 @@ hr{
     min-height: 300px;
 }
 
+.kindeditor{
+    width:100%;
+    height: auto;
+    min-height:200px;
+    visibility: hidden;
+}
+
 .map-size{
     height: 200px;
+}
+
+.message-height{
+    height: auto;
+    min-height: 50px;
 }
 
 /* 定制样式 */

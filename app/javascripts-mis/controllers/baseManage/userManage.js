@@ -3,7 +3,7 @@
  */
 
 app.controller('userManageCtrl',['$scope', '$state','$http', '$cookies','toaster', function($scope, $state,$http, $cookies, toaster){
-	$scope.userTypes = global_data.user_types;
+	$scope.userTypes = global_config.user_types;
 
 	$scope.newUserType = $scope.userTypes[0];
     $scope.newUserName = undefined;
@@ -36,7 +36,7 @@ app.controller('userManageCtrl',['$scope', '$state','$http', '$cookies','toaster
                 else
                     toaster.pop("danger", "创建失败!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
             }, function(res){
-                toaster.pop("danger", "创建失败!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
+                toaster.pop("error", "服务器错误!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
             });
 		}
 	};
@@ -73,7 +73,7 @@ app.controller('userManageCtrl',['$scope', '$state','$http', '$cookies','toaster
                     $("#userModal").modal("show");
                 }
             },function(res){
-                toaster.pop("warning", "查询失败!"+ (res.data.msg || ''), null, 2000, "toast-top-full-width");
+                toaster.pop("error", "服务器错误!"+ (res.data.msg || ''), null, 2000, "toast-top-full-width");
 			});
 		}
 	};
@@ -89,10 +89,10 @@ app.controller('userManageCtrl',['$scope', '$state','$http', '$cookies','toaster
                     2000, "toast-top-full-width");
                 $("#userModal").modal("hide");
             } else
-                toaster.pop("error", "删除失败!" + (res.data.msg || ""), null,
+                toaster.pop("danger", "删除失败!" + (res.data.msg || ""), null,
                     2000, "toast-top-full-width");
         }, function(res){
-            toaster.pop("error", "删除失败!" + (res.data.msg || ""), null,
+            toaster.pop("error", "服务器错误!" + (res.data.msg || ""), null,
                 2000, "toast-top-full-width");
         });
     };
@@ -119,10 +119,10 @@ app.controller('userManageCtrl',['$scope', '$state','$http', '$cookies','toaster
                         2000, "toast-top-full-width");
                     $("#userModal").modal("hide");
                 } else
-                    toaster.pop("error", "修改失败!" + (res.data.msg || ""), null,
+                    toaster.pop("danger", "修改失败!" + (res.data.msg || ""), null,
                         2000, "toast-top-full-width");
             }, function(res){
-                toaster.pop("error", "修改失败!" + (res.data.msg || ""), null,
+                toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null,
                     2000, "toast-top-full-width");
             });
         }
