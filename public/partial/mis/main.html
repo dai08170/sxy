@@ -37,15 +37,15 @@
     <div class="right-box height-auto">
         <div class="row bg-white border-radius-3">
             <div class="row col-md-11 margin-center">
-                <div class="col-md-5 margin-left-10" ng-repeat="item in announcements">
-                    <a href="#">
-                        <span class="badge">公告</span>
-                        <small class="color-gray" ng-bind="item.date"></small>&nbsp;
-                        <small ng-bind="item.title"></small>&nbsp;
+                <div class="col-md-10 margin-left-10">
+                        <span class="badge" ng-bind="announcement.type"></span>
+                        <small class="color-gray" ng-bind="announcement.create_time"></small>&nbsp;
+                    <a class="color-gray">
+                        <small ng-bind="announcement.content"></small>&nbsp;
                     </a>
                 </div>
                 <div class="col-md-1 pull-right margin-right-10">
-                    <a href="#"><small>>>更多</small></a>
+                    <a class="color-gray" ui-sref="main.systemNotice"><small>>>更多</small></a>
                 </div>
             </div>
         </div>

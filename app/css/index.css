@@ -348,10 +348,6 @@ hr{
     height:300px !important;
 }
 
-.scrollbar-margin-top{
-    margin-top: -100px;
-}
-
 #document-tree .list-group .list-group-item{
     text-align: center !important;
     padding: 5px 0 !important;
@@ -364,6 +360,11 @@ hr{
 
 #document-tree .list-group .list-group-item span{
     display: none;
+}
+
+/* 设置权限管理模块按键的位置 */
+.authority-btn{
+    margin-top: 160px;
 }
 
 @media (max-width: 2120px){
@@ -437,8 +438,13 @@ hr{
         display: none;
     }
 
+    .authority-scroller{
+        height: 460px;
+        overflow-y: hidden;
+        position: relative;
+    }
+
     .scroller {
-        white-space: pre-line;
         height: 500px;
         overflow-y: hidden;
         position: relative;
@@ -454,8 +460,13 @@ hr{
         height: 400px;
     }
 
+    .authority-scroller{
+         height: 380px;
+         overflow-y: hidden;
+         position: relative;
+     }
+
     .scroller {
-        white-space: pre-line;
         height: 420px;
         overflow-y: hidden;
         position: relative;

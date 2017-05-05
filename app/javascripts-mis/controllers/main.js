@@ -2,7 +2,7 @@
  * Created by lonelydawn on 2017-03-09.
  */
 
-app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', function ($scope, $http, $state, $cookies) {
+app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', '$interval', function ($scope, $http, $state, $cookies, $interval) {
     // 如果用户cookies存在, 则将角色赋值于全局角色 ;否则, 返回登录界面
     if($cookies.get('pass')!=undefined)
         global_role = JSON.parse($cookies.get('pass')).role;
@@ -39,31 +39,34 @@ app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', function ($
                 $state.go("main.userManage");
                 break;
             case "100860602":
-                $state.go("main.courseManage");
+                $state.go("main.classManage");
                 break;
             case "100860603":
-                $state.go("main.attendenceManage");
+                $state.go("main.courseManage");
                 break;
             case "100860604":
-                $state.go("main.propagateManage");
+                $state.go("main.courseDistribute");
                 break;
             case "100860605":
-                $state.go("main.systemManage");
+                $state.go("main.attendenceManage");
                 break;
             case "100860606":
-                $state.go("main.accountManage");
+                $state.go("main.propagateManage");
                 break;
             case "100860607":
-                $state.go("main.authorityManage");
+                $state.go("main.systemManage");
                 break;
             case "100860608":
-                $state.go("main.infoManage");
+                $state.go("main.accountManage");
                 break;
             case "100860609":
-                $state.go("main.configManage");
+                $state.go("main.authorityManage");
                 break;
             case "100860610":
-                $state.go("main.classManage");
+                $state.go("main.infoManage");
+                break;
+            case "100860611":
+                $state.go("main.configManage");
                 break;
             default:
                 $state.go("main.homepage");
@@ -73,36 +76,127 @@ app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', function ($
 
     // 创建目录树
     var createTree = function () {
-        $('#nav-tree').treeview({
-            level: 1,
-            expandIcon: 'glyphicon glyphicon-chevron-right',
-            collapseIcon: 'glyphicon glyphicon-chevron-down',
-            checkedIcon: 'glyphicon glyphicon-chevron-down',
-            data: global_modules,
-            color: '#fff',
-            backColor: '#222',
-            onhoverColor: '#333',
-            showBorder: false,
-            onNodeSelected: function(event, node) {
-                routeViews(node.moduleId);
+        // 基础权限模块
+        var modules = [];
+        // 权限模块父级模块
+        var extraModuleParent = {
+            text: "基础管理",
+            selectable: false,
+            moduleId: "1008606",
+            state: {
+                expanded: false
+            },
+            nodes: []
+        };
+
+        // 根据 id 号返回权限模块
+        var getAuthorityModules = function(moduleId){
+            return {
+                "100860601": {
+                    text: "用户管理",
+                    icon: "glyphicon glyphicon-tags",
+                    moduleId: "100860601",
+                    href: "main.userManage"
+                },
+                "100860602": {
+                    text: "班级管理",
+                    icon: "glyphicon glyphicon-tags",
+                    moduleId: "100860602",
+                    href: "main.classManage"
+                },
+                "100860603": {
+                    text: "课程管理",
+                    icon: "glyphicon glyphicon-tags",
+                    moduleId: "100860603",
+                    href: "main.courseManage"
+                },
+                "100860604": {
+                    text: "课程分配",
+                    icon: "glyphicon glyphicon-tags",
+                    moduleId: "100860604",
+                    href: "main.courseDistribute"
+                },
+                "100860605": {
+                    text: "出勤管理",
+                    icon: "glyphicon glyphicon-tags",
+                    moduleId: "100860605",
+                    href: "main.attendenceManage"
+                },
+                "100860606": {
+                    text: "宣传管理",
+                    icon: "glyphicon glyphicon-tags",
+                    moduleId: "100860606",
+                    href: "main.propagateManage"
+                },
+                "100860607": {
+                    text: "制度管理",
+                    icon: "glyphicon glyphicon-tags",
+                    moduleId: "100860607",
+                    href: "main.systemManage"
+                },
+                "100860608": {
+                    text: "资产管理",
+                    icon: "glyphicon glyphicon-tags",
+                    moduleId: "100860608",
+                    href: "main.accountManage"
+                },
+                "100860609": {
+                    text: "权限管理",
+                    icon: "glyphicon glyphicon-tags",
+                    moduleId: "100860609",
+                    href: "main.authorityManage"
+                },
+                "100860610": {
+                    text: "信息管理",
+                    icon: "glyphicon glyphicon-tags",
+                    moduleId: "100860610",
+                    href: "main.infoManage"
+                },
+                "100860611": {
+                    text: "配置管理",
+                    icon: "glyphicon glyphicon-tags",
+                    moduleId: "100860611",
+                    href: "main.configManage"
+                }
+            }[moduleId];
+        };
+        // 创建目录树
+        var createBranchs = function(){
+            $('#nav-tree').treeview({
+                level: 1,
+                expandIcon: 'glyphicon glyphicon-chevron-right',
+                collapseIcon: 'glyphicon glyphicon-chevron-down',
+                checkedIcon: 'glyphicon glyphicon-chevron-down',
+                data: modules,
+                color: '#fff',
+                backColor: '#222',
+                onhoverColor: '#333',
+                showBorder: false,
+                onNodeSelected: function(event, node) {
+                    routeViews(node.moduleId);
+                }
+            });
+        };
+        // 添加权限模块
+        $http.get('/api/authorityManage/get?username='+global_role.username).then(function (res) {
+            // 将全局可用模块复制进入创建树 的模块组
+            // 直接赋值的话, 会改变原始数组内容
+            for(var t =0;t<global_modules.length;t++)
+                modules.push(global_modules[t]);
+
+            if(res.data.modules.length > 0){
+                var moduleIds = res.data.modules;
+                for(var i=0; i<moduleIds.length; i++)
+                    extraModuleParent.nodes.push(getAuthorityModules(moduleIds[i]));
+                modules.push(extraModuleParent);
             }
+            createBranchs();
+        }, function (res) {
+            toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
         });
     };
 
-    // 获取公告信息
-    var getAnnouncements = function(){
-        var announcements = [{
-            "id": 1,
-            "title": "商学管理信息系统已正式投入建设",
-            "date": "[3-12]"
-        },{
-            "id": 2,
-            "title": "预计于4月份商学院管理信息系统将正式建成",
-            "date": "[3-13]"
-        }];
-        return announcements;
-    };
-
+    // 返回门户网
     $scope.toggleDoor = function () {
         window.location.href = "http://localhost:3000/index/homepage"
     };
@@ -113,7 +207,34 @@ app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', function ($
         $state.go("login");
     };
 
-    // 模块初始操作
+    // 设置公告栏
+    $scope.announcement = undefined;
+    var setAnnounceBar = function(){
+        // 控制公告获取最大数量
+        var announceNum = 8;
+
+        // 获取公告信息, 并设置定时更换公告信息
+        $http.get("/api/infoManage/getPage?pageNum=0"
+            +"&pageSize="+ announceNum+"&tableIndex=0").then(function (res) {
+            var announcements = res.data.items;
+            if(announcements.length>0){
+                var index = 0;
+                $scope.announcement = announcements[index];
+                // 设置定时器定时更换公告信息
+                $interval(function () {
+                    index = (index+1)<announcements.length? index+1: 0;
+                    $scope.announcement = announcements[index];
+                }, 10000);
+            }else
+                $scope.announcement = {
+                    "type": "公告",
+                    "content": "暂无"
+                };
+        }, function (res) {
+            toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
+        });
+    };
+
     createTree();
-    $scope.announcements = getAnnouncements();
+    setAnnounceBar();
 }]);

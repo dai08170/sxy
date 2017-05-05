@@ -42,6 +42,7 @@ const classManage = require("./routes/mis/baseManage/classManage");
 const courseManage = require("./routes/mis/baseManage/courseManage");
 const propagateManage = require("./routes/mis/baseManage/propagateManage");
 const systemManage = require("./routes/mis/baseManage/systemManage");
+const authorityManage = require("./routes/mis/baseManage/authorityManage");
 const infoManage = require("./routes/mis/baseManage/infoManage");
 const configManage = require("./routes/mis/baseManage/configManage");
 
@@ -114,9 +115,13 @@ app.use(route.get('/api/dailySystem/getAll', dailySystem.getAll));
 // 领导职责
 app.use(route.get('/api/leaderDuty/getAll', leaderDuty.getAll));
 
-// 制度管理
+// 制度管理authorityManage
 app.use(route.post('/api/systemManage/create',systemManage.create));
 app.use(route.post('/api/systemManage/delete',systemManage.delete));
+
+// 权限管理
+app.use(route.get('/api/authorityManage/get',authorityManage.get));
+app.use(route.post('/api/authorityManage/update',authorityManage.update));
 
 // 信息管理
 app.use(route.get('/api/infoManage/getAnnounceTypes',infoManage.getAnnounceTypes));

@@ -85,64 +85,6 @@ var global_modules = [
                 moduleId: "100860502",
                 href: "main.systemNotice"
             }]
-        }, {
-            text: "基础管理",
-            selectable: false,
-            moduleId: "1008606",
-            state: {
-                expanded: false
-            },
-            nodes: [{
-                text: "用户管理",
-                icon: "glyphicon glyphicon-tags",
-                moduleId: "100860601",
-                href: "main.userManage"
-            }, {
-                text: "班级管理",
-                icon: "glyphicon glyphicon-tags",
-                moduleId: "100860610",
-                href: "main.classManage"
-            }, {
-                text: "课程管理",
-                icon: "glyphicon glyphicon-tags",
-                moduleId: "100860602",
-                href: "main.courseManage"
-            }, {
-                text: "出勤管理",
-                icon: "glyphicon glyphicon-tags",
-                moduleId: "100860603",
-                href: "main.attendenceManage"
-            }, {
-                text: "宣传管理",
-                icon: "glyphicon glyphicon-tags",
-                moduleId: "100860604",
-                href: "main.propagateManage"
-            }, {
-                text: "制度管理",
-                icon: "glyphicon glyphicon-tags",
-                moduleId: "100860605",
-                href: "main.systemManage"
-            }, {
-                text: "资产管理",
-                icon: "glyphicon glyphicon-tags",
-                moduleId: "100860606",
-                href: "main.accountManage"
-            }, {
-                text: "权限管理",
-                icon: "glyphicon glyphicon-tags",
-                moduleId: "100860607",
-                href: "main.authorityManage"
-            }, {
-                text: "信息管理",
-                icon: "glyphicon glyphicon-tags",
-                moduleId: "100860608",
-                href: "main.infoManage"
-            }, {
-                text: "配置管理",
-                icon: "glyphicon glyphicon-tags",
-                moduleId: "100860609",
-                href: "main.configManage"
-            }]
         }
     ];
 // 全局数据
@@ -380,6 +322,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 'content': {
                     templateUrl: '/partial/mis/baseManage/courseManage.html',
                     controller: 'courseManageCtrl'
+                }
+            }
+        })
+        .state('main.courseDistribute',{
+            url: '/courseDistribute',
+            views: {
+                'content': {
+                    templateUrl: '/partial/mis/baseManage/courseDistribute.html',
+                    controller: 'courseDistributeCtrl'
                 }
             }
         })

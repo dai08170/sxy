@@ -5,10 +5,58 @@
                 <h2><span class="glyphicon glyphicon-lock"></span> &nbsp;权限管理</h2>
             </div>
             <div class="panel-body">
-            
-            </div>
-            <div class="panel-footer bg-white">
-                <button class="btn btn-info" ng-click="getEditorContent();">确定</button>
+                <h3>查询用户权限</h3>
+                <hr/>
+                <form name="searchUserForm">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <input class="form-control" type="text" ng-model="searchAccount"
+                                   placeholder="请输入待查询账号" required/>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-info" ng-disabled="searchUserForm.$invalid"
+                                    ng-click="getAuthorityByAccount();">查询</button>
+                            <button class="btn btn-default" ng-click="resetSearch();">重置</button>
+                        </div>
+                    </div>
+                </form>
+                <hr/>
+                <div class="row"  ng-show="search">
+                    <div class="col-md-offset-1 col-md-4">
+                        <h3 class="text-center">可选权限</h3>
+                        <perfect-scrollbar class="authority-scroller"
+                                           wheel-propagation="true" wheel-speed="10"
+                                           min-scrollbar-length="20" refresh-on-change="noModules">
+                            <!-- noModules改变时刷新scrollbar-->
+                            <ul class="nav nav-pills nav-stacked">
+                                <li class="selectLi" ng-repeat="item in noModules track by $index"
+                                    ng-click="toggleSelect(item);">
+                                    <a class="text-center" ng-bind="item.name"></a>
+                                </li>
+                            </ul>
+                        </perfect-scrollbar>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="row authority-btn">
+                            <button class="btn btn-default" ng-click="addAuthority();">添加&nbsp;>></button>
+                            <button class="btn btn-default margin-top-10" ng-click="deleteAuthority();"><<&nbsp;删除</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <h3 class="text-center">已有权限</h3>
+                        <perfect-scrollbar class="authority-scroller"
+                                           wheel-propagation="true" wheel-speed="10"
+                                           min-scrollbar-length="20" refresh-on-change="hasModules">
+                            <!-- hasModules改变时刷新scrollbar-->
+                            <ul class="nav nav-pills nav-stacked">
+                                <li class="selectLi" ng-repeat="item in hasModules track by $index"
+                                    ng-click="toggleSelect(item);">
+                                    <a class="text-center" ng-bind="item.name"></a>
+                                </li>
+                            </ul>
+                        </perfect-scrollbar>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

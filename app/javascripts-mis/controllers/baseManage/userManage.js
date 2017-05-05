@@ -49,6 +49,11 @@ app.controller('userManageCtrl',['$scope', '$state','$http', '$cookies','toaster
         $scope.newUserPassword = undefined;
     };
 
+    // 重置搜索输入框
+    $scope.resetSearch = function(){
+        $scope.searchAccount= undefined;
+    };
+
     // 反转用户账号是否可用
     $scope.reverseUserDisabled = function(){
       $scope.searchedUserDisabled = !$scope.searchedUserDisabled;
@@ -62,7 +67,7 @@ app.controller('userManageCtrl',['$scope', '$state','$http', '$cookies','toaster
         	$http.get("/api/userManage/search?username="+$scope.searchAccount).then(function(res){
 				$scope.accountExist = res.data.exists;
 				if(!$scope.accountExist)
-					toaster.pop("warning", "查询失败!"+ (res.data.msg || ''), null, 2000, "toast-top-full-width");
+					toaster.pop("danger", "查询失败!"+ (res.data.msg || ''), null, 2000, "toast-top-full-width");
 				else {
                     $scope.searchedUserName = res.data.user.name;
                     $scope.searchedUserAccount = res.data.user.username;
