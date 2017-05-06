@@ -5,156 +5,143 @@
                 <h2><span class="glyphicon glyphicon-home"></span> &nbsp;班级管理</h2>
             </div>
             <div class="panel-body">
-                <h3>查询班级</h3>
+                <div class="row">
+                    <form name="searchForm">
+                        <div class="col-md-3">
+                            <input class="form-control" placeholder="请输入关键字 (名称)"
+                                   ng-model="keyword"/>
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-info" ng-click="search();">
+                                <span class="glyphicon glyphicon-search"></span>&nbsp;搜索
+                            </button>
+                        </div>
+                        <div class="col-md-3 pull-right">
+                            <button class="btn btn-success" ng-click="createModalShow();">新建班级信息</button>
+                        </div>
+                    </form>
+                </div>
                 <hr/>
-                <form name="searchClassForm">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <input class="form-control" type="text" ng-model="searchClassNumber"
-                                   onkeypress="numberOnly();" onpaste="return false;"
-                                   placeholder="请输入班级编号" required/>
-                        </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-info" ng-disabled="searchClassForm.$invalid"
-                                    ng-click="searchByNumber();">查询</button>
-                            <button class="btn btn-default" ng-click="resetSearch();">重置</button>
-                        </div>
-                    </div>
-                </form>
-                <hr/>
-                <h3>新建班级</h3>
-                <hr/>
-                <form name="newClassForm">
-                    <div class="row">
-                        <div class="col-md-offset-1 col-md-2">
-                            <label class="control-label">请输入编号:</label>
-                        </div>
-                        <div class="col-md-3">
-                            <input class="form-control" ng-model="newClassNumber"
-                                   onkeypress="numberOnly();" onpaste="return false;"
-                                   placeholder="请输入班级编号" required/>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-offset-1 col-md-2">
-                            <label class="control-label">请输入名称:</label>
-                        </div>
-                        <div class="col-md-3">
-                            <input class="form-control" ng-model="newClassName"
-                                   placeholder="请输入班级名称" required/>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-offset-1 col-md-2">
-                            <label class="control-label">请选择班级类型:</label>
-                        </div>
-                        <div class="col-md-3">
-                            <select class="form-control" ng-model="newClassType"
-                                    ng-options="item for item in classTypes">
-                                
-                            </select>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-offset-1 col-md-2">
-                            <label class="control-label">简介:</label>
-                        </div>
-                        <div class="col-md-8">
-                            <textarea class="form-control textarea-size" ng-model="newClassProfile"
-                            placeholder="简介..." required></textarea>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-offset-1 col-md-2">
-                            <label class="control-label">请选择班级状态:</label>
-                        </div>
-                        <div class="col-md-3">
-                            <select class="form-control" ng-model="newClassState"
-                                    ng-options="item for item in classState"></select>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="panel-footer bg-white">
-                <button class="btn btn-default pull-right margin-right-10"
-                        ng-click="resetNewClass();">重置</button>
-                <button class="btn btn-success pull-right margin-right-10"
-                        ng-disabled="newClassForm.$invalid" ng-click="createClass();">新建</button>
+        
+                <!-- 班级信息模块 -->
+                <div class="row" ng-show="dataArr.length>0">
+                    <table class="table table-bordered table-fixed table-striped">
+                        <thead>
+                        <tr>
+                            <td>编号</td>
+                            <td>名称</td>
+                            <td>类型</td>
+                            <td class="col-md-3">简介</td>
+                            <td>状态</td>
+                            <td>操作</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in dataArr">
+                            <td class="one-line" ng-bind="item.num"></td>
+                            <td class="one-line" ng-bind="item.name"></td>
+                            <td class="one-line" ng-bind="item.type"></td>
+                            <td class="one-line col-md-3" ng-bind="item.profile"></td>
+                            <td class="one-line" ng-bind="item.state"></td>
+                            <td>
+                                <button class="btn btn-xs btn-info"
+                                        ng-click="updateModalShow(item);">修改</button>
+                                <button class="btn btn-xs btn-danger"
+                                        ng-click="deleteClass(item.id);">删除</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+        
+                <!-- 分页 -->
+                <div class="row text-center" ng-show="dataArr.length>0">
+                    <ul class="pagination pagination-md">
+                        <li ng-repeat="btn in pageBtns">
+                            <a href="#" ng-bind="btn" ng-click="pageClick(btn)"></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- 班级查询结果模态框 -->
+<!-- 班级信息模态框 -->
 <div id="classModal" class="modal fade" tabindex="-1" role="dialog"
      aria-labelledby="classModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content top-red">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="classModalLabel">查询班级信息</h4>
+                <h4 class="modal-title" id="classModalLabel">{{action}}班级信息</h4>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-2">
-                        <label class="control-label">账号:</label>
+                <form name="classForm">
+                    <!-- 班级编号 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">班级编号:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" ng-model="item.num"
+                                   onkeypress="numberOnly();" onpaste="return false;"
+                                   placeholder="请输入班级编号" ng-disabled="update" required/>
+                        </div>
                     </div>
-                    <div class="col-md-5">
-                        <input class="form-control" ng-model="searchedClassNumber"
-                               placeholder="请输入账号" required/>
+                    <br/>
+                    <!-- 班级名称 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">班级名称:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" ng-model="item.name"
+                                   placeholder="请输入班级名称" required/>
+                        </div>
                     </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-2">
-                        <label class="control-label">名称:</label>
+                    <br/>
+                    <!-- 班级类型 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">班级类型:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <select class="form-control" ng-model="item.type"
+                                    ng-options="item for item in classTypes">
+    
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-md-5">
-                        <input class="form-control" ng-model="searchedClassName"
-                               placeholder="请输入名称" required/>
-                    </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-2">
-                        <label class="control-label">类型:</label>
-                    </div>
-                    <div class="col-md-3">
-                        <select class="form-control" ng-model="searchedClassType"
-                                ng-options="item for item in classTypes">
-        
-                        </select>
-                    </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-2">
-                        <label class="control-label">简介:</label>
-                    </div>
-                    <div class="col-md-8">
+                    <br/>
+                    <!-- 班级简介 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">班级简介:</label>
+                        </div>
+                        <div class="col-md-7">
                         <textarea class="form-control textarea-size" placeholder="简介..."
-                                  ng-model="searchedClassProfile"></textarea>
+                                  ng-model="item.profile"></textarea>
+                        </div>
                     </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-2">
-                        <label class="control-label">状态:</label>
+                    <br/>
+                    <!-- 班级状态 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">班级状态:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <select class="form-control" ng-model="item.state"
+                                    ng-options="item for item in classState"></select>
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <select class="form-control" ng-model="searchedClassState"
-                                ng-options="item for item in classState"></select>
-                    </div>
-                </div>
+                </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" data-dismiss="modal" ng-click="updateClass();">修改</button>
-                <button class="btn btn-info" ng-click="deleteClass();">
-                    删除</button>
+                <button class="btn btn-info" data-dismiss="modal" ng-click="updateClass();"
+                        ng-show="update" ng-disabled="classForm.$invalid">确定</button>
+                <button class="btn btn-info" data-dismiss="modal" ng-click="createClass();"
+                        ng-show="!update" ng-disabled="classForm.$invalid">确定</button>
                 <button class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
         </div><!-- /.modal-content -->

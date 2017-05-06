@@ -91,7 +91,7 @@ var global_modules = [
 var global_config = {
     "config_options": ["行业", "班级", "课程", "职称", "角色", "公告", "活动", "物资", "收支"],
     "user_types": ["学生", "教师"],
-    "config_state": ["在读", "毕业", "不明"],
+    "class_state": ["在读", "毕业", "不明"],
     "student_state": ["在读","毕业","休学","不明"],
     "teacher_state": ["在职","离职","休假","不明"],
     "regulation_types": ["日常制度", "领导职责"],

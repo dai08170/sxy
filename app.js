@@ -88,7 +88,7 @@ app.use(route.post('/api/teacherManage/update',teacherManage.update));
 // 班级管理
 app.use(route.get('/api/classManage/getClassType', classManage.getClassType));
 app.use(route.get('/api/classManage/getAllClassNames', classManage.getAllClassNames));
-app.use(route.get('/api/classManage/search',classManage.search));
+app.use(route.get('/api/classManage/getPage',classManage.getPage));
 app.use(route.post('/api/classManage/create',classManage.create));
 app.use(route.post('/api/classManage/update',classManage.update));
 app.use(route.post('/api/classManage/delete',classManage.delete));

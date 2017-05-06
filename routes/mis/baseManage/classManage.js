@@ -25,13 +25,15 @@ module.exports = {
         this.status = res.statusCode;
         this.body = res.body;
     },
-    search : function *(){
+    getPage : function *(){
         var options = {
             method : 'GET',
-            url : config.url2 +"/classManage/search",
+            url : config.url2 +"/classManage/getPage",
             json: true,
             headers: {
-                number : this.request.query.number
+                pageNum : this.request.query.pageNum,
+                pageSize : this.request.query.pageSize,
+                keyword: encodeURI(this.request.query.keyword)
             }
         };
         var res = yield this.routeConfig(options);
@@ -43,11 +45,11 @@ module.exports = {
             method : 'POST',
             url : config.url2 +"/classManage/create",
             json: {
-                number : this.request.body.number,
+                num : this.request.body.num,
                 name : this.request.body.name,
                 type : this.request.body.type,
-                profile : this.request.body.profile,
-                state : this.request.body.state
+                profile: this.request.body.profile,
+                state: this.request.body.state
             }
         };
         var res = yield this.routeConfig(options);
@@ -59,11 +61,12 @@ module.exports = {
             method : 'POST',
             url : config.url2 +"/classManage/update",
             json: {
-                number : this.request.body.number,
+                id : this.request.body.id,
+                num : this.request.body.num,
                 name : this.request.body.name,
                 type : this.request.body.type,
-                profile : this.request.body.profile,
-                state : this.request.body.state
+                profile: this.request.body.profile,
+                state: this.request.body.state
             }
         };
         var res = yield this.routeConfig(options);
@@ -75,7 +78,7 @@ module.exports = {
             method : 'POST',
             url : config.url2 +"/classManage/delete",
             json: {
-                number : this.request.body.number
+                id : this.request.body.id
             }
         };
         var res = yield this.routeConfig(options);
