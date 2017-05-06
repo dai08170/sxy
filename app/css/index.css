@@ -239,6 +239,10 @@ hr{
     min-height: 50px;
 }
 
+.white-space-pre-wrap{
+    white-space: pre-wrap;
+}
+
 /* 定制样式 */
 #rootCtrl{
     height:100%;

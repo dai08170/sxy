@@ -4,7 +4,7 @@
             <div class="panel-heading bg-white">
                 <div class="row">
                     <div class="col-md-10">
-                        <h2><span class="glyphicon glyphicon-file"></span> &nbsp;{{item.title}}</h2>
+                        <h2><span class="glyphicon glyphicon-file"></span> &nbsp;{{item.title ||item.student_name}}</h2>
                     </div>
                     <div class="col-md-2">
                         <h3><a class="color-gray" ng-click="backward();">返回</a></h3>
@@ -27,7 +27,8 @@
                                      src="{{item.picture_path}}">
                             </div>
                             <div class="col-md-6">
-                                <p class="text-index" ng-bind="item.content"></p>
+                                <pre class="text-feature border-none white-space-pre-wrap"
+                                     ng-bind="item.content"></pre>
                             </div>
                         </div>
                         <!-- 活动宣传 -->
@@ -35,9 +36,11 @@
                             <div class="col-md-6 text-center">
                                 <img class="bg-img poster-detail-img-height"
                                      src="{{item.picture_path}}">
+                                <div class="Icontent"></div>
                             </div>
                             <div class="col-md-6">
-                                <p class="text-index" ng-bind="item.content"></p>
+                                <pre class="text-feature border-none white-space-pre-wrap"
+                                     ng-bind="item.content"></pre>
                             </div>
                         </div>
                         <!-- 课程宣传 -->
@@ -47,7 +50,8 @@
                                      src="{{item.picture_path}}">
                             </div>
                             <div class="col-md-6">
-                                <p class="text-index" ng-bind="item.content"></p>
+                                <pre class="text-feature border-none white-space-pre-wrap"
+                                     ng-bind="item.content"></pre>
                             </div>
                         </div>
                         <!-- 优秀学子 -->
@@ -58,11 +62,14 @@
                             </div>
                             <div class="col-md-6">
                                 <p class="text-feature">个人简介:</p>
-                                <p class="text-index" ng-bind="item.profile"></p>
+                                <pre class="text-feature border-none white-space-pre-wrap"
+                                     ng-bind="item.profile"></pre>
                                 <p class="text-feature">所的荣誉:</p>
-                                <p class="text-index" ng-bind="item.honor"></p>
+                                <pre class="text-feature border-none white-space-pre-wrap"
+                                     ng-bind="item.honor"></pre>
                                 <p class="text-feature">个人宣言:</p>
-                                <p class="text-index" ng-bind="item.declaration"></p>
+                                <pre class="text-feature border-none white-space-pre-wrap"
+                                     ng-bind="item.declaration"></pre>
                             </div>
                         </div>
                     </perfect-scrollbar>

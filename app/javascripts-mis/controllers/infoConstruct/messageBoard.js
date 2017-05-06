@@ -35,6 +35,7 @@ app.controller('messageBoardCtrl',['$scope', '$state','$http', '$cookies','toast
                 if(res.data.flg == 1) {
                     toaster.pop("success", "留言成功!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
                     getPage();
+                    $scope.message = undefined;
                 } else
                     toaster.pop("danger", "留言失败!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
             }, function (res) {

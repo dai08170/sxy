@@ -39,33 +39,39 @@ app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', '$interval'
                 $state.go("main.userManage");
                 break;
             case "100860602":
-                $state.go("main.classManage");
+                $state.go("main.studentManage");
                 break;
             case "100860603":
-                $state.go("main.courseManage");
+                $state.go("main.teacherManage");
                 break;
             case "100860604":
-                $state.go("main.courseDistribute");
+                $state.go("main.classManage");
                 break;
             case "100860605":
-                $state.go("main.attendenceManage");
+                $state.go("main.courseManage");
                 break;
             case "100860606":
-                $state.go("main.propagateManage");
+                $state.go("main.courseDistribute");
                 break;
             case "100860607":
-                $state.go("main.systemManage");
+                $state.go("main.attendenceManage");
                 break;
             case "100860608":
-                $state.go("main.accountManage");
+                $state.go("main.propagateManage");
                 break;
             case "100860609":
-                $state.go("main.authorityManage");
+                $state.go("main.systemManage");
                 break;
             case "100860610":
-                $state.go("main.infoManage");
+                $state.go("main.accountManage");
                 break;
             case "100860611":
+                $state.go("main.authorityManage");
+                break;
+            case "100860612":
+                $state.go("main.infoManage");
+                break;
+            case "100860613":
                 $state.go("main.configManage");
                 break;
             default:
@@ -99,63 +105,75 @@ app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', '$interval'
                     href: "main.userManage"
                 },
                 "100860602": {
-                    text: "班级管理",
+                    text: "学生管理",
                     icon: "glyphicon glyphicon-tags",
                     moduleId: "100860602",
-                    href: "main.classManage"
+                    href: "main.studentManage"
                 },
                 "100860603": {
-                    text: "课程管理",
+                    text: "教师管理",
                     icon: "glyphicon glyphicon-tags",
                     moduleId: "100860603",
-                    href: "main.courseManage"
+                    href: "main.teacherManage"
                 },
                 "100860604": {
-                    text: "课程分配",
+                    text: "班级管理",
                     icon: "glyphicon glyphicon-tags",
                     moduleId: "100860604",
-                    href: "main.courseDistribute"
+                    href: "main.classManage"
                 },
                 "100860605": {
-                    text: "出勤管理",
+                    text: "课程管理",
                     icon: "glyphicon glyphicon-tags",
                     moduleId: "100860605",
-                    href: "main.attendenceManage"
+                    href: "main.courseManage"
                 },
                 "100860606": {
-                    text: "宣传管理",
+                    text: "课程分配",
                     icon: "glyphicon glyphicon-tags",
                     moduleId: "100860606",
-                    href: "main.propagateManage"
+                    href: "main.courseDistribute"
                 },
                 "100860607": {
-                    text: "制度管理",
+                    text: "出勤管理",
                     icon: "glyphicon glyphicon-tags",
                     moduleId: "100860607",
-                    href: "main.systemManage"
+                    href: "main.attendenceManage"
                 },
                 "100860608": {
-                    text: "资产管理",
+                    text: "宣传管理",
                     icon: "glyphicon glyphicon-tags",
                     moduleId: "100860608",
-                    href: "main.accountManage"
+                    href: "main.propagateManage"
                 },
                 "100860609": {
-                    text: "权限管理",
+                    text: "制度管理",
                     icon: "glyphicon glyphicon-tags",
                     moduleId: "100860609",
-                    href: "main.authorityManage"
+                    href: "main.systemManage"
                 },
                 "100860610": {
-                    text: "信息管理",
+                    text: "资产管理",
                     icon: "glyphicon glyphicon-tags",
                     moduleId: "100860610",
-                    href: "main.infoManage"
+                    href: "main.accountManage"
                 },
                 "100860611": {
-                    text: "配置管理",
+                    text: "权限管理",
                     icon: "glyphicon glyphicon-tags",
                     moduleId: "100860611",
+                    href: "main.authorityManage"
+                },
+                "100860612": {
+                    text: "信息管理",
+                    icon: "glyphicon glyphicon-tags",
+                    moduleId: "100860612",
+                    href: "main.infoManage"
+                },
+                "100860613": {
+                    text: "配置管理",
+                    icon: "glyphicon glyphicon-tags",
+                    moduleId: "100860613",
                     href: "main.configManage"
                 }
             }[moduleId];

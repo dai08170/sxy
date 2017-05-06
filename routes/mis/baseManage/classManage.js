@@ -15,6 +15,16 @@ module.exports = {
         this.status = res.statusCode;
         this.body = res.body;
     },
+    getAllClassNames : function *(){
+        var options = {
+            method : 'GET',
+            url : config.url2 +"/classManage/getAllClassNames",
+            json: true
+        };
+        var res = yield this.routeConfig(options);
+        this.status = res.statusCode;
+        this.body = res.body;
+    },
     search : function *(){
         var options = {
             method : 'GET',

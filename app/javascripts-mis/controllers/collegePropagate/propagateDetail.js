@@ -7,9 +7,10 @@ app.controller('propagateDetailCtrl',['$scope', '$state', '$stateParams', 'toast
     $scope.typeIndex = $stateParams.typeIndex;
     var pageNum = $stateParams.pageNum;
 
-    if($scope.item == undefined || $scope.typeIndex == undefined)
-        toaster.pop("danger", "数据丢失!请重新选择!", null, 2000, "toast-top-full-width");
-    else {
+    if($scope.item == undefined || $scope.typeIndex == undefined) {
+        toaster.pop("danger", "数据丢失!页面跳转至首页!", null, 2000, "toast-top-full-width");
+        $state.go("main.homepage");
+    } else {
         var propagateTypes = global_config.propagate_types;
         $scope.propagateType = propagateTypes[$scope.typeIndex];
     }

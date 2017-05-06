@@ -92,6 +92,8 @@ var global_config = {
     "config_options": ["行业", "班级", "课程", "职称", "角色", "公告", "活动", "物资", "收支"],
     "user_types": ["学生", "教师"],
     "config_state": ["在读", "毕业", "不明"],
+    "student_state": ["在读","毕业","休学","不明"],
+    "teacher_state": ["在职","离职","休假","不明"],
     "regulation_types": ["日常制度", "领导职责"],
     "propagate_types": ["企业宣传", "活动宣传", "课程宣传", "优秀学子"]
 };
@@ -304,6 +306,24 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 'content': {
                     templateUrl: '/partial/mis/baseManage/userManage.html',
                     controller: 'userManageCtrl'
+                }
+            }
+        })
+        .state('main.studentManage',{
+            url: '/studentManage',
+            views: {
+                'content': {
+                    templateUrl: '/partial/mis/baseManage/studentManage.html',
+                    controller: 'studentManageCtrl'
+                }
+            }
+        })
+        .state('main.teacherManage',{
+            url: '/teacherManage',
+            views: {
+                'content': {
+                    templateUrl: '/partial/mis/baseManage/teacherManage.html',
+                    controller: 'teacherManageCtrl'
                 }
             }
         })

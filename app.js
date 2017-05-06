@@ -38,6 +38,8 @@ const leaderDuty = require("./routes/mis/collegeRegulation/leaderDuty");
 
 // 基础管理
 const userManage = require("./routes/mis/baseManage/userManage");
+const studentManage = require("./routes/mis/baseManage/studentManage");
+const teacherManage = require("./routes/mis/baseManage/teacherManage");
 const classManage = require("./routes/mis/baseManage/classManage");
 const courseManage = require("./routes/mis/baseManage/courseManage");
 const propagateManage = require("./routes/mis/baseManage/propagateManage");
@@ -75,8 +77,17 @@ app.use(route.post('/api/userManage/create',userManage.create));
 app.use(route.post('/api/userManage/update',userManage.update));
 app.use(route.post('/api/userManage/delete',userManage.delete));
 
+// 学生管理
+app.use(route.get('/api/studentManage/getPage',studentManage.getPage));
+app.use(route.post('/api/studentManage/update',studentManage.update));
+
+// 教师管理
+app.use(route.get('/api/teacherManage/getPage',teacherManage.getPage));
+app.use(route.post('/api/teacherManage/update',teacherManage.update));
+
 // 班级管理
 app.use(route.get('/api/classManage/getClassType', classManage.getClassType));
+app.use(route.get('/api/classManage/getAllClassNames', classManage.getAllClassNames));
 app.use(route.get('/api/classManage/search',classManage.search));
 app.use(route.post('/api/classManage/create',classManage.create));
 app.use(route.post('/api/classManage/update',classManage.update));

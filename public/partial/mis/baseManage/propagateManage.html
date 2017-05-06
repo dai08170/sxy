@@ -109,7 +109,7 @@
                 </div>
                 
                 <!-- 分页 -->
-                <div class="row text-center">
+                <div class="row text-center" ng-show="propageteArr.length>0">
                     <ul class="pagination pagination-md">
                         <li ng-repeat="btn in pageBtns">
                             <a href="#" ng-bind="btn" ng-click="pageClick(btn)"></a>
