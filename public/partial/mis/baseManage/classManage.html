@@ -41,7 +41,8 @@
                             <td class="one-line" ng-bind="item.num"></td>
                             <td class="one-line" ng-bind="item.name"></td>
                             <td class="one-line" ng-bind="item.type"></td>
-                            <td class="one-line col-md-3" ng-bind="item.profile"></td>
+                            <td class="one-line col-md-3" ng-bind="item.profile"
+                                ng-click="profileModalShow(item.profile);"></td>
                             <td class="one-line" ng-bind="item.state"></td>
                             <td>
                                 <button class="btn btn-xs btn-info"
@@ -144,6 +145,24 @@
                         ng-show="!update" ng-disabled="classForm.$invalid">确定</button>
                 <button class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 班级简介模态框 -->
+<div id="profileModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content top-red">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="profileModalLabel">班级简介</h4>
+            </div>
+            <div class="modal-body">
+                <pre class="text-feature white-space-pre-wrap" ng-bind="profileContent"></pre>
+                <hr/>
+            </div>
+            
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>

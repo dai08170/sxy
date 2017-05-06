@@ -13,6 +13,9 @@ app.controller('classManageCtrl',['$scope', '$state','$http', '$cookies','toaste
     $scope.keyword = '';
     $scope.action = undefined;
 
+    // 班级简介模态框内容
+    $scope.profileContent = undefined;
+
     $scope.classTypes = [];
     $scope.classState = global_config.class_state;
     var init = function () {
@@ -174,6 +177,12 @@ app.controller('classManageCtrl',['$scope', '$state','$http', '$cookies','toaste
             toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null,
                 2000, "toast-top-full-width");
         });
+    };
+
+    // 班级简介模态框显示
+    $scope.profileModalShow = function (profile) {
+        $scope.profileContent = profile;
+        $("#profileModal").modal('show');
     };
 
     getPage();
