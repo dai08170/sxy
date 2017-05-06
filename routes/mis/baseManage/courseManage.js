@@ -25,13 +25,15 @@ module.exports = {
         this.status = res.statusCode;
         this.body = res.body;
     },
-    search : function *(){
+    getPage : function *(){
         var options = {
             method : 'GET',
-            url : config.url2 +"/courseManage/search",
+            url : config.url2 +"/courseManage/getPage",
             json: true,
             headers: {
-                number : this.request.query.number
+                pageNum : this.request.query.pageNum,
+                pageSize : this.request.query.pageSize,
+                keyword: encodeURI(this.request.query.keyword)
             }
         };
         var res = yield this.routeConfig(options);
@@ -43,11 +45,11 @@ module.exports = {
             method : 'POST',
             url : config.url2 +"/courseManage/create",
             json: {
-                number : this.request.body.number,
-                name : this.request.body.name,
-                type : this.request.body.type,
+                num : this.request.body.num,
                 teacher_id: this.request.body.teacher_id,
+                name : this.request.body.name,
                 score: this.request.body.score,
+                type : this.request.body.type,
                 begin_date: this.request.body.begin_date,
                 end_date: this.request.body.end_date
             }
@@ -61,11 +63,12 @@ module.exports = {
             method : 'POST',
             url : config.url2 +"/courseManage/update",
             json: {
-                number : this.request.body.number,
-                name : this.request.body.name,
-                type : this.request.body.type,
+                id : this.request.body.id,
+                num : this.request.body.num,
                 teacher_id: this.request.body.teacher_id,
+                name : this.request.body.name,
                 score: this.request.body.score,
+                type : this.request.body.type,
                 begin_date: this.request.body.begin_date,
                 end_date: this.request.body.end_date
             }
@@ -79,7 +82,7 @@ module.exports = {
             method : 'POST',
             url : config.url2 +"/courseManage/delete",
             json: {
-                number : this.request.body.number
+                id : this.request.body.id
             }
         };
         var res = yield this.routeConfig(options);

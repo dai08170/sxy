@@ -96,7 +96,7 @@ app.use(route.post('/api/classManage/delete',classManage.delete));
 // 课程管理
 app.use(route.get('/api/courseManage/getCourseType', courseManage.getCourseType));
 app.use(route.get('/api/courseManage/getAllCourses',courseManage.getAllCourses));
-app.use(route.get('/api/courseManage/search',courseManage.search));
+app.use(route.get('/api/courseManage/getPage',courseManage.getPage));
 app.use(route.post('/api/courseManage/create',courseManage.create));
 app.use(route.post('/api/courseManage/update',courseManage.update));
 app.use(route.post('/api/courseManage/delete',courseManage.delete));

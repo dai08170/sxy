@@ -5,207 +5,178 @@
                 <h2><span class="glyphicon glyphicon-list"></span> &nbsp;课程管理</h2>
             </div>
             <div class="panel-body">
-                <h3>查询课程</h3>
+                <div class="row">
+                    <form name="searchForm">
+                        <div class="col-md-3">
+                            <input class="form-control" placeholder="请输入关键字 (名称)"
+                                   ng-model="keyword"/>
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-info" ng-click="search();">
+                                <span class="glyphicon glyphicon-search"></span>&nbsp;搜索
+                            </button>
+                        </div>
+                        <div class="col-md-3 pull-right">
+                            <button class="btn btn-success" ng-click="createModalShow();">新建课程信息</button>
+                        </div>
+                    </form>
+                </div>
                 <hr/>
-                <form name="searchCourseForm">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <input class="form-control" type="text" ng-model="searchCourseNumber"
-                                   onkeypress="numberOnly();" onpaste="return false;"
-                                   placeholder="请输入课程编号" required/>
-                        </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-info" ng-disabled="searchCourseForm.$invalid"
-                                    ng-click="searchByNumber();">查询</button>
-                            <button class="btn btn-default" ng-click="resetSearch();">重置</button>
-                        </div>
-                    </div>
-                </form>
-                <hr/>
-                <h3>新建课程</h3>
-                <hr/>
-                <form name="newCourseForm">
-                    <div class="row">
-                        <div class="col-md-offset-1 col-md-2">
-                            <label class="control-label">课程编号:</label>
-                        </div>
-                        <div class="col-md-3">
-                            <input class="form-control" ng-model="newCourseNumber"
-                                   onkeypress="numberOnly();" onpaste="return false;"
-                                   placeholder="请输入课程编号" required/>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-offset-1 col-md-2">
-                            <label class="control-label">课程名称:</label>
-                        </div>
-                        <div class="col-md-3">
-                            <input class="form-control" ng-model="newCourseName"
-                                   placeholder="请输入课程名称" required/>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-offset-1 col-md-2">
-                            <label class="control-label">课程学分:</label>
-                        </div>
-                        <div class="col-md-3">
-                            <input type="number" min="0" max="10" class="form-control"
-                                   ng-model="newCourseScore" placeholder="学分范围 : 0-10" required/>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-offset-1 col-md-2">
-                            <label class="control-label">授课教师:</label>
-                        </div>
-                        <div class="col-md-3">
-                            <select class="form-control" ng-model="newCourseTeacher"
-                                    ng-options="item.name for item in teacherArr">
-    
-                            </select>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-offset-1 col-md-2">
-                            <label class="control-label">课程类型:</label>
-                        </div>
-                        <div class="col-md-3">
-                            <select class="form-control" ng-model="newCourseType"
-                                    ng-options="item for item in courseTypes">
-            
-                            </select>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-offset-1 col-md-2">
-                            <label class="control-label">起止日期:</label>
-                        </div>
-                        <div class="col-md-3">
-                            <div id="beginDate" class="input-append date">
-                                <input type="text" class="form-control" ng-model="beginDate"
-                                       size="16" readonly required />
-                                <span class="add-on"><i class="icon-th"></i></span>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div id="endDate" class="input-append date">
-                                <input type="text" class="form-control" ng-model="endDate"
-                                       size="16" readonly required />
-                                <span class="add-on"><i class="icon-th"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="panel-footer bg-white">
-                <button class="btn btn-default pull-right margin-right-10"
-                        ng-click="resetNewCourse();">重置</button>
-                <button class="btn btn-success pull-right margin-right-10"
-                        ng-disabled="newCourseForm.$invalid" ng-click="createCourse();">新建</button>
+        
+                <!-- 课程信息模块 -->
+                <div class="row" ng-show="dataArr.length>0">
+                    <table class="table table-bordered table-fixed table-striped">
+                        <thead>
+                        <tr>
+                            <td>编号</td>
+                            <td>名称</td>
+                            <td>授课教师</td>
+                            <td>学分</td>
+                            <td>类型</td>
+                            <td>开始日期</td>
+                            <td>结束日期</td>
+                            <td>操作</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in dataArr">
+                            <td class="one-line" ng-bind="item.num"></td>
+                            <td class="one-line" ng-bind="item.name"></td>
+                            <td class="one-line" ng-bind="item.teacher_name"></td>
+                            <td class="one-line" ng-bind="item.score"></td>
+                            <td class="one-line" ng-bind="item.type"></td>
+                            <td class="one-line" ng-bind="item.begin_date"></td>
+                            <td class="one-line" ng-bind="item.end_date"></td>
+                            <td>
+                                <button class="btn btn-xs btn-info"
+                                        ng-click="updateModalShow(item);">修改</button>
+                                <button class="btn btn-xs btn-danger"
+                                        ng-click="deleteCourse(item.id);">删除</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+        
+                <!-- 分页 -->
+                <div class="row text-center" ng-show="dataArr.length>0">
+                    <ul class="pagination pagination-md">
+                        <li ng-repeat="btn in pageBtns">
+                            <a href="#" ng-bind="btn" ng-click="pageClick(btn)"></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- 课程查询结果模态框 -->
+<!-- 课程信息模态框 -->
 <div id="courseModal" class="modal fade" tabindex="-1" role="dialog"
      aria-labelledby="courseModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content top-red">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="courseModalLabel">查询课程信息</h4>
+                <h4 class="modal-title" id="courseModalLabel">{{action}}课程信息</h4>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-offset-2 col-md-2">
-                        <label class="control-label">课程编号:</label>
+                <form name="courseForm">
+                    <!-- 课程编号 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">课程编号:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" ng-model="item.num"
+                                   onkeypress="numberOnly();" onpaste="return false;"
+                                   placeholder="请输入课程编号" ng-disabled="update" required/>
+                        </div>
                     </div>
-                    <div class="col-md-5">
-                        <input class="form-control" ng-model="searchedCourseNumber"
-                               placeholder="请输入课程编号" required/>
+                    <br/>
+                    <!-- 课程名称 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">课程名称:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" ng-model="item.name"
+                                   placeholder="请输入课程名称" required/>
+                        </div>
                     </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-2 col-md-2">
-                        <label class="control-label">课程名称:</label>
-                    </div>
-                    <div class="col-md-5">
-                        <input class="form-control" ng-model="searchedCourseName"
-                               placeholder="请输入课程名称" required/>
-                    </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-2 col-md-2">
-                        <label class="control-label">课程学分:</label>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="number" min="0" max="10" class="form-control"
-                               ng-model="searchedCourseScore"
-                               placeholder="学分范围 : 0-10" required/>
-                    </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-2 col-md-2">
-                        <label class="control-label">授课教师:</label>
-                    </div>
-                    <div class="col-md-5">
-                        <select class="form-control" ng-model="searchedCourseTeacher"
-                                ng-options="item.name for item in teacherArr">
-                        
-                        </select>
-                    </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-2 col-md-2">
-                        <label class="control-label">课程类型:</label>
-                    </div>
-                    <div class="col-md-5">
-                        <select class="form-control" ng-model="searchedCourseType"
-                                ng-options="item for item in courseTypes">
+                    <br/>
+                    <!-- 授课教师 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">授课教师:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <select class="form-control" ng-model="teacherItem"
+                                    ng-options="item.name for item in teacherArr">
             
-                        </select>
-                    </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-2 col-md-2">
-                        <label class="control-label">开始日期:</label>
-                    </div>
-                    <div class="col-md-5">
-                        <div id="searchedBeginDate" class="input-append date">
-                            <input type="text" class="form-control" ng-model="searchedBeginDate"
-                                   size="16" readonly required />
-                            <span class="add-on"><i class="icon-th"></i></span>
+                            </select>
                         </div>
                     </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-2 col-md-2">
-                        <label class="control-label">结束日期:</label>
-                    </div>
-                    <div class="col-md-5">
-                        <div id="searchedEndDate" class="input-append date">
-                            <input type="text" class="form-control" ng-model="searchedEndDate"
-                                   size="16" readonly required />
-                            <span class="add-on"><i class="icon-th"></i></span>
+                    <br/>
+                    <!-- 课程学分 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">课程学分:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="number" min="0" max="10" class="form-control"
+                                   ng-model="item.score"
+                                   placeholder="学分范围 : 0-10" required/>
                         </div>
                     </div>
-                </div>
+                    <br/>
+                    <!-- 课程类型 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">课程类型:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <select class="form-control" ng-model="item.type"
+                                    ng-options="item for item in courseTypes">
+            
+                            </select>
+                        </div>
+                    </div>
+                    <br/>
+                    <!-- 开始日期 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">开始日期:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <div id="beginDate" class="input-append date">
+                                <input type="text" class="form-control" ng-model="item.begin_date"
+                                       size="16" readonly required/>
+                                <span class="add-on"><i class="icon-th"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <!-- 结束日期 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">结束日期:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <div id="endDate" class="input-append date">
+                                <input type="text" class="form-control" ng-model="item.end_date"
+                                       size="16" readonly required/>
+                                <span class="add-on"><i class="icon-th"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" data-dismiss="modal" ng-click="updateCourse();">修改</button>
-                <button class="btn btn-info" ng-click="deleteCourse();">
-                    删除</button>
+                <button class="btn btn-info" data-dismiss="modal" ng-click="updateCourse();"
+                        ng-show="update" ng-disabled="courseForm.$invalid">确定</button>
+                <button class="btn btn-info" data-dismiss="modal" ng-click="createCourse();"
+                        ng-show="!update" ng-disabled="courseForm.$invalid">确定</button>
                 <button class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
         </div><!-- /.modal-content -->
