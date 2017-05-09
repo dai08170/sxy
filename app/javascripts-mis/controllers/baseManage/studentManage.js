@@ -84,7 +84,7 @@ app.controller('studentManageCtrl',['$scope', '$state','$http', '$cookies','toas
         $scope.isFemale = $scope.item.sex == "女";
 
         // 获取所有的班级条目
-        $http.get("/api/classManage/getAllClassNames").then(function (res) {
+        $http.get("/api/classManage/getAllClass").then(function (res) {
             $scope.classArr = res.data;
             // 初始化已在班级条目
             var exist= false;

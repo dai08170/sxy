@@ -23,9 +23,9 @@
                 <!-- 公司宣传 -->
                 <div class="row" ng-show="propagateType == propagateTypes[0]">
                     <div class="col-md-6" ng-repeat="item in propagateArr">
-                        <a class="color-deep-gray" ng-click="updateModalShow(item.id);">
+                        <a class="color-deep-gray" ng-click="updateModalShow(item);">
                             <div class="row border-gray padding-5">
-                                <div class="col-md-6">
+                                <div class="col-md-6 text-center">
                                     <img class="bg-img poster-img-height" src="{{item.picture_path}}" alt="公司宣传">
                                 </div>
                                 <div class="col-md-6">
@@ -45,9 +45,9 @@
                 <!-- 活动宣传 -->
                 <div class="row" ng-show="propagateType == propagateTypes[1]">
                     <div class="col-md-6" ng-repeat="item in propagateArr">
-                        <a class="color-deep-gray" ng-click="updateModalShow(item.id);">
+                        <a class="color-deep-gray" ng-click="updateModalShow(item);">
                             <div class="row border-gray padding-5">
-                                <div class="col-md-6">
+                                <div class="col-md-6 text-center">
                                     <img class="bg-img poster-img-height" src="{{item.picture_path}}" alt="公司宣传">
                                 </div>
                                 <div class="col-md-6">
@@ -67,9 +67,9 @@
                 <!-- 课程宣传 -->
                 <div class="row" ng-show="propagateType == propagateTypes[2]">
                     <div class="col-md-6" ng-repeat="item in propagateArr">
-                        <a class="color-deep-gray" ng-click="updateModalShow(item.id);">
+                        <a class="color-deep-gray" ng-click="updateModalShow(item);">
                             <div class="row border-gray padding-5">
-                                <div class="col-md-6">
+                                <div class="col-md-6 text-center">
                                     <img class="bg-img poster-img-height" src="{{item.picture_path}}" alt="公司宣传">
                                 </div>
                                 <div class="col-md-6">
@@ -88,9 +88,9 @@
                 <!-- 优秀学子 -->
                 <div class="row" ng-show="propagateType == propagateTypes[3]">
                     <div class="col-md-6" ng-repeat="item in propagateArr">
-                        <a class="color-deep-gray" ng-click="updateModalShow(item.id);">
+                        <a class="color-deep-gray" ng-click="updateModalShow(item);">
                             <div class="row border-gray padding-5">
-                                <div class="col-md-6">
+                                <div class="col-md-6 text-center">
                                     <img class="bg-img poster-img-height" src="{{item.photo_path}}" alt="公司宣传">
                                 </div>
                                 <div class="col-md-6">
@@ -137,7 +137,7 @@
                             <label class="control-label">宣传标题:</label>
                         </div>
                         <div class="col-md-5">
-                            <input class="form-control" type="text" ng-model="companyTitle"
+                            <input class="form-control" type="text" ng-model="item.title"
                                 placeholder="请输入标题" required/>
                         </div>
                     </div>
@@ -148,7 +148,7 @@
                         </div>
                         <div class="col-md-5">
                             <input class="form-control" tabindex="-1" type="text" placeholder="点击输入..."
-                                   ng-click="contentModalShow();" ng-model="propagateContent" required/>
+                                   ng-click="contentModalShow();" ng-model="item.content" required/>
                         </div>
                     </div>
                     <br/>
@@ -167,7 +167,7 @@
                             <label class="control-label">企业名称:</label>
                         </div>
                         <div class="col-md-5">
-                            <input class="form-control" type="text" ng-model="companyName"
+                            <input class="form-control" type="text" ng-model="item.company_name"
                                    placeholder="请输入企业名称" required/>
                         </div>
                     </div>
@@ -177,7 +177,7 @@
                             <label class="control-label">企业类型:</label>
                         </div>
                         <div class="col-md-5">
-                            <input class="form-control" type="text" tabindex="-1" ng-model="companyType"
+                            <input class="form-control" type="text" tabindex="-1" ng-model="item.company_type"
                                    ng-click="companyTypeModalShow();" placeholder="点击选择..."/>
                         </div>
                     </div>
@@ -187,7 +187,7 @@
                             <label class="control-label">企业地址:</label>
                         </div>
                         <div class="col-md-5">
-                            <input class="form-control" type="text" ng-model="companyAddress"
+                            <input class="form-control" type="text" ng-model="item.company_address"
                                    placeholder="请输入企业地址" required/>
                         </div>
                     </div>
@@ -197,7 +197,8 @@
                             <label class="control-label">联系方式:</label>
                         </div>
                         <div class="col-md-5">
-                            <input class="form-control" type="text" ng-model="companyPhone"
+                            <input class="form-control" type="text" ng-model="item.phone_number"
+                                   onkeypress="numberOnly();" onpaste="return false;"
                                    placeholder="请输入联系方式" required/>
                         </div>
                     </div>
@@ -233,7 +234,7 @@
                             <label class="control-label">宣传标题:</label>
                         </div>
                         <div class="col-md-5">
-                            <input class="form-control" type="text" ng-model="activityTitle"
+                            <input class="form-control" type="text" ng-model="item.title"
                                    placeholder="请输入标题" required/>
                         </div>
                     </div>
@@ -244,7 +245,7 @@
                         </div>
                         <div class="col-md-5">
                             <input class="form-control" tabindex="-1" type="text" placeholder="点击输入..."
-                                   ng-click="contentModalShow();" ng-model="propagateContent" required/>
+                                   ng-click="contentModalShow();" ng-model="item.content" required/>
                         </div>
                     </div>
                     <br/>
@@ -273,7 +274,7 @@
                             <label class="control-label">负责组织:</label>
                         </div>
                         <div class="col-md-5">
-                            <input class="form-control" type="text" ng-model="activityMan"
+                            <input class="form-control" type="text" ng-model="item.corporation"
                                    placeholder="请输入负责人" required/>
                         </div>
                     </div>
@@ -283,7 +284,8 @@
                             <label class="control-label">联系方式:</label>
                         </div>
                         <div class="col-md-5">
-                            <input class="form-control" type="text" ng-model="activityPhone"
+                            <input class="form-control" type="text" ng-model="item.phone_number"
+                                   onkeypress="numberOnly();" onpaste="return false;"
                                    placeholder="请输入联系方式" required/>
                         </div>
                     </div>
@@ -329,7 +331,7 @@
                             <label class="control-label">宣传标题:</label>
                         </div>
                         <div class="col-md-5">
-                            <input class="form-control" type="text" ng-model="courseTitle"
+                            <input class="form-control" type="text" ng-model="item.title"
                                    placeholder="请输入标题" required/>
                         </div>
                     </div>
@@ -340,7 +342,7 @@
                         </div>
                         <div class="col-md-5">
                             <input class="form-control" tabindex="-1" type="text" placeholder="点击输入..."
-                                   ng-click="contentModalShow();" ng-model="propagateContent" required/>
+                                   ng-click="contentModalShow();" ng-model="item.content" required/>
                         </div>
                     </div>
                     <br/>
@@ -398,7 +400,7 @@
                         </div>
                         <div class="col-md-5">
                             <input class="form-control" tabindex="-1" type="text" placeholder="点击输入..."
-                                   ng-click="contentModalShow();" ng-model="propagateContent" required/>
+                                   ng-click="profileContentModalShow();" ng-model="item.profile" required/>
                         </div>
                     </div>
                     <br/>
@@ -418,7 +420,7 @@
                         </div>
                         <div class="col-md-5">
                             <input class="form-control" tabindex="-1" type="text" placeholder="点击输入..."
-                                   ng-click="honorContentModalShow();" ng-model="honorContent" required/>
+                                   ng-click="honorContentModalShow();" ng-model="item.honor" required/>
                         </div>
                     </div>
                     <br/>
@@ -428,7 +430,7 @@
                         </div>
                         <div class="col-md-5">
                             <input class="form-control" tabindex="-1" type="text" placeholder="点击输入..."
-                                   ng-click="declarationContentModalShow();" ng-model="declarationContent" required/>
+                                   ng-click="declarationContentModalShow();" ng-model="item.declaration" required/>
                         </div>
                     </div>
                 </form>
@@ -481,8 +483,28 @@
                 <h4 class="modal-title" id="contentModalLabel">宣传内容</h4>
             </div>
             <div class="modal-body">
-                <textarea class="form-control textarea-size2" ng-model="propagateContent"
+                <textarea class="form-control textarea-size2" ng-model="item.content"
                           placeholder="内容..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" ng-click="resetContent();">清空</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 个人简介模态框 -->
+<div id="profileContentModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="profileContentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content top-red">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="profileContentModalLabel">个人简介</h4>
+            </div>
+            <div class="modal-body">
+                <textarea class="form-control textarea-size2" ng-model="item.profile"
+                          placeholder="个人简介..."></textarea>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-default" ng-click="resetContent();">清空</button>
@@ -501,7 +523,7 @@
                 <h4 class="modal-title" id="honorContentModalLabel">所获荣誉</h4>
             </div>
             <div class="modal-body">
-                <textarea class="form-control textarea-size2" ng-model="honorContent"
+                <textarea class="form-control textarea-size2" ng-model="item.honor"
                           placeholder="所获荣誉..."></textarea>
             </div>
             <div class="modal-footer">
@@ -521,7 +543,7 @@
                 <h4 class="modal-title" id="declarationContentModalLabel">个人宣言</h4>
             </div>
             <div class="modal-body">
-                <textarea class="form-control textarea-size2" ng-model="declarationContent"
+                <textarea class="form-control textarea-size2" ng-model="item.declaration"
                           placeholder="个人宣言..."></textarea>
             </div>
             <div class="modal-footer">

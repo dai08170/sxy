@@ -38,7 +38,6 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
 
     // 标识当前执行的动作 是否是创建
     $scope.createAction = true;
-    $scope.propagateId = undefined;
 
     $scope.picturePath = "images/no.png";
     $scope.pictureName = "";
@@ -48,56 +47,33 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
         url: "/api/propagateManage/upload",
         filters: [{
             name: 'imageFilter',
-            fn: function(item /*{File|FileLikeObject}*/, options) {
+            fn: function(item) {
                 var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
                 return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
             }
         }],
-        onAfterAddingFile: function(fileItem) {
+        onAfterAddingFile: function() {
             if(uploader.queue.length>1){
                 uploader.queue[0] = uploader.queue[1];
                 uploader.queue.length =1;
             }
         },
-        onWhenAddingFileFailed: function(item /*{File|FileLikeObject}*/, filter, options) {
+        onWhenAddingFileFailed: function() {
             toaster.pop("warning", "请选择正确的文件类型!", null, 2000, "toast-top-full-width");
+        },
+        onCompleteAll: function() {
+            // 防止图片缓存造成的延时刷新, 在资源请求路径上加上时间戳
+            $scope.item.picture_path = $scope.item.picture_path+"?t="+Date.now();
+            $scope.item.photo_path = $scope.item.photo_path+"?t="+Date.now();
         }
     });
-
-    // 初始化配置项数据
-    var init = function(){
-        $http.get('/api/configManage/getCurrent?tableIndex=6').then(function(res){
-            // 返回的是对象数组, 需要转换为字符串数组
-            $scope.activityTypes = res.data;
-        }, function (res) {
-            toaster.pop("error", "已有配置项数据获取失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
-        });
-
-        $http.get('/api/courseManage/getAllCourses').then(function(res){
-            // 返回的是对象数组, 需要转换为字符串数组
-            $scope.courses = res.data;
-        }, function (res) {
-            toaster.pop("error", "已有配置项数据获取失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
-        });
-
-        $http.get("/api/userManage/getAllStudents").then(function (res) {
-            if(res.data.length>0){
-                $scope.excellentStudents = res.data;
-            } else
-                toaster.pop("danger", "无学生存在!请先创建学生!", null, 2000, "toast-top-full-width");
-        }, function (res) {
-            toaster.pop("error", "服务器错误!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
-        });
-    };
-    init();
-
 
     // 获取待上传图片
     $scope.getPicture = function(){
         // 判断是新建还是修改
         if($scope.pictureName == "") {
             var filename = uploader.queue[0].file.name
-            filename = Date.now() + filename.substr(filename.lastIndexOf("."));
+            filename = global_role.id + ''+ Date.now() + filename.substr(filename.lastIndexOf("."));
             uploader.queue[0].file.name = filename;
             $scope.picturePath = global_baseurl + filename;
             $scope.pictureName = filename;
@@ -105,6 +81,30 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
         // 隐藏图片模态框
         $("#imageUploadModal").modal('hide');
     };
+
+    // 初始化配置项数据
+    $http.get('/api/configManage/getCurrent?tableIndex=6').then(function(res){
+        // 返回的是对象数组, 需要转换为字符串数组
+        $scope.activityTypes = res.data;
+    }, function (res) {
+        toaster.pop("error", "已有配置项数据获取失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
+    });
+
+    $http.get('/api/courseManage/getAllCourses').then(function(res){
+        // 返回的是对象数组, 需要转换为字符串数组
+        $scope.courses = res.data;
+    }, function (res) {
+        toaster.pop("error", "已有配置项数据获取失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
+    });
+
+    $http.get("/api/userManage/getAllStudents").then(function (res) {
+        if(res.data.length>0){
+            $scope.excellentStudents = res.data;
+        } else
+            toaster.pop("danger", "无学生存在!请先创建学生!", null, 2000, "toast-top-full-width");
+    }, function (res) {
+        toaster.pop("error", "服务器错误!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
+    });
 
     // 显示企业宣传模态框
     $scope.companyTypeModalShow = function(){
@@ -126,41 +126,34 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
         });
     };
 
+    // 点击选择企业类型
+    $scope.toggleSelect = function(type){
+        $(".company-type").removeClass("btn-info");
+        var ev = event || window.event;
+        $(ev.target).addClass("btn-info");
+        $scope.item.company_type = type;
+        $("#companyTypeModal").modal('hide');
+    };
+
     // 路由分发创建宣传模态框
     $scope.createModalShow = function(){
-        // 初始化公共项目
-        var init = function(){
-            $scope.propagateContent = undefined;
+        $scope.item = undefined;
+        uploader.queue.length = 0;
 
-            $scope.picturePath = "images/no.png";
-            $scope.pictureName = "";
-            uploader.queue.length = 0;
-        };
         // 初始化公司宣传模态框
         var initCompanyModal = function(){
-            $scope.companyTitle = undefined;
-            $scope.companyName = undefined;
-            $scope.companyType = undefined;
             $(".company-type").removeClass("btn-info");
-            $scope.companyAddress = undefined;
-            $scope.companyPhone = undefined;
         };
         // 初始化活动宣传模态框
         var initActivityModal = function(){
-            $scope.activityTitle = undefined;
-            $scope.activityMan = undefined;
-            $scope.activityPhone = undefined;
             $scope.activityType = $scope.activityTypes[0];
         };
         // 初始化课程宣传模态框
         var initCourseModal = function () {
-            $scope.courseTitle = undefined;
             $scope.course = $scope.courses[0];
         };
         // 初始化优秀学子模态框
         var initStudentModal = function () {
-            $scope.honorContent = undefined;
-            $scope.declarationContent = undefined;
             $scope.excellentStudent = $scope.excellentStudents[0];
         };
 
@@ -169,7 +162,6 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
         // 标识当前 创建动作
         $scope.createAction = true;
 
-        init();
         switch(index){
             case 0:
                 initCompanyModal();
@@ -208,17 +200,17 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
 
     // 创建公司宣传
     $scope.createCompanyPropagate = function(){
-        if(!/[\d]{5,11}/.test($scope.companyPhone))
+        if(!/[\d]{5,11}/.test($scope.item.phone_number))
             toaster.pop("warning", "联系方式格式错误!", null, 2000, "toast-top-full-width");
         else {
             var data = {
                 "table_index": $scope.propagateTypes.indexOf($scope.propagateType),
-                "title": $scope.companyTitle,
-                "content": $scope.propagateContent,
-                "company_name": $scope.companyName,
-                "company_type": $scope.companyType,
-                "company_address": $scope.companyAddress,
-                "phone_number": $scope.companyPhone,
+                "title": $scope.item.title,
+                "content": $scope.item.content,
+                "company_name": $scope.item.company_name,
+                "company_type": $scope.item.company_type,
+                "company_address": $scope.item.company_address,
+                "phone_number": $scope.item.phone_number,
                 "picture_path": $scope.picturePath,
                 "creator_id": global_role.id
             };
@@ -228,16 +220,16 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
 
     // 创建活动宣传
     $scope.createActivityPropagate = function(){
-        if(!/[\d]{5,11}/.test($scope.activityPhone))
+        if(!/[\d]{5,11}/.test($scope.item.phone_number))
             toaster.pop("warning", "联系方式格式错误!", null, 2000, "toast-top-full-width");
         else {
             var data = {
                 "table_index": $scope.propagateTypes.indexOf($scope.propagateType),
-                "title": $scope.activityTitle,
-                "content": $scope.propagateContent,
+                "title": $scope.item.title,
+                "content": $scope.item.content,
                 "type": $scope.activityType.name,
-                "corporation": $scope.activityMan,
-                "phone_number": $scope.activityPhone,
+                "corporation": $scope.item.corporation,
+                "phone_number": $scope.item.phone_number,
                 "picture_path": $scope.picturePath,
                 "creator_id": global_role.id
             };
@@ -250,8 +242,8 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
         var data = {
             "table_index": $scope.propagateTypes.indexOf($scope.propagateType),
             "course_id": $scope.course.id,
-            "title": $scope.courseTitle,
-            "content": $scope.propagateContent,
+            "title": $scope.item.title,
+            "content": $scope.item.content,
             "picture_path": $scope.picturePath,
             "creator_id": global_role.id
         };
@@ -263,9 +255,9 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
         var data = {
             "table_index": $scope.propagateTypes.indexOf($scope.propagateType),
             "student_id": $scope.excellentStudent.id,
-            "profile": $scope.propagateContent,
-            "honor": $scope.honorContent,
-            "declaration": $scope.declarationContent,
+            "profile": $scope.item.profile,
+            "honor": $scope.item.honor,
+            "declaration": $scope.item.declaration,
             "photo_path": $scope.picturePath,
             "creator_id": global_role.id
         };
@@ -273,106 +265,56 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
     };
 
     // 路由分发创建宣传模态框
-    $scope.updateModalShow = function(id){
+    $scope.updateModalShow = function(item){
         // 获取表下标
         var index = $scope.propagateTypes.indexOf($scope.propagateType);
         // 标识当前 修改动作
         $scope.createAction = false;
-        // 全局获取被修改宣传的 id
-        $scope.propagateId = id;
+
+        // 全局获取被修改条目
+        $scope.item = item;
+
+        // 获取无参数图片路径
+        var getNoParamPath = function(){
+            var path = item.picture_path;
+            $scope.picturePath = (path.indexOf("?") == -1)? path:
+                path.substr(0, path.indexOf("?"));
+            $scope.pictureName = $scope.picturePath.substr($scope.picturePath.lastIndexOf("/") + 1);
+        };
+
         // 初始化公司宣传模态框
         var initCompanyModal = function(){
-            $http.get("/api/propagateManage/getCurrent?tableIndex="+ index
-                +"&id=" + id).then(function(res){
-                if(res.data != undefined && res.data != '' && res.data != null) {
-                    $scope.companyTitle = res.data.title;
-                    $scope.propagateContent = res.data.content;
-
-                    var path = res.data.picture_path;
-                    $scope.picturePath = path;
-                    $scope.pictureName = path.substr(path.lastIndexOf("/") + 1);
-
-                    $scope.companyName = res.data.company_name;
-                    $scope.companyType = res.data.company_type;
-                    $scope.companyAddress = res.data.company_address;
-                    $scope.companyPhone = res.data.phone_number;
-                }else
-                    toaster.pop("danger", "数据获取失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
-            }, function (res) {
-                toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
-            });
+            getNoParamPath();
         };
         // 初始化活动宣传模态框
         var initActivityModal = function(){
-            $http.get("/api/propagateManage/getCurrent?tableIndex="+ index +"&id=" + id)
-                .then(function(res){
-                    if(res.data != undefined && res.data != '' && res.data != null) {
-                        $scope.activityTitle = res.data.title;
-                        $scope.propagateContent = res.data.content;
+            getNoParamPath();
 
-                        var path = res.data.picture_path;
-                        $scope.picturePath = path;
-                        $scope.pictureName = path.substr(path.lastIndexOf("/") + 1);
-
-                        $scope.activityMan = res.data.corporation;
-                        $scope.activityPhone = res.data.phone_number;
-                        // 获取活动类型
-                        for (var i = 0; i < $scope.activityTypes.length; i++) {
-                            if (res.data.type == $scope.activityTypes[i].name)
-                                $scope.activityType = $scope.activityTypes[i];
-                        }
-                    } else
-                        toaster.pop("danger", "数据获取失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
-                }, function (res) {
-                    toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
-                });
+            // 获取活动类型
+            for (var i = 0; i < $scope.activityTypes.length; i++) {
+                if (item.type == $scope.activityTypes[i].name)
+                    $scope.activityType = $scope.activityTypes[i];
+            }
         };
         // 初始化课程宣传模态框
         var initCourseModal = function () {
-            $http.get("/api/propagateManage/getCurrent?tableIndex="+ index +"&id=" + id)
-                .then(function(res){
-                    if(res.data != undefined && res.data != '' && res.data != null) {
-                        $scope.courseTitle = undefined;
-                        $scope.propagateContent = res.data.content;
+            getNoParamPath();
 
-                        var path = res.data.picture_path;
-                        $scope.picturePath = path;
-                        $scope.pictureName = path.substr(path.lastIndexOf("/") + 1);
-
-                        // 获取课程类型
-                        for (var i = 0; i < $scope.courses.length; i++) {
-                            if (res.data.course_id == $scope.courses[i].id)
-                                $scope.course = $scope.courses[i];
-                        }
-                    }else
-                        toaster.pop("danger", "数据获取失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
-                }, function (res) {
-                    toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
-                });
+            // 获取课程类型
+            for (var i = 0; i < $scope.courses.length; i++) {
+                if (item.course_id == $scope.courses[i].id)
+                    $scope.course = $scope.courses[i];
+            }
         };
         // 初始化优秀学子模态框
         var initStudentModal = function () {
-            $http.get("/api/propagateManage/getCurrent?tableIndex="+ index +"&id=" + id)
-                .then(function(res) {
-                    if(res.data != undefined && res.data != '' && res.data != null) {
-                        $scope.propagateContent = res.data.profile;
-                        $scope.honorContent = res.data.honor;
-                        $scope.declarationContent = res.data.declaration;
+            getNoParamPath();
 
-                        var path = res.data.photo_path;
-                        $scope.picturePath = path;
-                        $scope.pictureName = path.substr(path.lastIndexOf("/") + 1);
-
-                        // 获取优秀学子
-                        for (var i = 0; i < $scope.excellentStudents.length; i++) {
-                            if (res.data.student_id == $scope.excellentStudents[i].id)
-                                $scope.excellentStudent = $scope.excellentStudents[i];
-                        }
-                    }else
-                        toaster.pop("danger", "数据获取失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
-                }, function (res) {
-                    toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
-                });
+            // 获取优秀学子
+            for (var i = 0; i < $scope.excellentStudents.length; i++) {
+                if (item.student_id == $scope.excellentStudents[i].id)
+                    $scope.excellentStudent = $scope.excellentStudents[i];
+            }
         };
 
         // 路由显示模态框
@@ -405,11 +347,9 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
                 uploader.uploadAll();
                 changed = true;
             }
-            if(res.data.flg == 1 || changed){
+            if(res.data.flg == 1 || changed)
                 toaster.pop("success", "修改成功!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
-                getTotalItem();
-                getPropagatePage();
-            } else
+            else
                 toaster.pop("danger", "修改失败!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
         }, function(res){
             toaster.pop("error", "服务器错误!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
@@ -418,18 +358,18 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
 
     // 修改公司宣传
     $scope.updateCompanyPropagate = function(){
-        if(!/[\d]{5,11}/.test($scope.companyPhone))
+        if(!/[\d]{5,11}/.test($scope.item.phone_number))
             toaster.pop("warning", "联系方式格式错误!", null, 2000, "toast-top-full-width");
         else {
             var data = {
                 "table_index": $scope.propagateTypes.indexOf($scope.propagateType),
-                "id": $scope.propagateId,
-                "title": $scope.companyTitle,
-                "content": $scope.propagateContent,
-                "company_name": $scope.companyName,
-                "company_type": $scope.companyType,
-                "company_address": $scope.companyAddress,
-                "phone_number": $scope.companyPhone,
+                "id": $scope.item.id,
+                "title": $scope.item.title,
+                "content": $scope.item.content,
+                "company_name": $scope.item.company_name,
+                "company_type": $scope.item.company_type,
+                "company_address": $scope.item.company_address,
+                "phone_number": $scope.item.phone_number,
                 "picture_path": $scope.picturePath,
                 "creator_id": global_role.id
             };
@@ -439,17 +379,17 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
 
     // 修改活动宣传
     $scope.updateActivityPropagate = function(){
-        if(!/[\d]{5,11}/.test($scope.activityPhone))
+        if(!/[\d]{5,11}/.test($scope.item.phone_number))
             toaster.pop("warning", "联系方式格式错误!", null, 2000, "toast-top-full-width");
         else {
             var data = {
                 "table_index": $scope.propagateTypes.indexOf($scope.propagateType),
-                "id": $scope.propagateId,
-                "title": $scope.activityTitle,
-                "content": $scope.propagateContent,
+                "id": $scope.item.id,
+                "title": $scope.item.title,
+                "content": $scope.item.content,
                 "type": $scope.activityType.name,
-                "corporation": $scope.activityMan,
-                "phone_number": $scope.activityPhone,
+                "corporation": $scope.item.corporation,
+                "phone_number": $scope.item.phone_number,
                 "picture_path": $scope.picturePath,
                 "creator_id": global_role.id
             };
@@ -461,10 +401,10 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
     $scope.updateCoursePropagate = function(){
         var data = {
             "table_index": $scope.propagateTypes.indexOf($scope.propagateType),
-            "id": $scope.propagateId,
+            "id": $scope.item.id,
             "course_id": $scope.course.id,
-            "title": $scope.courseTitle,
-            "content": $scope.propagateContent,
+            "title": $scope.item.title,
+            "content": $scope.item.content,
             "picture_path": $scope.picturePath,
             "creator_id": global_role.id
         };
@@ -486,11 +426,11 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
     $scope.updateExcellentStudent = function(){
         var data = {
             "table_index": $scope.propagateTypes.indexOf($scope.propagateType),
-            "id": $scope.propagateId,
+            "id": $scope.item.id,
             "student_id": $scope.excellentStudent.id,
-            "profile": $scope.propagateContent,
-            "honor": $scope.honorContent,
-            "declaration": $scope.declarationContent,
+            "profile": $scope.item.profile,
+            "honor": $scope.item.honor,
+            "declaration": $scope.item.declaration,
             "photo_path": $scope.picturePath,
             "creator_id": global_role.id
         };
@@ -502,13 +442,13 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
     var deletePropagate = function(){
         var data = {
             "table_index": $scope.propagateTypes.indexOf($scope.propagateType),
-            "id": $scope.propagateId
+            "id": $scope.item.id
         };
         $http.post("/api/propagateManage/delete", data).then(function(res){
             if(res.data.flg == 1) {
                 toaster.pop("success", "删除成功!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
                 for(var i=0; i<$scope.propagateArr.length; i++){
-                    if($scope.propagateArr[i].id == $scope.propagateId)
+                    if($scope.propagateArr[i].id == $scope.item.id)
                         $scope.propagateArr.splice(i,1);
                 }
 
@@ -554,6 +494,11 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
         $("#contentModal").modal("show");
     };
 
+    // 个人简介内容模态框
+    $scope.profileContentModalShow = function(){
+        $("#profileContentModal").modal("show");
+    };
+
     // 所获荣誉模态框
     $scope.honorContentModalShow =  function(){
         $("#honorContentModal").modal("show");
@@ -571,16 +516,7 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
 
     // 重置内容输入框内容
     $scope.resetContent = function(){
-        $scope.propagateContent = undefined;
-    };
-
-    // 点击选择企业类型
-    $scope.toggleSelect = function(type){
-        $(".company-type").removeClass("btn-info");
-        var ev = event || window.event;
-        $(ev.target).addClass("btn-info");
-        $scope.companyType = type;
-        $("#companyTypeModal").modal('hide');
+        $scope.item.content = undefined;
     };
 
     // 获取所有条目数
@@ -625,7 +561,7 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
     };
 
     // 检测propagateType的值
-    $scope.$watch('propagateType',function(newValue,oldValue){
+    $scope.$watch('propagateType',function(){
         $scope.pageNum = 0;
         getTotalItem();
         getPropagatePage();

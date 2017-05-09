@@ -11,6 +11,9 @@ app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', '$interval'
     // 根据点击树节点编号 转发视图
     var routeViews = function(moduleId){
         switch(moduleId){
+            case "1008601":
+                $state.go("main.selfInfo");
+                break;
             case "100860201":
                 $state.go("main.companyPropagate");
                 break;

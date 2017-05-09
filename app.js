@@ -30,6 +30,9 @@ var upload = multer({ storage: Storage });
 const common = require("./routes/common");
 const login = require("./routes/mis/login");
 
+// 个人信息
+const selfInfo =require("./routes/mis/selfInfo/selfInfo");
+
 // 学院宣传
 const collegePropagate =require("./routes/mis/collegePropagate/collegePropagate");
 // 学院制度
@@ -69,6 +72,16 @@ app.use(common.config);
 
 app.use(route.post('/api/login',login.login));
 
+// 个人信息
+app.use(route.get('/api/selfInfo/getStudent',selfInfo.getStudent));
+app.use(route.post('/api/selfInfo/updateStudent',selfInfo.updateStudent));
+app.use(route.post('/api/selfInfo/updateStudentPhoto',selfInfo.updateStudentPhoto));
+app.use(route.get('/api/selfInfo/getTeacher',selfInfo.getTeacher));
+app.use(route.post('/api/selfInfo/updateTeacher',selfInfo.updateTeacher));
+app.use(route.post('/api/selfInfo/updateTeacherPhoto',selfInfo.updateTeacherPhoto));
+// 上传图片保存到node服务器端
+app.use(route.post('/api/selfInfo/upload', upload.single('file')));
+
 // 用户管理
 app.use(route.get('/api/userManage/getAllTeachers',userManage.getAllTeachers));
 app.use(route.get('/api/userManage/getAllStudents',userManage.getAllStudents));
@@ -87,7 +100,7 @@ app.use(route.post('/api/teacherManage/update',teacherManage.update));
 
 // 班级管理
 app.use(route.get('/api/classManage/getClassType', classManage.getClassType));
-app.use(route.get('/api/classManage/getAllClassNames', classManage.getAllClassNames));
+app.use(route.get('/api/classManage/getAllClass', classManage.getAllClass));
 app.use(route.get('/api/classManage/getPage',classManage.getPage));
 app.use(route.post('/api/classManage/create',classManage.create));
 app.use(route.post('/api/classManage/update',classManage.update));

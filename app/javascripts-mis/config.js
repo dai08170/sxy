@@ -15,7 +15,7 @@ var global_modules = [
             text: "个人信息",
             icon: "glyphicon glyphicon-tags",
             moduleId: "1008601",
-            href: "main.sSelfInfo"
+            href: "main.selfInfo"
         }, {
             text: "宣传管理",
             moduleId: "1008602",
@@ -157,21 +157,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 }
             }
         })
-        .state('main.sSelfInfo',{
-            url: '/sSelfInfo',
+        .state('main.selfInfo',{
+            url: '/selfInfo',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/selfInfo/sSelfInfo.html',
-                    controller: 'sSelfInfoCtrl'
-                }
-            }
-        })
-        .state('main.tSelfInfo',{
-            url: '/tSelfInfo',
-            views: {
-                'content': {
-                    templateUrl: '/partial/mis/selfInfo/tSelfInfo.html',
-                    controller: 'tSelfInfoCtrl'
+                    templateUrl: '/partial/mis/selfInfo/selfInfo.html',
+                    controller: 'selfInfoCtrl'
                 }
             }
         })

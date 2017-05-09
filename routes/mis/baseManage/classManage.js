@@ -15,10 +15,10 @@ module.exports = {
         this.status = res.statusCode;
         this.body = res.body;
     },
-    getAllClassNames : function *(){
+    getAllClass : function *(){
         var options = {
             method : 'GET',
-            url : config.url2 +"/classManage/getAllClassNames",
+            url : config.url2 +"/classManage/getAllClass",
             json: true
         };
         var res = yield this.routeConfig(options);

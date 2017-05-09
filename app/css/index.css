@@ -243,6 +243,10 @@ hr{
     white-space: pre-wrap;
 }
 
+.cursor-pointer{
+    cursor: pointer;
+}
+
 /* 定制样式 */
 #rootCtrl{
     height:100%;
@@ -350,6 +354,10 @@ hr{
 
 .poster-detail-img-height{
     height:300px !important;
+}
+
+.headphoto-img-height{
+    height:200px;
 }
 
 #document-tree .list-group .list-group-item{
