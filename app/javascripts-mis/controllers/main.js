@@ -210,7 +210,8 @@ app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', '$interval'
                 for(var i=0; i<moduleIds.length; i++)
                     extraModuleParent.nodes.push(getAuthorityModules(moduleIds[i]));
                 modules.push(extraModuleParent);
-            }
+            }else
+                toaster.pop("danger", "初始化目录树失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
             createBranchs();
         }, function (res) {
             toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");

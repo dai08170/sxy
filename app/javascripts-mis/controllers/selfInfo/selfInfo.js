@@ -81,7 +81,7 @@ app.controller('selfInfoCtrl',['$scope', '$state','$http', '$interval', '$cookie
         var filename = '';
         if($scope.userInfo.photo_path == '') {
             filename = uploader.queue[0].file.name
-            filename = global_role.id + Date.now() + filename.substr(filename.lastIndexOf("."));
+            filename = global_role.id + '' + Date.now() + filename.substr(filename.lastIndexOf("."));
             $scope.photoPath = global_baseurl + filename;
         } else {
             var photoPath = $scope.userInfo.photo_path;
