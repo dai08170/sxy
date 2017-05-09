@@ -276,7 +276,7 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
 
         // 获取无参数图片路径
         var getNoParamPath = function(){
-            var path = item.picture_path;
+            var path = item.picture_path || item.photo_path;
             $scope.picturePath = (path.indexOf("?") == -1)? path:
                 path.substr(0, path.indexOf("?"));
             $scope.pictureName = $scope.picturePath.substr($scope.picturePath.lastIndexOf("/") + 1);
@@ -408,18 +408,7 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
             "picture_path": $scope.picturePath,
             "creator_id": global_role.id
         };
-        $http.post("/api/propagateManage/updateCourse", data).then(function(res){
-            if(res.data.flg == 1){
-                toaster.pop("success", "修改成功!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
-                getTotalItem();
-                getPropagatePage();
-                if(uploader.queue.length>0)
-                    uploader.uploadAll();
-            } else
-                toaster.pop("danger", "修改失败!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
-        }, function(res){
-            toaster.pop("error", "服务器错误!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
-        });
+        update("/api/propagateManage/updateCourse", data);
     };
 
     // 修改优秀学子
