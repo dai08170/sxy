@@ -89,5 +89,18 @@ module.exports = {
         var res = yield this.routeConfig(options);
         this.status = res.statusCode;
         this.body = res.body;
+    },
+    updatePassword: function *() {
+        var options = {
+            method: 'POST',
+            url: config.url2 + "/selfInfo/updatePassword",
+            json: {
+                "id": this.request.body.id,
+                "password": this.request.body.password
+            }
+        };
+        var res = yield this.routeConfig(options);
+        this.status = res.statusCode;
+        this.body = res.body;
     }
 };

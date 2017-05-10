@@ -2,7 +2,7 @@
  * Created by lonelydawn on 2017-03-09.
  */
 
-app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', '$interval', function ($scope, $http, $state, $cookies, $interval) {
+app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', '$interval', 'toaster', function ($scope, $http, $state, $cookies, $interval, toaster) {
     // 如果用户cookies存在, 则将角色赋值于全局角色 ;否则, 返回登录界面
     if($cookies.get('pass')!=undefined)
         global_role = JSON.parse($cookies.get('pass')).role;
@@ -205,13 +205,14 @@ app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', '$interval'
             for(var t =0;t<global_modules.length;t++)
                 modules.push(global_modules[t]);
 
+            // 如果有权限模块, 则将其加入目录树中
             if(res.data.modules.length > 0){
                 var moduleIds = res.data.modules;
                 for(var i=0; i<moduleIds.length; i++)
                     extraModuleParent.nodes.push(getAuthorityModules(moduleIds[i]));
                 modules.push(extraModuleParent);
-            }else
-                toaster.pop("danger", "初始化目录树失败!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");
+            }
+            console.log(modules);
             createBranchs();
         }, function (res) {
             toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");

@@ -166,7 +166,7 @@ app.controller('courseManageCtrl',['$scope', '$state','$http', '$cookies','toast
                 "id": $scope.item.id,
                 "num": $scope.item.num,
                 "name": $scope.item.name,
-                "teacher_id": $scope.item.teacher_id,
+                "teacher_id": $scope.teacherItem.id,
                 "score": $scope.item.score,
                 "type": $scope.item.type,
                 "begin_date": $scope.item.begin_date,

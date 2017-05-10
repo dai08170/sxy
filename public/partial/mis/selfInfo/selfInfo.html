@@ -6,7 +6,7 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3" ng-show="isTeacher || isStudent">
                         <br/>
                         <div class="row text-center margin-top-10">
                             <img class="bg-img headphoto-img-height" alt="用户照片"
@@ -17,16 +17,23 @@
                             <a class="color-deep-gray cursor-pointer"
                                ng-click="imageUploadModalShow();">上传头像</a>
                         </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div class="row text-center">
+                            <button class="btn btn-danger" ng-click="updatePasswordModalShow();">
+                                修改登录密码</button>
+                        </div>
                     </div>
                     <div class="col-md-9">
                         <div class="row">
                             <div class="col-md-8">
                                 <h1>Hi , {{welcomeName}}!</h1>
                             </div>
-                            <div class="col-md-3 pull-right">
-                                <i class="pull-right" style="margin-bottom: 0;"
-                                   ng-bind="currentTime"></i>
-                            </div>
+                            <!--<div class="col-md-3 pull-right">-->
+                                <!--<i class="pull-right" style="margin-bottom: 0;"-->
+                                   <!--ng-bind="currentTime"></i>-->
+                            <!--</div>-->
                         </div>
                         <hr/>
                         <!-- 学生信息 -->
@@ -331,6 +338,55 @@
                 <!--<span class="glyphicon glyphicon-upload"></span>&nbsp;上传</button>-->
                 <button class="btn btn-info" ng-click="uploadPicture();"
                         ng-disabled="!uploader.getNotUploadedItems().length">确定</button>
+                <button class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 修改密码模态框 -->
+<div id="passwordModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="passwordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content top-red">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="passwordModalLabel">修改登录密码</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-3">
+                        <label class="control-label">原始密码:</label>
+                    </div>
+                    <div class="col-md-5">
+                        <input class="form-control" placeholder="请输入原始密码..."
+                               ng-model="oldPwd"/>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-3">
+                        <label class="control-label">新密码:</label>
+                    </div>
+                    <div class="col-md-5">
+                        <input class="form-control" placeholder="请输入新密码..."
+                               ng-model="newPwd"/>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-3">
+                        <label class="control-label">重复新密码:</label>
+                    </div>
+                    <div class="col-md-5">
+                        <input class="form-control" placeholder="请重复输入新密码..."
+                               ng-model="againPwd"/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-info" ng-click="updatePassword();"
+                        data-dismiss="modal">确定</button>
                 <button class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
         </div><!-- /.modal-content -->

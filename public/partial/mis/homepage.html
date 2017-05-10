@@ -2,17 +2,15 @@
     <div class="row">
         <div class="col-md-9 padding-5 height-auto">
             <div class="row bg-white">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <br/><br/>
-                    <div class="row">
-                        <img style="width:94px;height:132px;" src="images/mis/head_photo.jpg"/>
+                    <div class="row text-center">
+                        <img class="bg-img headphoto-img-height"
+                             src="{{client.photo_path || 'uploads/no.png'}}"/>
                     </div>
                     <br/>
-                    <div class="row text-center">
-                        <a ng-click="">上传头像</a>
-                    </div>
                 </div>
-                <div class="panel col-md-10 border-none">
+                <div class="panel col-md-9 border-none">
                     <div class="panel-heading">
                         <h3 ng-bind="greetings"></h3>
                     </div>
@@ -35,35 +33,38 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="control-label">
-                                    班级:
-                                </label>
-                                <p ng-bind="client.class"></p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="control-label">
                                     出生日期:
                                 </label>
                                 <p ng-bind="client.birth"></p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">
+                                    身份证号:
+                                </label>
+                                <p ng-bind="client.profile_number"></p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="control-label">
-                                    企业链接:
+                                    联系电话:
                                 </label>
-                                <p ng-bind="client.link"></p>
+                                <p ng-bind="client.phone_number"></p>
                             </div>
                             <div class="col-md-6">
                                 <label class="control-label">
-                                    简介:
+                                    电子邮箱:
                                 </label>
-                                <p ng-bind="client.profile"></p>
+                                <p ng-bind="client.email"></p>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="row">
+                            <div class="col-md-3 pull-right">
+                                <a class="color-deep-gray" ui-sref="main.selfInfo">修改个人信息</a>
                             </div>
                         </div>
                     </div>
-                    <hr/>
-                    <button class="btn btn-info pull-right"
-                            ng-click="">修改个人信息</button>
                 </div>
             </div>
             <div class="divider-bar"></div>

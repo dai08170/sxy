@@ -161,6 +161,40 @@ app.controller('selfInfoCtrl',['$scope', '$state','$http', '$interval', '$cookie
         abstractUpdate("/api/selfInfo/updateTeacher", data);
     };
 
+    // 更新密码模态框显示
+    $scope.updatePasswordModalShow = function(){
+        $scope.oldPwd = undefined;
+        $scope.newPwd = undefined;
+        $scope.againPwd = undefined;
+
+        $("#passwordModal").modal('show');
+    };
+
+    // 修改登录密码
+    $scope.updatePassword = function () {
+        if($scope.oldPwd != global_role.password)
+            toaster.pop("warning", "原密码错误!", null, 2000, "toast-top-full-width");
+        else if($scope.newPwd != $scope.againPwd)
+            toaster.pop("warning", "两次输入的密码不一致!", null, 2000, "toast-top-full-width");
+        else{
+            var data = {
+                "id": global_role.id,
+                "password": $scope.newPwd
+            };
+
+            $http.post("/api/selfInfo/updatePassword", data).then(function (res) {
+                if (res.data.flg == 1)
+                    toaster.pop("success", "修改成功!" + (res.data.msg || ""), null,
+                        2000, "toast-top-full-width");
+                else
+                    toaster.pop("danger", "修改失败!" + (res.data.msg || ""), null,
+                        2000, "toast-top-full-width");
+            }, function (res) {
+                toaster.pop("error", "服务器错误!" + (res.data.msg || ''), null, 2000, "toast-top-full-width");
+            });
+        }
+    };
+
     // 初始化用户信息
     var initUserInfo = function() {
         // 获取用户个人信息

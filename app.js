@@ -79,6 +79,7 @@ app.use(route.post('/api/selfInfo/updateStudentPhoto',selfInfo.updateStudentPhot
 app.use(route.get('/api/selfInfo/getTeacher',selfInfo.getTeacher));
 app.use(route.post('/api/selfInfo/updateTeacher',selfInfo.updateTeacher));
 app.use(route.post('/api/selfInfo/updateTeacherPhoto',selfInfo.updateTeacherPhoto));
+app.use(route.post('/api/selfInfo/updatePassword',selfInfo.updatePassword));
 // 上传图片保存到node服务器端
 app.use(route.post('/api/selfInfo/upload', upload.single('file')));
 
