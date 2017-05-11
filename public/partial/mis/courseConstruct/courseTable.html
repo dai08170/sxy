@@ -1,0 +1,52 @@
+<div class="margin-top-10 height-auto bg-white">
+    <div class="row margin-10">
+        <div class="panel panel-default border-none">
+            <div class="panel-heading bg-white">
+                <h2><span class="glyphicon glyphicon-random"></span> &nbsp;课程表{{infoMsg}}</h2>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <table class="table table-bordered table-fixed">
+                        <thead>
+                        <tr>
+                            <td class="text-center" ng-repeat="item in cols" ng-bind="item"></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="white-space-pre-wrap border-none bg-white text-center font-px-12"
+                                ng-repeat="item in strArr[1] track by $index" ng-bind="item">
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="white-space-pre-wrap border-none bg-white text-center font-px-12"
+                                ng-repeat="item in strArr[2] track by $index" ng-bind="item">
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="white-space-pre-wrap border-none bg-white text-center font-px-12"
+                                ng-repeat="item in strArr[3] track by $index" ng-bind="item">
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="white-space-pre-wrap border-none bg-white text-center font-px-12"
+                                ng-repeat="item in strArr[4] track by $index" ng-bind="item">
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="white-space-pre-wrap border-none bg-white text-center font-px-12"
+                                ng-repeat="item in strArr[5] track by $index" ng-bind="item">
+                                
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

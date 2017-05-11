@@ -6,15 +6,17 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-md-offset-7 col-md-3">
-                        <input class="form-control" type="text" ng-model="searchText"
-                               placeholder="请输入关键字 (姓名)"/>
-                    </div>
-                    <div class="col-md-1">
-                        <button class="btn btn-info" ng-click="search();">
-                            <span class="glyphicon"></span>&nbsp;搜索
-                        </button>
-                    </div>
+                    <form>
+                        <div class="col-md-offset-7 col-md-3">
+                            <input class="form-control" type="text" ng-model="searchText"
+                                   placeholder="请输入关键字 (姓名)"/>
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-info" ng-click="search();">
+                                <span class="glyphicon"></span>&nbsp;搜索
+                            </button>
+                        </div>
+                    </form>
                 </div>
                 <div class="row margin-top-10 border-gray" ng-repeat="item in propagateArr">
                     <!-- 路由到宣传详细页面 -->
@@ -27,10 +29,10 @@
                                 <div class="row">
                                     <!-- 标题 -->
                                     <div class="col-md-8">
-                                        <h6 class="one-line">
-                                            <span class="badge bg-green">优秀学子</span>
+                                        <h5 class="one-line">
+                                            <span class="badge bg-green">优秀</span>
                                             {{item.student_name}}
-                                        </h6>
+                                        </h5>
                                     </div>
                                     <!-- 创建时间 -->
                                     <div class="col-md-4">

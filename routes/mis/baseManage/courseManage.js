@@ -49,9 +49,7 @@ module.exports = {
                 teacher_id: this.request.body.teacher_id,
                 name : this.request.body.name,
                 score: this.request.body.score,
-                type : this.request.body.type,
-                begin_date: this.request.body.begin_date,
-                end_date: this.request.body.end_date
+                type : this.request.body.type
             }
         };
         var res = yield this.routeConfig(options);
@@ -68,9 +66,7 @@ module.exports = {
                 teacher_id: this.request.body.teacher_id,
                 name : this.request.body.name,
                 score: this.request.body.score,
-                type : this.request.body.type,
-                begin_date: this.request.body.begin_date,
-                end_date: this.request.body.end_date
+                type : this.request.body.type
             }
         };
         var res = yield this.routeConfig(options);

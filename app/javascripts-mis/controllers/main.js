@@ -26,6 +26,12 @@ app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', '$interval'
             case "100860204":
                 $state.go("main.excellentStudent");
                 break;
+            case "100860301":
+                $state.go("main.courseTable")
+                break;
+            case "100860302":
+                $state.go("main.courseResource")
+                break;
             case "100860401":
                 $state.go("main.dailySystem");
                 break;
@@ -212,7 +218,6 @@ app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', '$interval'
                     extraModuleParent.nodes.push(getAuthorityModules(moduleIds[i]));
                 modules.push(extraModuleParent);
             }
-            console.log(modules);
             createBranchs();
         }, function (res) {
             toaster.pop("error", "服务器错误!"+(res.data.msg || ''), null, 2000, "toast-top-full-width");

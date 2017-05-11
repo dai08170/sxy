@@ -247,6 +247,10 @@ hr{
     cursor: pointer;
 }
 
+.font-px-12{
+    font-size: 12px;
+}
+
 /* 定制样式 */
 #rootCtrl{
     height:100%;

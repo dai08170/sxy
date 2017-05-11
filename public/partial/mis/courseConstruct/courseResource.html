@@ -1,0 +1,183 @@
+<div class="margin-top-10 height-auto bg-white">
+    <div class="row margin-10">
+        <div class="panel panel-default border-none">
+            <div class="panel-heading bg-white">
+                <h2><span class="glyphicon glyphicon-list"></span> &nbsp;课程资料</h2>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <form name="searchForm">
+                        <div class="col-md-3">
+                            <input class="form-control" placeholder="请输入关键字 (名称)"
+                                   ng-model="keyword"/>
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-info" ng-click="search();">
+                                <span class="glyphicon glyphicon-search"></span>&nbsp;搜索
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <hr/>
+    
+                <!-- 学生课程信息模块 -->
+                <div class="row" ng-show="isStudent && dataArr.length>0">
+                    <table class="table table-bordered table-fixed table-striped">
+                        <thead>
+                        <tr>
+                            <td>名称</td>
+                            <td>授课教师</td>
+                            <td>学分</td>
+                            <td>类型</td>
+                            <td>操作</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in dataArr">
+                            <td class="one-line" ng-bind="item.name"></td>
+                            <td class="one-line" ng-bind="item.teacher_name"></td>
+                            <td class="one-line" ng-bind="item.score"></td>
+                            <td class="one-line" ng-bind="item.type"></td>
+                            <td>
+                                <button class="btn btn-xs btn-success"
+                                        ng-click="downloadModalShow(item);">查看</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- 教师课程信息模块 -->
+                <div class="row" ng-show="isTeacher && dataArr.length>0">
+                    <table class="table table-bordered table-fixed table-striped">
+                        <thead>
+                        <tr>
+                            <td>名称</td>
+                            <td>学分</td>
+                            <td>类型</td>
+                            <td>操作</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in dataArr">
+                            <td class="one-line" ng-bind="item.name"></td>
+                            <td class="one-line" ng-bind="item.score"></td>
+                            <td class="one-line" ng-bind="item.type"></td>
+                            <td>
+                                <button class="btn btn-xs btn-info"
+                                        ng-click="uploadModalShow(item);">上传</button>
+                                <button class="btn btn-xs btn-success"
+                                        ng-click="downloadModalShow(item);">查看</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- 分页 -->
+                <div class="row text-center" ng-show="dataArr.length>0">
+                    <ul class="pagination pagination-md">
+                        <li ng-repeat="btn in pageBtns">
+                            <a href="#" ng-bind="btn" ng-click="pageClick(btn)"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 课程资料上传模态框 -->
+<div id="uploadModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content top-red">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="uploadModalLabel">上传课程资料</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-2">
+                        <label class="control-label">选择课件:</label>
+                    </div>
+                    <div class="col-md-5"> <input type="file" nv-file-select=""
+                                                  uploader="uploader" multiple/>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <table class="table table-fixed table-bordered">
+                        <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>大小</th>
+                            <th>进度</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in uploader.queue">
+                            <td class="one-line" title="{{item.title}}">
+                                <strong ng-bind="item.file.name"></strong>
+                            </td>
+                            <td class="one-line">{{ item.file.size/1024|number:2 }} KB</td>
+                            <td>
+                                <div class="progress margin-none">
+                                    <div class="progress-bar" role="progressbar"
+                                         ng-style="{ 'width': item.progress + '%' }"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()"
+                                        ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                    <span class="glyphicon glyphicon-upload"></span>上传
+                                </button>
+                                <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                    <span class="glyphicon glyphicon-trash"></span> 删除
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-info" ng-click="uploadResource();"
+                        ng-disabled="!uploader.getNotUploadedItems().length">确定</button>
+                <button class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 课程资料模态框 -->
+<div id="downloadModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="downloadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content top-red">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="downloadModalLabel">下载课程资料</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-fixed table-striped">
+                    <thead>
+                    <tr>
+                        <td>名称</td>
+                        <td>操作</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in wareArr">
+                        <td class="one-line" ng-bind="item.title"></td>
+                        <td>
+                            <a href="{{item.ware_path}}" target="_blank" download>下载</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>

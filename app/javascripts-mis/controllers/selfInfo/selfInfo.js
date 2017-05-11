@@ -174,6 +174,8 @@ app.controller('selfInfoCtrl',['$scope', '$state','$http', '$interval', '$cookie
     $scope.updatePassword = function () {
         if($scope.oldPwd != global_role.password)
             toaster.pop("warning", "原密码错误!", null, 2000, "toast-top-full-width");
+        else if($scope.newPwd.length<4 || $scope.newPwd.length>20)
+            toaster.pop("warning", "密码格式应为4-20位字符!", null, 2000, "toast-top-full-width");
         else if($scope.newPwd != $scope.againPwd)
             toaster.pop("warning", "两次输入的密码不一致!", null, 2000, "toast-top-full-width");
         else{
@@ -183,10 +185,12 @@ app.controller('selfInfoCtrl',['$scope', '$state','$http', '$interval', '$cookie
             };
 
             $http.post("/api/selfInfo/updatePassword", data).then(function (res) {
-                if (res.data.flg == 1)
+                if (res.data.flg == 1){
                     toaster.pop("success", "修改成功!" + (res.data.msg || ""), null,
                         2000, "toast-top-full-width");
-                else
+                    global_role.password = $scope.newPwd;
+                    $("#passwordModal").modal('hide');
+                } else
                     toaster.pop("danger", "修改失败!" + (res.data.msg || ""), null,
                         2000, "toast-top-full-width");
             }, function (res) {
@@ -220,7 +224,7 @@ app.controller('selfInfoCtrl',['$scope', '$state','$http', '$interval', '$cookie
 
         // 初始化教师信息
         var initTeacherModule = function(){
-            $http.get("/api/configManage/getCurrent", {"tableIndex":3}).then(function (res) {
+            $http.get("/api/configManage/getCurrent?tableIndex=3").then(function (res) {
                 for(var i=0;i<res.data.length;i++)
                     $scope.teacherTitles.push(res.data[i].name);
             }, function (res) {

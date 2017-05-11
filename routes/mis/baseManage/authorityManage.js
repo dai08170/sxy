@@ -14,7 +14,6 @@ module.exports = {
                 username: this.request.query.username
             }
         };
-        console.log(options);
         var res = yield this.routeConfig(options);
         this.status = res.statusCode;
         this.body = res.body;

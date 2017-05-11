@@ -46,9 +46,22 @@ var global_modules = [
             }]
         }, {
             text: "课程建设",
-            icon: "glyphicon glyphicon-th",
+            selectable: false,
             moduleId: "1008603",
-            href: "main.tCourseBuild"
+            state: {
+                expanded: false
+            },
+            nodes: [{
+                text: "课程表",
+                icon: "glyphicon glyphicon-tags",
+                moduleId: "100860301",
+                href: "main.courseTable"
+            }, {
+                text: "课程资料",
+                icon: "glyphicon glyphicon-tags",
+                moduleId: "100860302",
+                href: "main.courseResource"
+            }]
         }, {
             text: "学院制度",
             selectable: false,
@@ -237,21 +250,21 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 }
             }
         })
-        .state('main.sCourseBuild',{
-            url: '/sCourseBuild',
+        .state('main.courseTable',{
+            url: '/courseTable',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/courseConstruct/sCourseBuild.html',
-                    controller: 'sCourseBuildCtrl'
+                    templateUrl: '/partial/mis/courseConstruct/courseTable.html',
+                    controller: 'courseTableCtrl'
                 }
             }
         })
-        .state('main.tCourseBuild',{
-            url: '/tCourseBuild',
+        .state('main.courseResource',{
+            url: '/courseResource',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/courseConstruct/tCourseBuild.html',
-                    controller: 'tCourseBuildCtrl'
+                    templateUrl: '/partial/mis/courseConstruct/courseResource.html',
+                    controller: 'courseResourceCtrl'
                 }
             }
         })

@@ -35,7 +35,6 @@ app.controller('homepageCtrl',['$http', '$scope', '$state', '$cookies', 'toaster
             else if (global_role.type == "教师")
                 getUserInfo("getTeacher");
         }
-        console.log(global_role);
     };
     // 视图跳转到个人信息
     $scope.goSelfInfo = function () {

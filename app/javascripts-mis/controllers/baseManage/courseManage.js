@@ -13,17 +13,6 @@ app.controller('courseManageCtrl',['$scope', '$state','$http', '$cookies','toast
     $scope.keyword = '';
     $scope.action = undefined;
 
-    // 初始化日期设置框
-    var date = new Date();
-    $("#beginDate").datepicker({
-        format : "yyyy-mm-dd",
-        startDate : date
-    });
-    $("#endDate").datepicker({
-        format : "yyyy-mm-dd",
-        startDate : date
-    });
-
     $scope.courseTypes = [];
     $scope.teacherArr = [];
     var init = function () {
@@ -112,9 +101,7 @@ app.controller('courseManageCtrl',['$scope', '$state','$http', '$cookies','toast
                 "name": $scope.item.name,
                 "teacher_id": $scope.teacherItem.id,
                 "score": $scope.item.score,
-                "type": $scope.item.type,
-                "begin_date": $scope.item.begin_date,
-                "end_date": $scope.item.end_date
+                "type": $scope.item.type
             };
             $http.post("/api/courseManage/create", data).then(function(res){
                 if(res.data.flg == 1) {
@@ -140,9 +127,7 @@ app.controller('courseManageCtrl',['$scope', '$state','$http', '$cookies','toast
             "name": item.name,
             "teacher_id": item.teacher_id,
             "score": item.score,
-            "type": item.type,
-            "begin_date": item.begin_date,
-            "end_date": item.end_date
+            "type": item.type
         };
 
         var exist = false;
@@ -168,9 +153,7 @@ app.controller('courseManageCtrl',['$scope', '$state','$http', '$cookies','toast
                 "name": $scope.item.name,
                 "teacher_id": $scope.teacherItem.id,
                 "score": $scope.item.score,
-                "type": $scope.item.type,
-                "begin_date": $scope.item.begin_date,
-                "end_date": $scope.item.end_date
+                "type": $scope.item.type
             };
             $http.post("/api/courseManage/update", data).then(function (res) {
                 if (res.data.flg == 1) {

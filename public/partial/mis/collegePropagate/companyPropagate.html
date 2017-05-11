@@ -7,15 +7,17 @@
             <div class="panel-body">
                 <!-- 搜索栏 -->
                 <div class="row">
-                    <div class="col-md-offset-7 col-md-3">
-                        <input class="form-control" type="text" ng-model="searchText"
-                            placeholder="请输入关键字 (标题)"/>
-                    </div>
-                    <div class="col-md-1">
-                        <button class="btn btn-info" ng-click="search();">
-                            <span class="glyphicon"></span>&nbsp;搜索
-                        </button>
-                    </div>
+                    <form>
+                        <div class="col-md-offset-7 col-md-3">
+                            <input class="form-control" type="text" ng-model="searchText"
+                                   placeholder="请输入关键字 (标题)"/>
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-info" ng-click="search();">
+                                <span class="glyphicon"></span>&nbsp;搜索
+                            </button>
+                        </div>
+                    </form>
                 </div>
                 
                 <!-- 宣传项目栏 -->

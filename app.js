@@ -26,15 +26,21 @@ var Storage = multer.diskStorage({
 });
 var upload = multer({ storage: Storage });
 
+
+
 // 自定义路由转发模块
 const common = require("./routes/common");
 const login = require("./routes/mis/login");
 
 // 个人信息
-const selfInfo =require("./routes/mis/selfInfo/selfInfo");
+const selfInfo = require("./routes/mis/selfInfo/selfInfo");
+
+// 课程资料
+const courseTable = require("./routes/mis/courseConstruct/courseTable");
+const courseResource = require("./routes/mis/courseConstruct/courseResource");
 
 // 学院宣传
-const collegePropagate =require("./routes/mis/collegePropagate/collegePropagate");
+const collegePropagate = require("./routes/mis/collegePropagate/collegePropagate");
 // 学院制度
 const dailySystem = require("./routes/mis/collegeRegulation/dailySystem");
 const leaderDuty = require("./routes/mis/collegeRegulation/leaderDuty");
@@ -45,6 +51,7 @@ const studentManage = require("./routes/mis/baseManage/studentManage");
 const teacherManage = require("./routes/mis/baseManage/teacherManage");
 const classManage = require("./routes/mis/baseManage/classManage");
 const courseManage = require("./routes/mis/baseManage/courseManage");
+const courseDistribute = require("./routes/mis/baseManage/courseDistribute");
 const propagateManage = require("./routes/mis/baseManage/propagateManage");
 const systemManage = require("./routes/mis/baseManage/systemManage");
 const authorityManage = require("./routes/mis/baseManage/authorityManage");
@@ -83,6 +90,16 @@ app.use(route.post('/api/selfInfo/updatePassword',selfInfo.updatePassword));
 // 上传图片保存到node服务器端
 app.use(route.post('/api/selfInfo/upload', upload.single('file')));
 
+// 课程建设
+app.use(route.get('/api/courseTable/getTeacherCourseTable',courseTable.getTeacherCourseTable));
+
+app.use(route.get('/api/courseResource/getStudentCoursePage',courseResource.getStudentCoursePage));
+app.use(route.get('/api/courseResource/getTeacherCoursePage',courseResource.getTeacherCoursePage));
+app.use(route.get('/api/courseResource/getResource',courseResource.getResource));
+app.use(route.post('/api/courseResource/uploadResource',courseResource.uploadResource));
+// 上传文件保存到node服务器端
+app.use(route.post('/api/courseResource/upload', upload.single('file')));
+
 // 用户管理
 app.use(route.get('/api/userManage/getAllTeachers',userManage.getAllTeachers));
 app.use(route.get('/api/userManage/getAllStudents',userManage.getAllStudents));
@@ -114,6 +131,11 @@ app.use(route.get('/api/courseManage/getPage',courseManage.getPage));
 app.use(route.post('/api/courseManage/create',courseManage.create));
 app.use(route.post('/api/courseManage/update',courseManage.update));
 app.use(route.post('/api/courseManage/delete',courseManage.delete));
+
+// 课程分配
+app.use(route.get('/api/courseDistribute/getDistribution',courseDistribute.getDistribution));
+app.use(route.post('/api/courseDistribute/distribute',courseDistribute.distribute));
+app.use(route.post('/api/courseDistribute/deleteDistribution',courseDistribute.deleteDistribution));
 
 // 学院宣传
 app.use(route.get('/api/collegePropagate/search', collegePropagate.search));
