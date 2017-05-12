@@ -108,7 +108,8 @@ var global_config = {
     "student_state": ["在读","毕业","休学","不明"],
     "teacher_state": ["在职","离职","休假","不明"],
     "regulation_types": ["日常制度", "领导职责"],
-    "propagate_types": ["企业宣传", "活动宣传", "课程宣传", "优秀学子"]
+    "propagate_types": ["企业宣传", "活动宣传", "课程宣传", "优秀学子"],
+    "account_action": ["收入", "支出"]
 };
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'JSONFormatterConfigProvider', 'cfpLoadingBarProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, JSONFormatterConfigProvider, cfpLoadingBarProvider) {

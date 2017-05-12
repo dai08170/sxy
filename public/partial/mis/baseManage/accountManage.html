@@ -5,82 +5,192 @@
                 <h2><span class="glyphicon glyphicon-credit-card"></span> &nbsp;资产管理</h2>
             </div>
             <div class="panel-body">
-            
-            </div>
-            <div class="panel-footer bg-white">
-            
+                <div class="row">
+                    <form name="searchForm">
+                        <div class="col-md-3">
+                            <input class="form-control" placeholder="请输入关键字 (名称 & 类型)"
+                                   ng-model="keyword"/>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-info" ng-click="search();">
+                                <span class="glyphicon glyphicon-search"></span>&nbsp;搜索
+                            </button>
+                        </div>
+                    </form>
+                    <div class="col-md-3">
+                        <p class="text-feature">资产总额:&nbsp;
+                            <strong ng-class="{true: 'color-red',false:'color-gray'}[sum<0]"
+                                    ng-bind="sum"></strong>&nbsp;&nbsp;元</p>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-success" ng-click="createModalShow();">
+                            新建资产项</button>
+                        <button class="btn btn-primary" ng-click="graphModalShow();">
+                            查看统计图</button>
+                    </div>
+                </div>
+                <hr/>
+                
+                <!-- 资产信息模块 -->
+                <div class="row" ng-show="dataArr.length>0">
+                    <table class="table table-bordered table-fixed table-striped">
+                        <thead>
+                        <tr>
+                            <td>名称</td>
+                            <td>金额</td>
+                            <td>类型</td>
+                            <td>收支类型</td>
+                            <td>创建者</td>
+                            <td>创建时间</td>
+                            <td>操作</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in dataArr">
+                            <td class="one-line" ng-bind="item.name"></td>
+                            <td class="one-line" ng-bind="item.val"></td>
+                            <td class="one-line" ng-bind="item.type"></td>
+                            <td class="one-line" ng-bind="item.action"></td>
+                            <td class="one-line" ng-bind="item.creator_name"></td>
+                            <td class="one-line" ng-bind="item.create_time"></td>
+                            <td>
+                                <button class="btn btn-xs btn-info"
+                                        ng-click="updateModalShow(item);">修改</button>
+                                <button class="btn btn-xs btn-danger"
+                                        ng-click="deleteAccount(item.id);">删除</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+        
+                <!-- 分页 -->
+                <div class="row text-center" ng-show="dataArr.length>0">
+                    <ul class="pagination pagination-md">
+                        <li ng-repeat="btn in pageBtns">
+                            <a href="#" ng-bind="btn" ng-click="pageClick(btn)"></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- 班级查询结果模态框 -->
-<div id="classModal" class="modal fade" tabindex="-1" role="dialog"
-     aria-labelledby="classModalLabel" aria-hidden="true">
+<!-- 资产信息模态框 -->
+<div id="accountModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="accountModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content top-red">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="classModalLabel">查询班级信息</h4>
+                <h4 class="modal-title" id="accountModalLabel">{{action}}资产信息</h4>
+            </div>
+            <div class="modal-body">
+                <form name="accountForm">
+                    <!-- 资产名称 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">资产名称:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" ng-model="item.name"
+                                   placeholder="请输入资产名称" required/>
+                        </div>
+                    </div>
+                    <br/>
+                    <!-- 资产金额 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">资产金额:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" ng-model="item.val"
+                                   onkeypress="numberOnly();" onpaste="return false;"
+                                   placeholder="请输入资产金额" required/>
+                        </div>
+                    </div>
+                    <br/>
+                    <!-- 资产类型 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">资产类型:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <select class="form-control" ng-model="item.type"
+                                    ng-options="item for item in accountType">
+                            
+                            </select>
+                        </div>
+                    </div>
+                    <br/>
+                    <!-- 收支类型 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">收支类型:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <select class="form-control" ng-model="item.action"
+                                    ng-options="item for item in actionType">
+    
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-info" data-dismiss="modal" ng-click="updateAccount();"
+                        ng-show="update" ng-disabled="accountForm.$invalid">确定</button>
+                <button class="btn btn-info" data-dismiss="modal" ng-click="createAccount();"
+                        ng-show="!update" ng-disabled="accountForm.$invalid">确定</button>
+                <button class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 统计图模态框 -->
+<div id="graphModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="graphModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content top-red">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="graphModalLabel">统计图</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-offset-1 col-md-2">
-                        <label class="control-label">账号:</label>
+                    <div class="col-md-offset-2 col-md-3">
+                        <label class="control-label">统计图类型:</label>
                     </div>
                     <div class="col-md-5">
-                        <input class="form-control" ng-model="searchedClassNumber"
-                               placeholder="请输入账号" required/>
-                    </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-2">
-                        <label class="control-label">名称:</label>
-                    </div>
-                    <div class="col-md-5">
-                        <input class="form-control" ng-model="searchedClassName"
-                               placeholder="请输入名称" required/>
-                    </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-2">
-                        <label class="control-label">类型:</label>
-                    </div>
-                    <div class="col-md-3">
-                        <select class="form-control" ng-model="searchedClassType"
-                                ng-options="item for item in classTypes">
-                        
+                        <select class="form-control" ng-model="graphType"
+                                ng-change="toggleGraph();"
+                                ng-options="item for item in graphTypes">
+            
                         </select>
                     </div>
                 </div>
-                <br/>
+                <hr/>
                 <div class="row">
-                    <div class="col-md-offset-1 col-md-2">
-                        <label class="control-label">简介:</label>
-                    </div>
-                    <div class="col-md-8">
-                        <textarea class="form-control textarea-size" placeholder="简介..."
-                                  ng-model="searchedClassProfile"></textarea>
-                    </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-2">
-                        <label class="control-label">状态:</label>
+                    <div class="col-md-offset-2 col-md-3">
+                        <label class="control-label">时间范围:</label>
                     </div>
                     <div class="col-md-3">
-                        <select class="form-control" ng-model="searchedClassState"
-                                ng-options="item for item in classState"></select>
+                        <input id="graphBeginDate" class="form-control" type="text"
+                               ng-model="graphBeginDate" data-date-format="yyyy-mm-dd"
+                               ng-change="toggleGraph()" readonly/>
+                    </div>
+                    <div class="col-md-3">
+                        <input id="graphEndDate" class="form-control" type="text"
+                               ng-model="graphEndDate" data-date-format="yyyy-mm-dd"
+                               ng-change="toggleGraph()" readonly/>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-success" data-dismiss="modal" ng-click="updateClass();">修改</button>
-                <button class="btn btn-info" ng-click="deleteClass();">
-                    删除</button>
-                <button class="btn btn-default" data-dismiss="modal">关闭</button>
+                <hr/>
+                <div id="graph" class="row" style="width:560px;height:300px;">
+                
+                </div>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->

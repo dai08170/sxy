@@ -54,6 +54,7 @@ const courseManage = require("./routes/mis/baseManage/courseManage");
 const courseDistribute = require("./routes/mis/baseManage/courseDistribute");
 const propagateManage = require("./routes/mis/baseManage/propagateManage");
 const systemManage = require("./routes/mis/baseManage/systemManage");
+const accountManage = require("./routes/mis/baseManage/accountManage");
 const authorityManage = require("./routes/mis/baseManage/authorityManage");
 const infoManage = require("./routes/mis/baseManage/infoManage");
 const configManage = require("./routes/mis/baseManage/configManage");
@@ -163,8 +164,16 @@ app.use(route.get('/api/dailySystem/getAll', dailySystem.getAll));
 app.use(route.get('/api/leaderDuty/getAll', leaderDuty.getAll));
 
 // 制度管理authorityManage
-app.use(route.post('/api/systemManage/create',systemManage.create));
-app.use(route.post('/api/systemManage/delete',systemManage.delete));
+app.use(route.post('/api/systemManage/create', systemManage.create));
+app.use(route.post('/api/systemManage/delete', systemManage.delete));
+
+// 资产管理
+app.use(route.get('/api/accountManage/getSum', accountManage.getSum));
+app.use(route.get('/api/accountManage/getPage', accountManage.getPage));
+app.use(route.post('/api/accountManage/create', accountManage.create));
+app.use(route.post('/api/accountManage/update', accountManage.update));
+app.use(route.post('/api/accountManage/delete', accountManage.delete));
+app.use(route.get('/api/accountManage/getAccountByType', accountManage.getAccountByType));
 
 // 权限管理
 app.use(route.get('/api/authorityManage/get',authorityManage.get));
