@@ -52,6 +52,7 @@ const teacherManage = require("./routes/mis/baseManage/teacherManage");
 const classManage = require("./routes/mis/baseManage/classManage");
 const courseManage = require("./routes/mis/baseManage/courseManage");
 const courseDistribute = require("./routes/mis/baseManage/courseDistribute");
+const absenceManage = require("./routes/mis/baseManage/absenceManage");
 const propagateManage = require("./routes/mis/baseManage/propagateManage");
 const systemManage = require("./routes/mis/baseManage/systemManage");
 const accountManage = require("./routes/mis/baseManage/accountManage");
@@ -137,6 +138,13 @@ app.use(route.post('/api/courseManage/delete',courseManage.delete));
 app.use(route.get('/api/courseDistribute/getDistribution',courseDistribute.getDistribution));
 app.use(route.post('/api/courseDistribute/distribute',courseDistribute.distribute));
 app.use(route.post('/api/courseDistribute/deleteDistribution',courseDistribute.deleteDistribution));
+
+// 出勤管理
+app.use(route.get('/api/absenceManage/getPage', absenceManage.getPage));
+app.use(route.post('/api/absenceManage/create', absenceManage.create));
+app.use(route.post('/api/absenceManage/update', absenceManage.update));
+app.use(route.post('/api/absenceManage/delete', absenceManage.delete));
+app.use(route.get('/api/absenceManage/getAbsenceByCourse', absenceManage.getAbsenceByCourse));
 
 // 学院宣传
 app.use(route.get('/api/collegePropagate/search', collegePropagate.search));

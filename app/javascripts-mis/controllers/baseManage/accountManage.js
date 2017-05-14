@@ -17,7 +17,7 @@ app.controller('accountManageCtrl',['$scope', '$state','$http', '$cookies','toas
     $scope.actionType = global_config.account_action;
     $scope.accountType = [];
 
-    $scope.graphTypes = ["资产支出柱状图","资产收入柱状图","资产支出扇形图","资产收入扇形图"];
+    $scope.graphTypes = ["资产支出直观图","资产收入直观图","资产支出比例图","资产收入比例图"];
     $scope.graphType = undefined;
 
 
@@ -178,14 +178,15 @@ app.controller('accountManageCtrl',['$scope', '$state','$http', '$cookies','toas
     getPage();
 
     /******************** 统计图 ******************************/
+    var date = new Date();
     $("#graphBeginDate").datepicker();
     $("#graphEndDate").datepicker();
+    $scope.graphBeginDate = (1900+date.getYear())+"-01-01";
+    $scope.graphEndDate = (1900+date.getYear())+"-"+
+        getDoubleBitNumber(date.getMonth()+1)+"-"+getDoubleBitNumber(date.getDate());
+
     // 统计图模态框显示
     $scope.graphModalShow = function () {
-        var date = new Date();
-        $scope.graphBeginDate = (1900+date.getYear())+"-01-01";
-        $scope.graphEndDate = (1900+date.getYear())+"-"+
-            getDoubleBitNumber(date.getMonth()+1)+"-"+getDoubleBitNumber(date.getDate());
         $("#graphModal").modal('show');
     };
 
@@ -206,6 +207,14 @@ app.controller('accountManageCtrl',['$scope', '$state','$http', '$cookies','toas
                     color: ['#3398DB'],
                     title: {
                         text: $scope.graphType
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {show: true, readOnly: true},
+                            magicType: {show: true, type: ['line', 'bar']},
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
                     },
                     tooltip: {},
                     legend: {
@@ -231,6 +240,14 @@ app.controller('accountManageCtrl',['$scope', '$state','$http', '$cookies','toas
                     color: ['#3398DB'],
                     title: {
                         text: $scope.graphType
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {show: true, readOnly: true},
+                            magicType: {show: true, type: ['line', 'bar']},
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
                     },
                     tooltip: {},
                     legend: {

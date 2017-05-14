@@ -63,7 +63,7 @@ app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', '$interval'
                 $state.go("main.courseDistribute");
                 break;
             case "100860607":
-                $state.go("main.attendenceManage");
+                $state.go("main.absenceManage");
                 break;
             case "100860608":
                 $state.go("main.propagateManage");
@@ -147,7 +147,7 @@ app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', '$interval'
                     text: "出勤管理",
                     icon: "glyphicon glyphicon-tags",
                     moduleId: "100860607",
-                    href: "main.attendenceManage"
+                    href: "main.absenceManage"
                 },
                 "100860608": {
                     text: "宣传管理",

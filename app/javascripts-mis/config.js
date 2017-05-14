@@ -359,12 +359,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 }
             }
         })
-        .state('main.attendenceManage',{
-            url: '/attendenceManage',
+        .state('main.absenceManage',{
+            url: '/absenceManage',
             views: {
                 'content': {
-                    templateUrl: '/partial/mis/baseManage/attendenceManage.html',
-                    controller: 'attendenceManageCtrl'
+                    templateUrl: '/partial/mis/baseManage/absenceManage.html',
+                    controller: 'absenceManageCtrl'
                 }
             }
         })

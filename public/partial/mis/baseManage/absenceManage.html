@@ -1,0 +1,214 @@
+<div class="margin-top-10 height-auto bg-white">
+    <div class="row margin-10">
+        <div class="panel panel-default border-none">
+            <div class="panel-heading bg-white">
+                <h2><span class="glyphicon glyphicon-list-alt"></span> &nbsp;出勤管理</h2>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <form name="searchForm">
+                        <div class="col-md-3">
+                            <input class="form-control" placeholder="请输入关键字 (学生|班级|课程)"
+                                   ng-model="keyword"/>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-info" ng-click="search();">
+                                <span class="glyphicon glyphicon-search"></span>&nbsp;搜索
+                            </button>
+                        </div>
+                    </form>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-success" ng-click="createModalShow();">
+                            新建缺勤项</button>
+                        <button class="btn btn-primary" ng-click="graphModalShow();">
+                            查看统计图</button>
+                    </div>
+                </div>
+                <hr/>
+        
+                <!-- 缺勤信息模块 -->
+                <div class="row" ng-show="dataArr.length>0">
+                    <table class="table table-bordered table-fixed table-striped">
+                        <thead>
+                        <tr>
+                            <td>学生姓名</td>
+                            <td>班级名称</td>
+                            <td>课程名称</td>
+                            <td>缺勤日期</td>
+                            <td>是否统计</td>
+                            <td>不统计原因</td>
+                            <td>操作</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in dataArr">
+                            <td class="one-line" ng-bind="item.student_name"></td>
+                            <td class="one-line" ng-bind="item.class_name"></td>
+                            <td class="one-line" ng-bind="item.course_name"></td>
+                            <td class="one-line" ng-bind="item.absence_date"></td>
+                            <td class="one-line" ng-bind="item.is_count? '是': '否'"></td>
+                            <td class="one-line" ng-bind="item.absence_reason"></td>
+                            <td>
+                                <button class="btn btn-xs btn-info"
+                                        ng-click="updateModalShow(item);">修改</button>
+                                <button class="btn btn-xs btn-danger"
+                                        ng-click="deleteAbsence(item.id);">删除</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+        
+                <!-- 分页 -->
+                <div class="row text-center" ng-show="dataArr.length>0">
+                    <ul class="pagination pagination-md">
+                        <li ng-repeat="btn in pageBtns">
+                            <a href="#" ng-bind="btn" ng-click="pageClick(btn)"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 缺勤信息模态框 -->
+<div id="absenceModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="absenceModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content top-red">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="absenceModalLabel">{{action}}缺勤记录</h4>
+            </div>
+            <div class="modal-body">
+                <form name="absenceForm">
+                    <!-- 课程名称 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">课程名称:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <select class="form-control" ng-model="courseItem"
+                                    ng-options="item.name for item in courseArr"
+                                    ng-disabled="update" required>
+    
+                            </select>
+                        </div>
+                    </div>
+                    <br/>
+                    <!-- 学生编号 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">学生编号:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input class="form-control" ng-model="item.student_num"
+                                   onkeypress="numberOnly();" onpaste="return false;"
+                                   placeholder="请输入学生编号" ng-disabled="update" required/>
+                        </div>
+                    </div>
+                    <br/>
+                    <!-- 缺勤日期 -->
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            <label class="control-label">缺勤日期:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input id="absenceDate" class="form-control" type="text"
+                                   ng-model="item.absence_date" data-date-format="yyyy-mm-dd"
+                                   readonly/>
+                        </div>
+                    </div>
+                </form>
+                <br/>
+                <!-- 是否统计 -->
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-2">
+                        <label class="control-label">是否统计:</label>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-default" ng-click="toggleCount();"
+                                ng-class="{true:'btn-info',flase:'btn-default'}[isCount]">
+                            统计
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-default" ng-click="toggleNotCount();"
+                                ng-class="{true:'btn-info',flase:'btn-default'}[!isCount]">
+                            不统计
+                        </button>
+                    </div>
+                </div>
+                <br/>
+                <!-- 缺勤原因 -->
+                <div class="row" ng-show="!isCount">
+                    <div class="col-md-offset-2 col-md-2">
+                        <label class="control-label">缺勤原因:</label>
+                    </div>
+                    <div class="col-md-7">
+                            <textarea class="form-control" placeholder="不统计原因..."
+                                      ng-model="item.absence_reason"></textarea>
+                    </div>
+                </div>
+                <br/>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-info" data-dismiss="modal" ng-click="updateAbsence();"
+                        ng-show="update" ng-disabled="absenceForm.$invalid">确定</button>
+                <button class="btn btn-info" data-dismiss="modal" ng-click="createAbsence();"
+                        ng-show="!update" ng-disabled="absenceForm.$invalid">确定</button>
+                <button class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 统计图模态框 -->
+<div id="graphModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="graphModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content top-red">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="graphModalLabel">班级各课程缺勤情况统计图</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-3">
+                        <label class="control-label">选择班级:</label>
+                    </div>
+                    <div class="col-md-5">
+                        <select class="form-control" ng-model="classItem"
+                                ng-change="toggleClass();"
+                                ng-options="item.name for item in classArr">
+                        
+                        </select>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-3">
+                        <label class="control-label">时间范围:</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input id="graphBeginDate" class="form-control" type="text"
+                               ng-model="graphBeginDate" data-date-format="yyyy-mm-dd"
+                               ng-change="toggleClass()" readonly/>
+                    </div>
+                    <div class="col-md-3">
+                        <input id="graphEndDate" class="form-control" type="text"
+                               ng-model="graphEndDate" data-date-format="yyyy-mm-dd"
+                               ng-change="toggleClass()" readonly/>
+                    </div>
+                </div>
+                <hr/>
+                <div id="graph" class="row" style="width:560px;height:300px;">
+                
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
