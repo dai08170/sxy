@@ -32,6 +32,9 @@ var upload = multer({ storage: Storage });
 const common = require("./routes/common");
 const login = require("./routes/mis/login");
 
+// 首页
+const homepage = require("./routes/mis/homepage");
+
 // 个人信息
 const selfInfo = require("./routes/mis/selfInfo/selfInfo");
 
@@ -81,6 +84,10 @@ app.use(session({
 app.use(common.config);
 
 app.use(route.post('/api/login',login.login));
+
+// 首页
+app.use(route.get('/api/homepage/getCourseInfo',homepage.getCourseInfo));
+app.use(route.get('/api/homepage/getPropagate',homepage.getPropagate));
 
 // 个人信息
 app.use(route.get('/api/selfInfo/getStudent',selfInfo.getStudent));

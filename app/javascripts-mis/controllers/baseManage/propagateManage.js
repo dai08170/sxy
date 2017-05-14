@@ -138,6 +138,7 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
     // 路由分发创建宣传模态框
     $scope.createModalShow = function(){
         $scope.item = undefined;
+        $scope.pictureName = "";
         uploader.queue.length = 0;
 
         // 初始化公司宣传模态框

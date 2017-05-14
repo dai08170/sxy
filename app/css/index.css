@@ -61,6 +61,14 @@ hr{
     color: #5a5a5a !important;
 }
 
+.color-black{
+    color: #333 !important;
+}
+
+.color-black:hover{
+    color: #000 !important;
+}
+
 .color-white{
     color: #fff !important;
 }
