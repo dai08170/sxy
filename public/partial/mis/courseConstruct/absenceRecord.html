@@ -1,0 +1,58 @@
+<div class="margin-top-10 height-auto bg-white">
+    <div class="row margin-10">
+        <div class="panel panel-default border-none">
+            <div class="panel-heading bg-white">
+                <h2><span class="glyphicon glyphicon-list-alt"></span> &nbsp;缺勤记录</h2>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <form name="searchForm">
+                        <div class="col-md-3">
+                            <input class="form-control" placeholder="请输入关键字 (课程名称)"
+                                   ng-model="keyword"/>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-info" ng-click="search();">
+                                <span class="glyphicon glyphicon-search"></span>&nbsp;搜索
+                            </button>
+                        </div>
+                    </form>
+                    <div class="col-md-3">
+                    </div>
+                </div>
+                <hr/>
+                
+                <!-- 缺勤信息模块 -->
+                <div class="row" ng-show="dataArr.length>0">
+                    <table class="table table-bordered table-fixed table-striped">
+                        <thead>
+                        <tr>
+                            <td>课程名称</td>
+                            <td>缺勤日期</td>
+                            <td>是否统计</td>
+                            <td>不统计原因</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in dataArr">
+                            <td class="one-line" ng-bind="item.course_name"></td>
+                            <td class="one-line" ng-bind="item.absence_date"></td>
+                            <td class="one-line" ng-bind="item.is_count? '是': '否'"></td>
+                            <td class="one-line" ng-bind="item.absence_reason"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- 分页 -->
+                <div class="row text-center" ng-show="dataArr.length>0">
+                    <ul class="pagination pagination-md">
+                        <li ng-repeat="btn in pageBtns">
+                            <a href="#" ng-bind="btn" ng-click="pageClick(btn)"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

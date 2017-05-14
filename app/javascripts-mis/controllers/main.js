@@ -32,6 +32,9 @@ app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', '$interval'
             case "100860302":
                 $state.go("main.courseResource")
                 break;
+            case "100860303":
+                $state.go("main.absenceRecord")
+                break;
             case "100860401":
                 $state.go("main.dailySystem");
                 break;
@@ -206,10 +209,17 @@ app.controller("mainCtrl", ['$scope', '$http', '$state', '$cookies', '$interval'
         };
         // 添加权限模块
         $http.get('/api/authorityManage/get?username='+global_role.username).then(function (res) {
-            // 将全局可用模块复制进入创建树 的模块组
-            // 直接赋值的话, 会改变原始数组内容
-            for(var t =0;t<global_modules.length;t++)
-                modules.push(global_modules[t]);
+            // 分角色获取固定模块
+            var tmpModules = [];
+            if(global_role.type == "教师")
+                tmpModules = global_modules.teacher_modules;
+            else if(global_role.type == "学生")
+                tmpModules = global_modules.student_modules;
+
+            // 直接赋值的话, 会改变原始数组内容, 所以采用copy
+            for(var t =0;t<tmpModules.length;t++)
+                modules.push(tmpModules[t]);
+
 
             // 如果有权限模块, 则将其加入目录树中
             if(res.data.modules.length > 0){

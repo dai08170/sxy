@@ -9,8 +9,9 @@ var app = angular.module('app', ['ui.router', 'jsonFormatter', 'toaster', 'ngAni
 var global_role = undefined;
 // 标识全局资源基路径
 var global_baseurl = "uploads/";
-// 全局配置
-var global_modules = [
+// 全局模块
+var global_modules = {
+    "teacher_modules": [
         {
             text: "个人信息",
             icon: "glyphicon glyphicon-tags",
@@ -99,7 +100,103 @@ var global_modules = [
                 href: "main.systemNotice"
             }]
         }
-    ];
+    ],
+    "student_modules": [
+        {
+            text: "个人信息",
+            icon: "glyphicon glyphicon-tags",
+            moduleId: "1008601",
+            href: "main.selfInfo"
+        }, {
+            text: "宣传管理",
+            moduleId: "1008602",
+            selectable: false,
+            state: {
+                expanded: false
+            },
+            nodes: [{
+                text: "企业宣传",
+                icon: "glyphicon glyphicon-tags",
+                moduleId: "100860201",
+                href: "main.companyPropagate"
+            }, {
+                text: "活动宣传",
+                icon: "glyphicon glyphicon-tags",
+                moduleId: "100860202",
+                href: "main.activityPropagate"
+            }, {
+                text: "课程宣传",
+                icon: "glyphicon glyphicon-tags",
+                moduleId: "100860203",
+                href: "main.coursePropagate"
+            }, {
+                text: "优秀学子",
+                icon: "glyphicon glyphicon-tags",
+                moduleId: "100860204",
+                href: "main.perfectStudent"
+            }]
+        }, {
+            text: "课程建设",
+            selectable: false,
+            moduleId: "1008603",
+            state: {
+                expanded: false
+            },
+            nodes: [{
+                text: "课程表",
+                icon: "glyphicon glyphicon-tags",
+                moduleId: "100860301",
+                href: "main.courseTable"
+            }, {
+                text: "课程资料",
+                icon: "glyphicon glyphicon-tags",
+                moduleId: "100860302",
+                href: "main.courseResource"
+            }, {
+                text: "缺勤记录",
+                icon: "glyphicon glyphicon-tags",
+                moduleId: "100860303",
+                href: "main.absenceRecord"
+            }]
+        }, {
+            text: "学院制度",
+            selectable: false,
+            moduleId: "1008604",
+            state: {
+                expanded: false
+            },
+            nodes: [{
+                text: "日常制度",
+                icon: "glyphicon glyphicon-tags",
+                moduleId: "100860401",
+                href: "main.dailySystem"
+            }, {
+                text: "领导职责",
+                icon: "glyphicon glyphicon-tags",
+                moduleId: "100860402",
+                href: "main.leaderDuty"
+            }]
+        }, {
+            text: "信息建设",
+            selectable: false,
+            moduleId: "1008605",
+            state: {
+                expanded: false
+            },
+            nodes: [{
+                text: "留言板",
+                icon: "glyphicon glyphicon-tags",
+                moduleId: "100860501",
+                href: "main.messageBoard"
+            }, {
+                text: "系统公告",
+                icon: "glyphicon glyphicon-tags",
+                moduleId: "100860502",
+                href: "main.systemNotice"
+            }]
+        }
+    ]
+};
 // 全局数据
 var global_config = {
     "config_options": ["行业", "班级", "课程", "职称", "角色", "公告", "活动", "物资", "收支"],
@@ -266,6 +363,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 'content': {
                     templateUrl: '/partial/mis/courseConstruct/courseResource.html',
                     controller: 'courseResourceCtrl'
+                }
+            }
+        })
+        .state('main.absenceRecord',{
+            url: '/absenceRecord',
+            views: {
+                'content': {
+                    templateUrl: '/partial/mis/courseConstruct/absenceRecord.html',
+                    controller: 'absenceRecordCtrl'
                 }
             }
         })

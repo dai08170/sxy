@@ -38,6 +38,7 @@ const selfInfo = require("./routes/mis/selfInfo/selfInfo");
 // 课程资料
 const courseTable = require("./routes/mis/courseConstruct/courseTable");
 const courseResource = require("./routes/mis/courseConstruct/courseResource");
+const absenceRecord = require("./routes/mis/courseConstruct/absenceRecord");
 
 // 学院宣传
 const collegePropagate = require("./routes/mis/collegePropagate/collegePropagate");
@@ -99,6 +100,9 @@ app.use(route.get('/api/courseResource/getStudentCoursePage',courseResource.getS
 app.use(route.get('/api/courseResource/getTeacherCoursePage',courseResource.getTeacherCoursePage));
 app.use(route.get('/api/courseResource/getResource',courseResource.getResource));
 app.use(route.post('/api/courseResource/uploadResource',courseResource.uploadResource));
+
+app.use(route.get('/api/absenceRecord/getPage',absenceRecord.getPage));
+
 // 上传文件保存到node服务器端
 app.use(route.post('/api/courseResource/upload', upload.single('file')));
 

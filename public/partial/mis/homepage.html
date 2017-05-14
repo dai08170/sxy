@@ -1,5 +1,5 @@
 <div class="margin-top-10">
-    <div class="row">
+    <div class="row" ng-show="!isAdmin">
         <div class="col-md-9 padding-5 height-auto">
             <div class="row bg-white">
                 <div class="col-md-3">
@@ -83,7 +83,7 @@
                                 <thead>
                                 <tr>
                                     <td class="one-line" ng-repeat="item in courses.fields" ng-bind="item">
-                                        
+                                    
                                     </td>
                                 </tr>
                                 </thead>
@@ -113,7 +113,7 @@
                                 <thead>
                                 <tr>
                                     <td class="one-line" ng-repeat="item in homework.fields" ng-bind="item">
-    
+                                    
                                     </td>
                                 </tr>
                                 </thead>
@@ -196,6 +196,11 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row" ng-show="isAdmin">
+        <div class="row padding-5 bg-white height-auto text-center">
+            <h1>Hi, Admin!</h1>
         </div>
     </div>
 </div>

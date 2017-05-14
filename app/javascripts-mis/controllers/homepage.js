@@ -3,7 +3,6 @@
  */
 
 app.controller('homepageCtrl',['$http', '$scope', '$state', '$cookies', 'toaster', function($http, $scope, $state, $cookies, toaster){
-
     // 初始化用户信息
     var initClientInfo = function() {
         // 获取用户个人信息
@@ -140,5 +139,9 @@ app.controller('homepageCtrl',['$http', '$scope', '$state', '$cookies', 'toaster
         });
     };
 
-    init();
+    $scope.isAdmin= true;
+    if(global_role.type != "管理员"){
+        init();
+        $scope.isAdmin = false;
+    }
 }]);
