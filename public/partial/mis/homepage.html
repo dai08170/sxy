@@ -68,7 +68,7 @@
                 </div>
             </div>
             <div class="divider-bar"></div>
-            <div class="row">
+            <div class="row" ng-show="courses.length>0">
                 <div class="row bg-white padding-5">
                     <div class="panel border-none">
                         <div class="panel-heading padding-5">
@@ -90,7 +90,7 @@
                                 </thead>
                                 <tbody>
                                 <tr ng-repeat="item in courses">
-                                    <td class="one-line" title="{{item.course_name}}" ng-bind="item.course_name"></td>
+                                    <td class="one-line" title="{{item.name}}" ng-bind="item.name"></td>
                                     <td class="one-line" title="{{item.teacher_name}}" ng-bind="item.teacher_name"></td>
                                     <td class="one-line" title="{{item.type}}" ng-bind="item.type"></td>
                                     <td class="one-line" title="{{item.score}}" ng-bind="item.score"></td>

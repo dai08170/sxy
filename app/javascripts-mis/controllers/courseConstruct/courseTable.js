@@ -47,7 +47,8 @@ app.controller('courseTableCtrl',['$scope', '$state', '$http', 'toaster', functi
         // 获取学生信息(class_id)
         $http.get("/api/selfInfo/getStudent?id=" + global_role.id).then(function (res) {
             $scope.studentItem = res.data;
-            $scope.infoMsg = " ("+ res.data.class_name +")";
+            if(res.data.class_name != undefined)
+                $scope.infoMsg = " ("+ res.data.class_name +")";
             getClass();
         }, function (res) {
             toaster.pop("error", "服务器错误!" + (res.data.msg || ''), null, 2000, "toast-top-full-width");
