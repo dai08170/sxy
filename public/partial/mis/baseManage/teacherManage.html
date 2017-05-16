@@ -96,6 +96,7 @@
                         <div class="col-md-2">
                             <button class="btn btn-default" ng-click="toggleFemale()"
                                     ng-class="{true:'btn-info',false:'btn-default'}[isFemale]">女
+                            </button>
                         </div>
                     </div>
                     <br/>
@@ -106,7 +107,8 @@
                         </div>
                         <div class="col-md-5">
                             <input class="form-control" ng-model="item.profile_number"
-                                   onkeypress="numberOnly();" onpaste="return false;"
+                                   onkeypress="return numberOnly(event);" onpaste="return false;"
+                                   onfocus="this.style.imeMode='disabled'"
                                    placeholder="请输入身份证号" required/>
                         </div>
                     </div>
@@ -117,7 +119,8 @@
                         </div>
                         <div class="col-md-5">
                             <input class="form-control" ng-model="item.salary"
-                                   onkeypress="numberOnly();" onpaste="return false;"
+                                   onkeypress="return numberOnly(event);" onpaste="return false;"
+                                   onfocus="this.style.imeMode='disabled'"
                                    placeholder="请输入月薪资" required/>
                         </div>
                     </div>

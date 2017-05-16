@@ -115,15 +115,9 @@ app.controller('authorityManageCtrl',['$scope', '$state','$http', '$cookies','to
         // 切换全局点击对象
         $scope.item = item;
         // 获取被点击li, 设置class 为 active 置背景色
-        var ev = event || window.event;
-        var tar = ev.target;
-
         $(".selectLi").removeClass("active");
-        // 兼容被点击对象的不同
-        if(tar.tagName.toLowerCase() == "a")
-            $(tar).parent().addClass("active");
-        else if(tar.tagName.toLowerCase() == "li")
-            $(tar).addClass("active");
+
+        $("#auth"+item.id).addClass("active");
     };
 
     // 添加 & 删除权限的抽象方法

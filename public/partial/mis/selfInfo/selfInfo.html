@@ -99,7 +99,8 @@
                                         <div class="col-md-8">
                                             <input class="form-control" placeholder="请输入联系电话"
                                                    ng-model="userInfo.phone_number"
-                                                   onkeypress="numberOnly();" onpaste="return false;"/>
+                                                   onkeypress="return numberOnly(event);" onpaste="return false;"
+                                                   onfocus="this.style.imeMode='disabled'"/>
                                         </div>
                                     </div>
                                     <br/>
@@ -218,7 +219,8 @@
                                         <div class="col-md-8">
                                             <input class="form-control" ng-model="userInfo.phone_number"
                                                    placeholder="请输入联系电话"
-                                                   onkeypress="numberOnly();" onpaste="return false;"/>
+                                                   onkeypress="return numberOnly(event);" onpaste="return false;"
+                                                   onfocus="this.style.imeMode='disabled'"/>
                                         </div>
                                     </div>
                                     <br/>

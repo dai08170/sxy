@@ -85,7 +85,8 @@
                         </div>
                         <div class="col-md-5">
                             <input class="form-control" ng-model="item.num"
-                                   onkeypress="numberOnly();" onpaste="return false;"
+                                   onkeypress="return numberOnly(event);" onpaste="return false;"
+                                   onfocus="this.style.imeMode='disabled'"
                                    placeholder="请输入课程编号" ng-disabled="update" required/>
                         </div>
                     </div>

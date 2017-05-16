@@ -108,17 +108,9 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
 
     // 显示企业宣传模态框
     $scope.companyTypeModalShow = function(){
-        // 将对象数组转化为 字符串数组
-        var getNameArray = function(arr){
-            var tmpArr = [];
-            for(var i=0; i<arr.length; i++)
-                tmpArr[i] = arr[i].name;
-            return tmpArr;
-        };
-
         $http.get('/api/configManage/getCurrent?tableIndex=0').then(function(res){
             // 返回的是对象数组, 需要转换为字符串数组
-            $scope.companyTypes = getNameArray(res.data);
+            $scope.companyTypes = res.data;
             // 显示模态框
             $("#companyTypeModal").modal('show');
         }, function (res) {
@@ -127,17 +119,16 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
     };
 
     // 点击选择企业类型
-    $scope.toggleSelect = function(type){
+    $scope.toggleSelect = function(item){
         $(".company-type").removeClass("btn-info");
-        var ev = event || window.event;
-        $(ev.target).addClass("btn-info");
-        $scope.item.company_type = type;
+        $("#companyType"+item.id).addClass("btn-info");
+        $scope.item.company_type = item.name;
         $("#companyTypeModal").modal('hide');
     };
 
     // 路由分发创建宣传模态框
     $scope.createModalShow = function(){
-        $scope.item = undefined;
+        $scope.item = {};
         $scope.pictureName = "";
         uploader.queue.length = 0;
 
@@ -441,13 +432,11 @@ app.controller('propagateManageCtrl',['$scope', '$state','$http', '$cookies','to
                     if($scope.propagateArr[i].id == $scope.item.id)
                         $scope.propagateArr.splice(i,1);
                 }
-
                 // 如果当前页无数据 且 还有数据页存在 页码回退1 并 获取该页数据
-                if($scope.propagateArr.length==0 && $scope.pageNum >0){
+                if($scope.propagateArr.length==0 && $scope.pageNum >0)
                     $scope.pageNum --;
-                    getTotalItem();
-                    getPropagatePage();
-                }
+                getTotalItem();
+                getPropagatePage();
             }else
                 toaster.pop("danger", "删除失败!" + (res.data.msg || ""), null, 2000, "toast-top-full-width");
         }, function(res){

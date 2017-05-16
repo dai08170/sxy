@@ -12,9 +12,6 @@ app.controller('studentManageCtrl',['$scope', '$state','$http', '$cookies','toas
     $scope.dataArr = [];
     $scope.keyword = '';
 
-    $scope.item = undefined;
-    $scope.isMale = $scope.item == undefined;
-    $scope.isFemale = $scope.item == undefined;
     $scope.classArr = [];
     $scope.classItem = undefined;
 

@@ -30,7 +30,7 @@
                             <!-- noModules改变时刷新scrollbar-->
                             <ul class="nav nav-pills nav-stacked">
                                 <li class="selectLi" ng-repeat="item in noModules track by $index"
-                                    ng-click="toggleSelect(item);">
+                                    id="auth{{item.id}}" ng-click="toggleSelect(item);">
                                     <a class="text-center" ng-bind="item.name"></a>
                                 </li>
                             </ul>
@@ -50,7 +50,7 @@
                             <!-- hasModules改变时刷新scrollbar-->
                             <ul class="nav nav-pills nav-stacked">
                                 <li class="selectLi" ng-repeat="item in hasModules track by $index"
-                                    ng-click="toggleSelect(item);">
+                                    id="auth{{item.id}}" ng-click="toggleSelect(item);">
                                     <a class="text-center" ng-bind="item.name"></a>
                                 </li>
                             </ul>

@@ -109,7 +109,7 @@
                 </div>
                 
                 <!-- 分页 -->
-                <div class="row text-center" ng-show="propageteArr.length>0">
+                <div class="row text-center" ng-show="propagateArr.length>0">
                     <ul class="pagination pagination-md">
                         <li ng-repeat="btn in pageBtns">
                             <a href="#" ng-bind="btn" ng-click="pageClick(btn)"></a>
@@ -198,7 +198,8 @@
                         </div>
                         <div class="col-md-5">
                             <input class="form-control" type="text" ng-model="item.phone_number"
-                                   onkeypress="numberOnly();" onpaste="return false;"
+                                   onkeypress="return numberOnly(event);" onpaste="return false;"
+                                   onfocus="this.style.imeMode='disabled'"
                                    placeholder="请输入联系方式" required/>
                         </div>
                     </div>
@@ -211,7 +212,7 @@
                 
                 <button class="btn btn-info" ng-click="updateCompanyPropagate()"
                         ng-disabled="companyPropagateForm.$invalid" ng-hide="createAction">修改</button>
-                <button class="btn btn-danger" ng-hide="createAction"
+                <button class="btn btn-danger" ng-hide="createAction" data-dismiss="modal"
                         ng-click="deleteCompanyPropagate()">删除</button>
             </div>
         </div><!-- /.modal-content -->
@@ -285,7 +286,8 @@
                         </div>
                         <div class="col-md-5">
                             <input class="form-control" type="text" ng-model="item.phone_number"
-                                   onkeypress="numberOnly();" onpaste="return false;"
+                                   onkeypress="return numberOnly(event);" onpaste="return false;"
+                                   onfocus="this.style.imeMode='disabled'"
                                    placeholder="请输入联系方式" required/>
                         </div>
                     </div>
@@ -298,7 +300,7 @@
                 
                 <button class="btn btn-info" ng-click="updateActivityPropagate()"
                         ng-disabled="activityPropagateForm.$invalid" ng-hide="createAction">修改</button>
-                <button class="btn btn-danger" ng-hide="createAction"
+                <button class="btn btn-danger" ng-hide="createAction" data-dismiss="modal"
                         ng-click="deleteCompanyPropagate()">删除</button>
             </div>
         </div><!-- /.modal-content -->
@@ -366,7 +368,7 @@
                 <!-- 修改删除按钮 -->
                 <button class="btn btn-info" ng-click="updateCoursePropagate()"
                         ng-disabled="coursePropagateForm.$invalid" ng-hide="createAction">修改</button>
-                <button class="btn btn-danger" ng-hide="createAction"
+                <button class="btn btn-danger" ng-hide="createAction" data-dismiss="modal"
                         ng-click="deleteCompanyPropagate()">删除</button>
             </div>
         </div><!-- /.modal-content -->
@@ -444,7 +446,7 @@
                 <!-- 修改删除按钮 -->
                 <button class="btn btn-info" ng-click="updateExcellentStudent()"
                         ng-disabled="studentPropagateForm.$invalid" ng-hide="createAction">修改</button>
-                <button class="btn btn-danger" ng-hide="createAction"
+                <button class="btn btn-danger" ng-hide="createAction" data-dismiss="modal"
                         ng-click="deleteExcellentStudent()">删除</button>
             </div>
         </div><!-- /.modal-content -->
@@ -462,8 +464,8 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <button class="btn btn-default margin-5 company-type" ng-repeat="item in companyTypes track by $index"
-                            ng-bind="item" ng-click="toggleSelect(item);"></button>
+                    <button id="companyType{{item.id}}" class="btn btn-default margin-5 company-type" ng-repeat="item in companyTypes track by $index"
+                            ng-bind="item.name" ng-click="toggleSelect(item);"></button>
                 </div>
             </div>
             <div class="modal-footer">

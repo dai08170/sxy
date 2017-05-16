@@ -15,8 +15,6 @@ app.controller('courseResourceCtrl',['$scope', '$state', '$http', 'toaster', 'Fi
     $scope.dataArr = [];
     $scope.keyword = '';
 
-    $scope.item = undefined;
-
     // 上传控制bar
     var uploader = $scope.uploader = new FileUploader({
         url: '/api/courseResource/upload',

@@ -12,10 +12,6 @@ app.controller('teacherManageCtrl',['$scope', '$state','$http', '$cookies','toas
     $scope.dataArr = [];
     $scope.keyword = '';
 
-    $scope.item = undefined;
-    $scope.isMale = $scope.item == undefined;
-    $scope.isFemale = $scope.item == undefined;
-
     $scope.states = global_config.teacher_state;
 
     // 获取单页内容
