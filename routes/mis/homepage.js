@@ -5,13 +5,26 @@
 const config = require("../config");
 
 module.exports = {
-    getCourseInfo : function *(){
+    getStudentCourseInfo : function *(){
         var options = {
             method : 'GET',
-            url : config.url2 +"/homepage/getCourseInfo",
+            url : config.url2 +"/homepage/getStudentCourseInfo",
             json: true,
             headers : {
-                studentId: this.request.query.studentId
+                studentId: this.request.query.id
+            }
+        };
+        var res = yield this.routeConfig(options);
+        this.status = res.statusCode;
+        this.body = res.body;
+    },
+    getTeacherCourseInfo : function *(){
+        var options = {
+            method : 'GET',
+            url : config.url2 +"/homepage/getTeacherCourseInfo",
+            json: true,
+            headers : {
+                teacherId: this.request.query.id
             }
         };
         var res = yield this.routeConfig(options);

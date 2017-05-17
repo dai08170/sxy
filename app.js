@@ -86,7 +86,8 @@ app.use(common.config);
 app.use(route.post('/api/login',login.login));
 
 // 首页
-app.use(route.get('/api/homepage/getCourseInfo',homepage.getCourseInfo));
+app.use(route.get('/api/homepage/getStudentCourseInfo',homepage.getStudentCourseInfo));
+app.use(route.get('/api/homepage/getTeacherCourseInfo',homepage.getTeacherCourseInfo));
 app.use(route.get('/api/homepage/getPropagate',homepage.getPropagate));
 
 // 个人信息
