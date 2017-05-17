@@ -15,7 +15,7 @@
   		return "Chrome";
  	else if (userAgent.indexOf("Safari") > -1) 
         return "Safari";
-    else if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera)
+    else if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && userAgent.indexOf("Opera")<=-1)
         return "IE";
 }
 
