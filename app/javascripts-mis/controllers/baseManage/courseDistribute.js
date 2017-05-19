@@ -56,11 +56,14 @@ app.controller('courseDistributeCtrl', ['$scope', '$http', 'toaster', function($
         var createCourseTable = function(data){
             for(var i=0;i<data.length;i++){
                 var alo = data[i].allocation;
-                var row = alo.substr(0,alo.indexOf("-")),col = alo.substr(alo.indexOf("-1"));
+                var row = alo.substr(0,alo.indexOf("-")),col = alo.substr(alo.indexOf("-")+1);
+                console.log(data[i]);
                 for(var t=0;t<$scope.courseArr.length;t++)
                     if(data[i].course_id == $scope.courseArr[t].id){
                         $scope.strArr[row][col] = "《"+$scope.courseArr[t].name +"》\n上课地点:"
                             + data[i].address +"\n起止: "+data[i].begin_week+"-"+data[i].end_week+"周";
+                        console.log($scope.courseArr[t]);
+                        console.log(row,col);
                     }
             }
         };
