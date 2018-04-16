@@ -26,3 +26,4 @@
 1. 配套后台文件在 sxy_backend 仓库中
 2. 源代码在./app下面, 经过压缩注入到./public/javascripts & ./public/stylesheets 中, 页面文件在 ./public/partials 中
 3. 入口文件 app.js , 主页面在 ./views 中
+4. [后台代码](https://github.com/lonelydawn/sxy_backend)
